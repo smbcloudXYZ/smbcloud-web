@@ -1,7 +1,7 @@
 import { Inter } from '@next/font/google'
 import SharedHead from "./../shared/head";
 import SharedTopBar from "./../shared/topbar";
-import styles from "./../../styles/Shared.module.css";
+import sharedStyles from "./../../styles/Shared.module.css";
 const inter = Inter({ subsets: ["latin"] });
 
 function Breadcrumb() {
@@ -29,7 +29,7 @@ export default function Sdk() {
                 title="SmbPndk SDK - Learn SmbPndk - A new cloud."
                 description="Learn SmbPndk SDK, a new cloud platform. For your explosive ideas: a controlled demolition."
             />
-            <main className={styles.main}>
+            <main className={sharedStyles.main}>
                 <SharedTopBar breadcrumb={<Breadcrumb />} />
                 <div className={inter.className}>
                     <h1 className={inter.className}>
@@ -38,11 +38,11 @@ export default function Sdk() {
                     <p className={inter.className}>SDK (Software development Kit) is a set of library that one can use to integrate an existing software.</p>
                 </div>
 
-                <div className={styles.center}></div>
-                <div className={styles.grid}>
+                <div className={sharedStyles.center}></div>
+                <div className={sharedStyles.grid}>
                     <a
                         href={process.env.NEXT_PUBLIC_BASE_URL}
-                        className={styles.card}
+                        className={sharedStyles.card}
                     >
                         <h2 className={inter.className}>
                             SDK <span>-&gt;</span>
