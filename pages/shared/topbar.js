@@ -10,6 +10,7 @@ export default function SharedTopBar(props) {
                     <code className={styles.code}>
                         <a href={process.env.NEXT_PUBLIC_BASE_URL_A}
                             target="_blank"
+                            rel="noopener noreferrer"
                         >
                             https://a.smbpndk.com
                         </a>
