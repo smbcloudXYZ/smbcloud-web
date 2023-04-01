@@ -31,21 +31,24 @@ export default function Sdk() {
             />
             <main className={styles.main}>
                 <SharedTopBar breadcrumb={<Breadcrumb />} />
-                <div className={styles.center}>
-                    <h2 className={inter.className}>
-                        SmbPndk Platform
-                    </h2>
+                <div className={inter.className}>
+                    <h1 className={inter.className}>
+                        SDK
+                    </h1>
+                    <p className={inter.className}>SDK (Software development Kit) is a set of library that one can use to integrate an existing software.</p>
                 </div>
+
+                <div className={styles.center}></div>
                 <div className={styles.grid}>
                     <a
-                        href={process.env.NEXT_PUBLIC_BASE_URL_DOCS + `/sdk`}
+                        href={process.env.NEXT_PUBLIC_BASE_URL}
                         className={styles.card}
                     >
                         <h2 className={inter.className}>
-                            Web Frontend Platform <span>-&gt;</span>
+                            SDK <span>-&gt;</span>
                         </h2>
                         <p className={inter.className}>
-                            Learn about SmbPndk  platform.
+                            Learn about SmbPndk SDK.
                         </p>
                     </a>
                 </div>

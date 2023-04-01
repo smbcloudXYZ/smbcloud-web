@@ -1,6 +1,5 @@
-import Image from 'next/image'
 import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
+import sharedStyles from '@/styles/Shared.module.css'
 import SharedTopBar from './shared/topbar'
 import SharedHead from './shared/head'
 
@@ -23,16 +22,16 @@ export default function Home() {
         title="SmbPndk - A new cloud."
         description="A new cloud platform. For your explosive ideas: a controlled demolition."
       />
-      <main className={styles.main}>
+      <main className={sharedStyles.main}>
         <SharedTopBar breadcrumb={<Breadcrumb />} />
-        <div className={styles.center}>
+        <div className={sharedStyles.center}>
           <h1 className={inter.className}>SmbPndk</h1>
         </div>
 
-        <div className={styles.grid}>
+        <div className={sharedStyles.grid}>
           <a
             href={process.env.NEXT_PUBLIC_BASE_URL_DOCS}
-            className={styles.card}
+            className={sharedStyles.card}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -46,7 +45,7 @@ export default function Home() {
 
           <a
             href={process.env.NEXT_PUBLIC_BASE_URL + `/learn`}
-            className={styles.card}
+            className={sharedStyles.card}
           >
             <h2 className={inter.className}>
               Learn <span>-&gt;</span>

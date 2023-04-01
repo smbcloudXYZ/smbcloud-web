@@ -1,5 +1,5 @@
 import { Inter } from '@next/font/google'
-import styles from '@/styles/Learn.module.css'
+import sharedStyles from '@/styles/Shared.module.css'
 import SharedTopBar from './shared/topbar'
 import SharedHead from './shared/head'
 const inter = Inter({ subsets: ['latin'] })
@@ -25,20 +25,20 @@ export default function Learn() {
                 title="Learn SmbPndk - A new cloud."
                 description="Learn SmbPndk, a new cloud platform. For your explosive ideas: a controlled demolition."
             />
-            <main className={styles.main}>
+            <main className={sharedStyles.main}>
                 <SharedTopBar breadcrumb={<Breadcrumb />} />
-                <div className={styles.center}>
+                <div className={sharedStyles.center}>
                     <h2 className={inter.className}>
                         Learn SmbPndk
                     </h2>
                 </div>
-                <div className={styles.grid}>
+                <div className={sharedStyles.grid}>
                     <a
                         href={process.env.NEXT_PUBLIC_BASE_URL + `/learn/platform`}
-                        className={styles.card}
+                        className={sharedStyles.card}
                     >
                         <h2 className={inter.className}>
-                            SmbPndk Platform <span>-&gt;</span>
+                            Platform <span>-&gt;</span>
                         </h2>
                         <p className={inter.className}>
                             Learn about SmbPndk platform.
@@ -47,13 +47,13 @@ export default function Learn() {
 
                     <a
                         href={process.env.NEXT_PUBLIC_BASE_URL + `/learn/sdk`}
-                        className={styles.card}
+                        className={sharedStyles.card}
                     >
                         <h2 className={inter.className}>
-                            SmbPndk SDK<span>-&gt;</span>
+                            SDK<span>-&gt;</span>
                         </h2>
                         <p className={inter.className}>
-                            Learn about SmbPndk MobileSDK!
+                            Learn about SmbPndk SDK!
                         </p>
                     </a>
                 </div>
