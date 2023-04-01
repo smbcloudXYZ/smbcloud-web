@@ -1,16 +1,32 @@
 import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
-import { HeadShared, MainTopBar } from '.'
+import styles from '@/styles/Learn.module.css'
+import SharedTopBar from './shared/topbar'
+import SharedHead from './shared/head'
 const inter = Inter({ subsets: ['latin'] })
+
+function Breadcrumb() {
+    return (
+        <>
+            <a href={process.env.NEXT_PUBLIC_BASE_URL}>
+                Home
+            </a>
+            &nbsp;/&nbsp;
+            <a href={process.env.NEXT_PUBLIC_BASE_URL}>
+                Learn
+            </a>
+        </>
+    )
+}
+
 export default function Learn() {
     return (
         <>
-            <HeadShared
+            <SharedHead
                 title="Learn SmbPndk - A new cloud."
                 description="Learn SmbPndk, a new cloud platform. For your explosive ideas: a controlled demolition."
             />
             <main className={styles.main}>
-                <MainTopBar />
+                <SharedTopBar breadcrumb={<Breadcrumb />} />
                 <div className={styles.center}>
                     <h2 className={inter.className}>
                         Learn SmbPndk
@@ -18,27 +34,23 @@ export default function Learn() {
                 </div>
                 <div className={styles.grid}>
                     <a
-                        href="https://docs.smbpndk.com/"
+                        href={process.env.NEXT_PUBLIC_BASE_URL + `/learn/platform`}
                         className={styles.card}
-                        target="_blank"
-                        rel="noopener noreferrer"
                     >
                         <h2 className={inter.className}>
-                            Frontend SDK <span>-&gt;</span>
+                            SmbPndk Platform <span>-&gt;</span>
                         </h2>
                         <p className={inter.className}>
-                            Learn about SmbPndk FrontendSDK!
+                            Learn about SmbPndk platform.
                         </p>
                     </a>
 
                     <a
-                        href="https://smbpndk.com/learn/mobile-sdk"
+                        href={process.env.NEXT_PUBLIC_BASE_URL + `/learn/sdk`}
                         className={styles.card}
-                        target="_blank"
-                        rel="noopener noreferrer"
                     >
                         <h2 className={inter.className}>
-                            Mobile SDK<span>-&gt;</span>
+                            SmbPndk SDK<span>-&gt;</span>
                         </h2>
                         <p className={inter.className}>
                             Learn about SmbPndk MobileSDK!
