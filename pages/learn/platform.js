@@ -11,11 +11,11 @@ function Breadcrumb() {
                 Home
             </a>
             &nbsp;/&nbsp;
-            <a href={process.env.NEXT_PUBLIC_BASE_URL + `/learn`}>
+            <a href={process.env.NEXT_PUBLIC_BASE_URL + `learn`}>
                 Learn
             </a>
             &nbsp;/&nbsp;
-            <a href={process.env.NEXT_PUBLIC_BASE_URL + `/learn/platform`}>
+            <a href={process.env.NEXT_PUBLIC_BASE_URL + `learn/platform`}>
                 Platform
             </a>
         </>
@@ -46,6 +46,19 @@ export default function Platform() {
                         </h2>
                         <p className={inter.className}>
                             Learn about SmbPndk platform.
+                        </p>
+                    </a>
+                </div>
+                <div className={sharedStyles.grid}>
+                    <a
+                        href={process.env.NEXT_PUBLIC_BASE_URL}
+                        className={sharedStyles.card}
+                    >
+                        <h2 className={inter.className}>
+                            Pkt Package Registry <span>-&gt;</span>
+                        </h2>
+                        <p className={inter.className}>
+                            Learn about Pkt, a polyglot package registry.
                         </p>
                     </a>
                 </div>

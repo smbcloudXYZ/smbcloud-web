@@ -41,6 +41,10 @@
     gap: 0.2rem;
 }
 
+.footer {
+    display: inherit;
+    justify-content: inherit;
+}
 
 .code {
     font-weight: 700;
