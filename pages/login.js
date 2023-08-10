@@ -1,25 +1,13 @@
 import { Inter } from "next/font/google"
 import sharedStyles from '@/styles/Shared.module.css'
+import loginStyles from '@/styles/Login.module.css'
 import SharedTopBar from './shared/topbar'
 import SharedHead from './shared/head'
 import SharedFooter from './shared/footer'
 const inter = Inter({ subsets: ['latin'] })
 
-function Breadcrumb() {
-    return (
-        <>
-            <a href={process.env.NEXT_PUBLIC_BASE_URL}>
-                Home
-            </a>
-            &nbsp;/&nbsp;
-            <a href={process.env.NEXT_PUBLIC_BASE_URL + `/login`}>
-                Login
-            </a>
-        </>
-    )
-}
-
-export default function Github() {
+export default function Login() {
+    const styleGithub = { "--color": '#e8eaea' } as React.CSSProperties;
     return (
         <>
             <SharedHead
@@ -27,13 +15,17 @@ export default function Github() {
                 description="Learn SmbPndk, a new cloud platform. For your explosive ideas: a controlled demolition."
             />
             <main className={sharedStyles.main}>
-                <SharedTopBar breadcrumb={<Breadcrumb />} />
-                <div>
-                    <a href="https://github.com/login/oauth/authorize?client_id=Iv1.07128cb5ebc13f09" className={sharedStyles.button}>
+                <SharedTopBar />
+                <div className={inter.className}>
+                    <a className={loginStyles.button} href="https://github.com/login/oauth/authorize?client_id=053e152f1b78ecee552b&redirect_uri=http://localhost:3000/authorize" style={styleGithub}>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
                         Login with Github
                     </a>
                 </div>
-                <SharedFooter breadcrumb={ <Breadcrumb /> }/>
+                <SharedFooter />
             </main>
         </>
     )
