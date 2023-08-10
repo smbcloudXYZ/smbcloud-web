@@ -7,7 +7,6 @@ import axios from "axios"
 import SharedFooter from './shared/footer'
 import Link from "next/link"
 import Image from "next/image"
-import { BsFillArrowRightSquareFill } from "react-icons/bs"
 const inter = Inter({ subsets: ['latin'] })
 
 axios.defaults.baseURL = `http://localhost:8088/v1/`
@@ -18,34 +17,20 @@ export const getServerSideProps = async (context) => {
     const res = await axios.post(`authorize`, { code })
     const obj = res.data
 
-    // Only filter primary email and verified email
-    if (obj.user_emails) {
-        obj.user_emails = obj.user_emails.filter((email) => {
-            return email.primary && email.verified
-        })
-    }
-
     return {
         props: obj
     }
 }
 
-const createAccount = async (user_info, user_emails) => {
-    const res = await axios.post(`users`, {
-        user_info,
-        user_emails
-    })
-    return false
-}
 
 export default function Authorize({
-    status, message, user_info, user_emails
+    status, message, user_info, user_email
 }) {
 
     // render singup form if we have success response
     // render error message if we have error response
     if (status === 200) {
-        return <SignupForm status={status} message={message} user_emails={user_emails} user_info={user_info} />
+        return <SignupForm status={status} message={message} user_email={user_email} user_info={user_info} />
     }
 
     return (
@@ -72,6 +57,22 @@ export default function Authorize({
 }
 
 function SignupForm(props) {
+
+    const createAccount = async (user_info, user_email) => {
+        const res = await axios.post(`users`, {
+            user: {
+                email: user_email.email,
+                name: user_info.name,
+                authorization: [{
+                    provider: 0,
+                    uid: user_info.id
+                }]
+            }
+        })
+        const obj = res.data
+        return false
+    }
+
     return (
         <>
             <SharedHead
@@ -83,7 +84,7 @@ function SignupForm(props) {
                 <h1 className={inter.className}>Signup</h1>
                 <p className={inter.className}>
                     Link your GitHub account to SmbPndk, the full-suite front-end developer platforms.
-                    You will need to confirm your email address {props.user_emails[0].email} to complete the signup process.
+                    You will need to confirm your email address {props.user_email.email} to complete the signup process.
                 </p>
                 <div className={authorizeStyles.syncContainer}>
                     <div>
@@ -111,8 +112,8 @@ function SignupForm(props) {
                     </div>
                 </div>
                 <Link onClick={() => {
-                    createAccount(props.user_info, props.user_emails)
-                }} href=':'>
+                    createAccount(props.user_info, props.user_email)
+                }} href=''>
                     <code className={sharedStyles.code}>
                         $ smb account create
                     </code>
