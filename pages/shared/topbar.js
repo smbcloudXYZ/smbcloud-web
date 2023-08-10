@@ -25,8 +25,8 @@ export default function SharedTopBar(props) {
             <div className={styles.description}>
                 <p>
                     <code className={styles.code}>
-                        <a href={process.env.NEXT_PUBLIC_BASE_URL + `account`} >
-                            https://smbpndk.com/account
+                        <a href={process.env.NEXT_PUBLIC_BASE_URL + `login`} >
+                            $ smb
                         </a>
                     </code>
                 </p>

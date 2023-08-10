@@ -7,7 +7,7 @@ import SharedFooter from './shared/footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Login() {
-    const styleGithub = { "--color": '#e8eaea' } as React.CSSProperties;
+    const styleGithub = { "--color": '#e8eaea' };
     return (
         <>
             <SharedHead

@@ -1,48 +1,23 @@
 import { Inter } from "next/font/google"
 import sharedStyles from '@/styles/Shared.module.css'
 import SharedTopBar from './shared/topbar'
-import globalstyles from '@/styles/global.module.css'
 import SharedHead from './shared/head'
-import SharedFooter from './shared/footer'
 import axios from "axios"
+import SharedFooter from './shared/footer'
 import Link from "next/link"
-import HttpStatusCode from "./shared/httpStatusCode"
 import Image from "next/image"
 const inter = Inter({ subsets: ['latin'] })
 
-interface UserInfo {
-    login: string
-    id: number
-    name: string
-    avatar_url: string
-    html_url: string
-}
-
-interface UserEmail {
-    email: string
-    primary: boolean
-    verified: boolean
-    visibility: string
-}
-
-interface Response {
-    status: HttpStatusCode
-    message: string
-    user_info?: UserInfo
-    user_emails?: UserEmail[]
-
-}
-
-export const getServerSideProps = async (context: { query: { code: any } }) => {
+export const getServerSideProps = async (context) => {
     const code = context.query.code
     console.log(code)
     axios.defaults.baseURL = `http://localhost:8088/v1/`
     const res = await axios.post(`authorize`, { code })
-    const obj: Response = res.data
+    const obj = res.data
 
     // Only filter primary email and verified email
     if (obj.user_emails) {
-        obj.user_emails = obj.user_emails.filter((email: UserEmail) => {
+        obj.user_emails = obj.user_emails.filter((email) => {
             return email.primary && email.verified
         })
     }
@@ -54,11 +29,11 @@ export const getServerSideProps = async (context: { query: { code: any } }) => {
 
 export default function Authorize({ 
     status, message, user_info, user_emails
-}: Response) {
+}) {
 
     // render singup form if we have success response
     // render error message if we have error response
-    if (status === HttpStatusCode.OK) {
+    if (status === 200) {
         return <SignupForm status={status} message={message} user_emails={user_emails} user_info={user_info} />
     }
 
@@ -83,7 +58,7 @@ export default function Authorize({
     )
 }
 
-function SignupForm(props: Response) {
+function SignupForm(props) {
     return (
         <>
             <SharedHead
