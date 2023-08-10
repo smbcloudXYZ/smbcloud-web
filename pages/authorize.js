@@ -1,17 +1,20 @@
 import { Inter } from "next/font/google"
 import sharedStyles from '@/styles/Shared.module.css'
+import authorizeStyles from '@/styles/Authorize.module.css'
 import SharedTopBar from './shared/topbar'
 import SharedHead from './shared/head'
 import axios from "axios"
 import SharedFooter from './shared/footer'
 import Link from "next/link"
 import Image from "next/image"
+import { BsFillArrowRightSquareFill } from "react-icons/bs"
 const inter = Inter({ subsets: ['latin'] })
+
+axios.defaults.baseURL = `http://localhost:8088/v1/`
 
 export const getServerSideProps = async (context) => {
     const code = context.query.code
     console.log(code)
-    axios.defaults.baseURL = `http://localhost:8088/v1/`
     const res = await axios.post(`authorize`, { code })
     const obj = res.data
 
@@ -27,7 +30,15 @@ export const getServerSideProps = async (context) => {
     }
 }
 
-export default function Authorize({ 
+const createAccount = async (user_info, user_emails) => {
+    const res = await axios.post(`users`, {
+        user_info,
+        user_emails
+    })
+    return false
+}
+
+export default function Authorize({
     status, message, user_info, user_emails
 }) {
 
@@ -46,12 +57,14 @@ export default function Authorize({
             <main className={sharedStyles.main}>
                 <SharedTopBar />
                 <h1 className={inter.className}>Error</h1>
-                <p className={inter.className}>{message}</p>
-                <Link href="/login" >
-                    <code className={sharedStyles.code}>
-                        $ Retry
-                    </code>
-                </Link>
+                <div className={inter.className}>
+                    <span >{message} Please retry: </span>
+                    <Link href="/login" >
+                        <code className={sharedStyles.code}>
+                            $ smb login retry
+                        </code>
+                    </Link>
+                </div>
                 <SharedFooter />
             </main>
         </>
@@ -67,29 +80,43 @@ function SignupForm(props) {
             />
             <main className={sharedStyles.main}>
                 <SharedTopBar />
-                <div>
-                    <h1 className={inter.className}>Signup</h1>
-                    <p className={inter.className}>Link your GitHub account to SmbPndk, the full-suite front-end developer platforms.</p>
-                    <div className={inter.className}>
-                    <Image
-      src={props.user_info?.avatar_url}
-      alt="Picture of the author"
-      width={500}
-      height={500}
-      blurDataURL="data:..."
-      placeholder="blur"
-    />
+                <h1 className={inter.className}>Signup</h1>
+                <p className={inter.className}>
+                    Link your GitHub account to SmbPndk, the full-suite front-end developer platforms.
+                    You will need to confirm your email address {props.user_emails[0].email} to complete the signup process.
+                </p>
+                <div className={authorizeStyles.syncContainer}>
+                    <div>
+                        <Image
+                            src={props.user_info?.avatar_url}
+                            alt="Picture of the author"
+                            width={50}
+                            height={50}
+                            blurDataURL="data:..."
+                            placeholder="blur"
+                            className={sharedStyles.avatar}
+                        />
                     </div>
-                    <form method="POST" action="/signup">
-                        <input type="hidden" name="user_info" value={JSON.stringify(props.user_info)} />
-                        <input type="hidden" name="user_emails" value={JSON.stringify(props.user_emails)} />
-                        <input type="hidden" name="status" value={props.status} />
-                        <input type="hidden" name="message" value={props.message} />
-                        <input type="text" name="username" placeholder="Username" />
-                        <input type="password" name="password" placeholder="Password" />
-                        <input type="submit" value="Signup" />
-                    </form>
+                    <div>
+                        <div className={authorizeStyles.arrow}>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div>
+                        <code className={sharedStyles.code}>
+                            $ smb
+                        </code>
+                    </div>
                 </div>
+                <Link onClick={() => {
+                    createAccount(props.user_info, props.user_emails)
+                }} href=':'>
+                    <code className={sharedStyles.code}>
+                        $ smb account create
+                    </code>
+                </Link>
                 <SharedFooter />
             </main>
         </>

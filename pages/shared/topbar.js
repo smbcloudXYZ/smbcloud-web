@@ -26,7 +26,7 @@ export default function SharedTopBar(props) {
                 <p>
                     <code className={styles.code}>
                         <a href={process.env.NEXT_PUBLIC_BASE_URL + `login`} >
-                            $ smb
+                            $ smb login
                         </a>
                     </code>
                 </p>
