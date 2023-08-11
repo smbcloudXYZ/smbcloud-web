@@ -7,6 +7,7 @@ import axios from "axios"
 import SharedFooter from './shared/footer'
 import Link from "next/link"
 import Image from "next/image"
+import Router from "next/router"
 const inter = Inter({ subsets: ['latin'] })
 
 axios.defaults.baseURL = `http://localhost:8088/v1/`
@@ -59,18 +60,14 @@ export default function Authorize({
 function SignupForm(props) {
 
     const createAccount = async (user_info, user_email) => {
-        const res = await axios.post(`users`, {
-            user: {
-                email: user_email.email,
-                name: user_info.name,
-                authorization: [{
-                    provider: 0,
-                    uid: user_info.id
-                }]
+        console.log(user_info)
+        Router.push({
+            pathname: '/signup',
+            query: {
+                user_info: JSON.stringify(user_info),
+                user_email: JSON.stringify(user_email)
             }
-        })
-        const obj = res.data
-        return false
+        }, '/signup')
     }
 
     return (
