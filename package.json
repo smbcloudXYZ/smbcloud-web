@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/font": "13.1.6",
     "@vercel/analytics": "^0.1.11",
     "axios": "^1.0.0",
     "eslint": "8.32.0",
