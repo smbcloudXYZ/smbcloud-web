@@ -3,14 +3,12 @@ import sharedStyles from '@/styles/Shared.module.css'
 import authorizeStyles from '@/styles/Authorize.module.css'
 import SharedTopBar from './shared/topbar'
 import SharedHead from './shared/head'
-import axios from "axios"
 import SharedFooter from './shared/footer'
+import axios from "../lib/axios"
 import Link from "next/link"
 import Image from "next/image"
 import Router from "next/router"
 const inter = Inter({ subsets: ['latin'] })
-
-axios.defaults.baseURL = `http://localhost:8088/v1/`
 
 export const getServerSideProps = async (context) => {
     const code = context.query.code

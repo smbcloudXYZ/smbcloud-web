@@ -6,8 +6,22 @@ import SharedHead from './shared/head'
 import SharedFooter from './shared/footer'
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Login() {
+export const getServerSideProps = (context) => {
+    console.log('getServerSideProps body', context.query)
+    return {
+        props: JSON.parse(JSON.stringify(context.query))
+    }
+}
+
+export default function Login(props) {
+    let errorMessage = ''
+    if (props.error) {
+        const error = JSON.parse(props.error)
+        errorMessage = error.message
+    }
+
     const styleGithub = { "--color": '#e8eaea' };
+
     return (
         <>
             <SharedHead
@@ -24,6 +38,9 @@ export default function Login() {
                         <span></span>
                         Login with Github
                     </a>
+                </div>
+                <div className={inter.className}>
+                    <span className={loginStyles.error}>{errorMessage}</span>
                 </div>
                 <SharedFooter />
             </main>
