@@ -12,10 +12,8 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const getServerSideProps = async (context) => {
     const code = context.query.code
-    console.log(code)
     const res = await axios.post(`authorize`, { code })
     const obj = res.data
-
     return {
         props: obj
     }
@@ -29,7 +27,12 @@ export default function Authorize({
     // render singup form if we have success response
     // render error message if we have error response
     if (status === 200) {
-        return <SignupForm status={status} message={message} user_email={user_email} user_info={user_info} />
+        return <SignupForm 
+                    status={status}
+                    message={message}
+                    user_email={user_email}
+                    user_info={user_info}
+            />
     }
 
     return (

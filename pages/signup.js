@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from "../lib/axios"
 import SharedTopBar from './shared/topbar'
 import SharedHead from './shared/head'
 import sharedStyles from '@/styles/Shared.module.css'
@@ -46,6 +46,13 @@ export default function Signup() {
             <main className={sharedStyles.main}>
                 <SharedTopBar />
                 <h1 className={inter.className}>Create your account</h1>
+                <div className={inter.className}>
+                    <div className={sharedStyles.center}>
+                        <p className={inter.className}>
+                            Your account has been created. You need to confirm your email.
+                            You will be redirect to the login page. Or click the link on the top left corner.</p>
+                    </div>
+                </div>
                 <SharedFooter />
             </main>
         </>
