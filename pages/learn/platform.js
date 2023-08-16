@@ -2,6 +2,7 @@ import { Inter } from '@next/font/google'
 import SharedHead from "./../shared/head";
 import SharedTopBar from "./../shared/topbar";
 import sharedStyles from "./../../styles/Shared.module.css";
+import SharedFooter from '../shared/footer';
 const inter = Inter({ subsets: ["latin"] });
 
 function Breadcrumb() {
@@ -49,19 +50,7 @@ export default function Platform() {
                         </p>
                     </a>
                 </div>
-                <div className={sharedStyles.grid}>
-                    <a
-                        href={process.env.NEXT_PUBLIC_BASE_URL}
-                        className={sharedStyles.card}
-                    >
-                        <h2 className={inter.className}>
-                            Pkt Package Registry <span>-&gt;</span>
-                        </h2>
-                        <p className={inter.className}>
-                            Learn about Pkt, a polyglot package registry.
-                        </p>
-                    </a>
-                </div>
+                <SharedFooter />
             </main>
         </>
     )

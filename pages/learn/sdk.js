@@ -2,6 +2,7 @@ import { Inter } from '@next/font/google'
 import SharedHead from "./../shared/head";
 import SharedTopBar from "./../shared/topbar";
 import sharedStyles from "./../../styles/Shared.module.css";
+import SharedFooter from '../shared/footer';
 const inter = Inter({ subsets: ["latin"] });
 
 function Breadcrumb() {
@@ -52,6 +53,7 @@ export default function Sdk() {
                         </p>
                     </a>
                 </div>
+                <SharedFooter />
             </main>
         </>
     )
