@@ -1,23 +1,37 @@
 
 import styles from '@/styles/Shared.module.css'
 
+function PageLinks() {
+    return (
+        <>
+            <a href={process.env.NEXT_PUBLIC_BASE_URL}>
+                Home
+            </a>
+            &nbsp;/&nbsp;
+            <a href={process.env.NEXT_PUBLIC_BASE_URL + `about`}>
+                About
+            </a>
+            &nbsp;/&nbsp;
+            <a href={process.env.NEXT_PUBLIC_BASE_URL + `contact`}>
+                Contact
+            </a>
+        </>
+    )
+}
+
 export default function SharedTopBar(props) {
     return (
         <>
             <div className={styles.description}>
                 <p>
-                    Get started here&nbsp;
                     <code className={styles.code}>
-                        <a href={process.env.NEXT_PUBLIC_BASE_URL_A}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            https://a.smbpndk.com
+                        <a href={process.env.NEXT_PUBLIC_BASE_URL + `login`} >
+                            $ smb login
                         </a>
                     </code>
                 </p>
                 <div>
-                    {props.breadcrumb}
+                    <PageLinks />
                 </div>
             </div>
         </>

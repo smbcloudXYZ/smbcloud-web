@@ -12,11 +12,11 @@ function Breadcrumb() {
                 Home
             </a>
             &nbsp;/&nbsp;
-            <a href={process.env.NEXT_PUBLIC_BASE_URL + `/learn`}>
+            <a href={process.env.NEXT_PUBLIC_BASE_URL + `learn`}>
                 Learn
             </a>
             &nbsp;/&nbsp;
-            <a href={process.env.NEXT_PUBLIC_BASE_URL + `/learn/platform`}>
+            <a href={process.env.NEXT_PUBLIC_BASE_URL + `learn/platform`}>
                 Platform
             </a>
         </>
