@@ -41,6 +41,10 @@
     gap: 0.2rem;
 }
 
+.footer {
+    display: inherit;
+    justify-content: inherit;
+}
 
 .code {
     font-weight: 700;
@@ -110,6 +114,10 @@
     position: absolute;
     filter: blur(45px);
     transform: translateZ(0);
+}
+
+.avatar {
+    border-radius: 50%;
 }
 
 .footer {

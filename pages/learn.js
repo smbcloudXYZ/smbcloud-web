@@ -5,20 +5,6 @@ import SharedHead from './shared/head'
 import SharedFooter from './shared/footer'
 const inter = Inter({ subsets: ['latin'] })
 
-function Breadcrumb() {
-    return (
-        <>
-            <a href={process.env.NEXT_PUBLIC_BASE_URL}>
-                Home
-            </a>
-            &nbsp;/&nbsp;
-            <a href={process.env.NEXT_PUBLIC_BASE_URL}>
-                Learn
-            </a>
-        </>
-    )
-}
-
 export default function Learn() {
     return (
         <>
@@ -27,7 +13,7 @@ export default function Learn() {
                 description="Learn SmbPndk, a new cloud platform. For your explosive ideas: a controlled demolition."
             />
             <main className={sharedStyles.main}>
-                <SharedTopBar breadcrumb={<Breadcrumb />} />
+                <SharedTopBar />
                 <div className={sharedStyles.center}>
                     <h2 className={inter.className}>
                         Learn SmbPndk

@@ -24,7 +24,7 @@ export default function Home() {
         description="A new cloud platform. For your explosive ideas: a controlled demolition."
       />
       <main className={sharedStyles.main}>
-        <SharedTopBar breadcrumb={<Breadcrumb />} />
+        <SharedTopBar />
         <div className={sharedStyles.center}>
           <h1 className={inter.className}>SmbPndk</h1>
         </div>
