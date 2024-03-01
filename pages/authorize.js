@@ -11,24 +11,42 @@ import Router from "next/router"
 const inter = Inter({ subsets: ['latin'] })
 
 export const getServerSideProps = async (context) => {
-    const code = context.query.code
-    const res = await axios.post(`authorize`, { code })
-    const obj = res.data
-    return {
-        props: obj
+    try {
+        const code = context.query.code
+        const res = await axios.post(`authorize`, { gh_code: code })
+        const obj = res.data
+        // Redirect to console if we have user
+        if (obj.user) {
+            return {
+                redirect: {
+                    destination: `/c/`,
+                    permanent: true,
+                }
+            }
+        }
+    
+        return {
+            props: obj
+        }
+    } catch (error) {
+        console.log('Error authorize', error.response.data)
+        return {
+            redirect: {
+                destination: `/login?error=${JSON.stringify(error.response.data)}`,
+                permanent: false,
+            }
+        }
     }
 }
 
-
 export default function Authorize({
-    status, message, user_info, user_email
+    message, user, error_code, user_info, user_email
 }) {
 
     // render singup form if we have success response
     // render error message if we have error response
-    if (status === 200) {
-        return <SignupForm 
-                    status={status}
+    if (error_code === 1001) {
+        return <SignupForm
                     message={message}
                     user_email={user_email}
                     user_info={user_info}

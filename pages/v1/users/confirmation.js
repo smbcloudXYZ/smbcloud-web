@@ -5,7 +5,6 @@ import SharedTopBar from "@/pages/shared/topbar"
 import { Inter } from "next/font/google"
 import SharedFooter from "@/pages/shared/footer"
 import { BsMailbox2 } from "react-icons/bs"
-import Link from "next/link"
 const inter = Inter({ subsets: ['latin'] })
 
 export const getServerSideProps = async ({ query }) => {
