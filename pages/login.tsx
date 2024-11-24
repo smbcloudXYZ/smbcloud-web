@@ -19,9 +19,6 @@ export default function Login(props) {
         const error = JSON.parse(props.error)
         errorMessage = error.message
     }
-
-    const styleGithub = { "--color": '#e8eaea' };
-
     return (
         <>
             <SharedHead
@@ -31,7 +28,7 @@ export default function Login(props) {
             <main className={sharedStyles.main}>
                 <SharedTopBar />
                 <div className={inter.className}>
-                    <a className={loginStyles.button} href="https://github.com/login/oauth/authorize?client_id=053e152f1b78ecee552b&redirect_uri=http://localhost:3000/authorize" style={styleGithub}>
+                    <a className={loginStyles.button} href="https://github.com/login/oauth/authorize?client_id=053e152f1b78ecee552b&redirect_uri=http://localhost:3000/authorize">
                         <span></span>
                         <span></span>
                         <span></span>
