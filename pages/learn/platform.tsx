@@ -1,4 +1,4 @@
-import { Inter } from '@next/font/google'
+import { Inter } from 'next/font/google'
 import SharedHead from "./../shared/head";
 import SharedTopBar from "./../shared/topbar";
 import sharedStyles from "./../../styles/Shared.module.css";
