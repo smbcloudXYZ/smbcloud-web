@@ -44,6 +44,10 @@ export const Post = defineDocumentType(() => ({
       type: "date",
       required: true,
     },
+    published: {
+      type: "boolean",
+      required: true
+    }
   },
   computedFields,
 }))
