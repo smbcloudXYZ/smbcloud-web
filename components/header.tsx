@@ -3,7 +3,7 @@ import { ModeToggle } from "./mode-toggle";
 
 export default function Header() {
   return (
-    <header>
+    <header className="mt-4 mb-8">
       <div className="flex items-center justify-between">
         <ModeToggle />
         <nav className="ml-auto text-sm font-medium space-x-6">
