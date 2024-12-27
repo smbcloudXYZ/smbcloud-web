@@ -14,17 +14,14 @@ export default function AboutMedia() {
         />
       </div>
       <div className="flex justify-center space-x-4">
-        <Link href={"https://www.youtube.com/@smbcloudXYZ"} target="_blank">
+        <Link href={"https://www.youtube.com/@smbcloudXYZ"} target="_blank" title="smbCloudXYZ YouTube channel">
           <FaYoutube size={30} />
-          smbCloudXYZ
         </Link>
-        <Link href={"https://instagram.com/smbcloudXYZ"} target="_blank">
+        <Link href={"https://instagram.com/smbcloudXYZ"} target="_blank" title="smbCloudXYZ Instagram account">
           <FaInstagram size={30} />
-          smbCloudXYZ
         </Link>
-        <Link href={"https://facebook.com/smbcloudXYZ"} target="_blank">
+        <Link href={"https://facebook.com/smbcloudXYZ"} target="_blank" title="smbCloudXYZ Facebook page">
           <FaFacebook size={30} />
-          smbCloudXYZ
         </Link>
       </div>
     </div>
