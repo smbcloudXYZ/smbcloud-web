@@ -10,7 +10,7 @@ import Header from "@/components/header";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "smbCloudXYZ",
+  title: "smbCloud",
   description: "The next generation cloud computing platform",
 };
 

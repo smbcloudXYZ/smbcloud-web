@@ -11,34 +11,34 @@ export default function Footer() {
         <Link
           href={"https://github.com/smbcloudXYZ"}
           target="_blank"
-          title="smbCloudXYZ GitHub organization"
+          title="smbCloud GitHub organization"
         >
           <FaGithub size={30} className="m-2" />
-          smbCloudXYZ
+          smbCloud
         </Link>
         <Link
           href={"https://debian.org"}
           target="_blank"
-          title="smbCloudXYZ is powered by Debian"
+          title="smbCloud is powered by Debian"
         >
           <FcDebian size={30} className="m-2" />
           Debian powered
         </Link>
       </div>
       <div className="flex justify-center space-x-4 m-2">
-        <Link href="/about" title="smbCloudXYZ about page">
+        <Link href="/about" title="smbCloud about page">
           About
         </Link>
-        <Link href="/privacy-policy" title="smbCloudXYZ privacy policy page">
+        <Link href="/privacy-policy" title="smbCloud privacy policy page">
           Privacy Policy
         </Link>
-        <Link href="/term-of-use" title="smbCloudXYZ term of use page">
+        <Link href="/term-of-use" title="smbCloud term of use page">
           Term of Use
         </Link>
       </div>
       <p className="m-2">
         &copy; {new Date().getFullYear()}{" "}
-        <a href="https://www.smbcloud.xyz">smbCloudXYZ</a>
+        <a href="https://www.smbcloud.xyz">smbCloud</a>
       </p>
     </footer>
   );

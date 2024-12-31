@@ -1,5 +1,5 @@
-# smbCloudXYZ
+# smbCloud
 
-smbCloudXYZ website.
+smbCloud website.
 
 https://smbcloud.xyz

@@ -1,10 +1,10 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'smbCloudXYZ | A next-gen cloud platform powering small and medium-sized businesses.',
+  title: 'smbCloud | A next-gen cloud platform powering small and medium-sized businesses.',
   author: 'hello@smbcloud.xyz',
-  headerTitle: 'smbCloudXYZ',
+  headerTitle: 'smbCloud',
   description:
-    'smbCloudXYZ offers small and medium-sized businesses easy, on-demand access to powerful, open-source software solutions in the cloud—without the hassle of installation or expensive licenses.',
+    'smbCloud offers small and medium-sized businesses easy, on-demand access to powerful, open-source software solutions in the cloud—without the hassle of installation or expensive licenses.',
   language: 'en-us',
   theme: 'dark', // system, dark or light
   siteUrl: 'https://smbcloud.xyz',
