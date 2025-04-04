@@ -14,7 +14,6 @@ export default function Footer() {
           title="smbCloud GitHub organization"
         >
           <FaGithub size={30} className="m-2" />
-          smbCloud
         </Link>
         <Link
           href={"https://debian.org"}
@@ -22,7 +21,6 @@ export default function Footer() {
           title="smbCloud is powered by Debian"
         >
           <FcDebian size={30} className="m-2" />
-          Debian powered
         </Link>
       </div>
       <div className="flex justify-center space-x-4 m-2">

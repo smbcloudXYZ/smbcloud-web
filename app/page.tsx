@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className="prose dark:prose-invert">
       <h1>smbCloud</h1>
-      <p className="text-xl">A next-gen cloud platform powering small and medium-sized businesses.</p>
+      <p className="text-xl">A next-gen <span className="italic font-semibold text-red-600">frontend platform</span> powering small and medium-sized businesses.</p>
       <hr />
       <h2>Resources</h2>
       {publishedPosts.map((post) => (
