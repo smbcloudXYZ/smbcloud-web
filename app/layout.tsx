@@ -1,9 +1,7 @@
-import Link from "next/link";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from "@/components/analytics";
-import { ModeToggle } from "@/components/mode-toggle";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 
