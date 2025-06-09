@@ -1,16 +1,13 @@
-import Link from "next/link";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Analytics } from "@/components/analytics";
-import { ModeToggle } from "@/components/mode-toggle";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "smbCloudXYZ",
+  title: "smbCloud",
   description: "The next generation cloud computing platform",
 };
 
@@ -30,7 +27,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <main>{children}</main>
             <Footer />
           </div>
-          <Analytics />
         </ThemeProvider>
       </body>
     </html>

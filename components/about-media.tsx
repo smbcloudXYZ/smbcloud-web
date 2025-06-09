@@ -8,19 +8,19 @@ export default function AboutMedia() {
       <div className="flex justify-center">
         <Image
           src={"/logo.png"}
-          alt={"smbCloudXYZ logo"}
+          alt={"smbCloud logo"}
           width={100}
           height={100}
         />
       </div>
       <div className="flex justify-center space-x-4">
-        <Link href={"https://www.youtube.com/@smbcloudXYZ"} target="_blank" title="smbCloudXYZ YouTube channel">
+        <Link href={"https://www.youtube.com/@smbcloudXYZ"} target="_blank" title="smbCloud YouTube channel">
           <FaYoutube size={30} />
         </Link>
-        <Link href={"https://instagram.com/smbcloudXYZ"} target="_blank" title="smbCloudXYZ Instagram account">
+        <Link href={"https://instagram.com/smbcloudXYZ"} target="_blank" title="smbCloud Instagram account">
           <FaInstagram size={30} />
         </Link>
-        <Link href={"https://facebook.com/smbcloudXYZ"} target="_blank" title="smbCloudXYZ Facebook page">
+        <Link href={"https://facebook.com/smbcloudXYZ"} target="_blank" title="smbCloud Facebook page">
           <FaFacebook size={30} />
         </Link>
       </div>
