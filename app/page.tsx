@@ -10,7 +10,34 @@ export default function Home() {
   return (
     <div className="prose dark:prose-invert">
       <h1>smbCloud</h1>
-      <p className="text-xl">A next-gen <span className="italic font-semibold text-red-600">frontend platform</span> powering small and medium-sized businesses.</p>
+      <p className="text-lg">Deploy your NextJS app with one command: </p>
+      <pre>
+        {
+          `$ smb
+✔ Valid config
+✔ Valid project
+✔ Valid deployment setup
+☱ Deploying > Use key path: ~/.ssh/id_11@smbcloud
+☱ Deploying > Building the app ✔
+☲ Deploying > App restart ✔
+☱ Deploying > App is running ✔
+✔ Deployment complete.`
+            .split('\n')
+            .map((line, idx) => (
+              <span key={idx}>
+                {line.split('✔').reduce((acc, part, i, arr) => {
+                  if (i === arr.length - 1) return [...acc, part];
+                  return [
+                    ...acc,
+                    part,
+                    <span key={`check-${i}`} style={{ color: 'green' }}>✔</span>
+                  ];
+                }, [] as (string | JSX.Element)[])}
+                {'\n'}
+              </span>
+            ))
+        }
+      </pre>
       <hr />
       <h2>Resources</h2>
       {publishedPosts.map((post) => (
