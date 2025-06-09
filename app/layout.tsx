@@ -1,7 +1,6 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Analytics } from "@/components/analytics";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 
@@ -28,7 +27,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <main>{children}</main>
             <Footer />
           </div>
-          <Analytics />
         </ThemeProvider>
       </body>
     </html>
