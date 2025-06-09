@@ -33,6 +33,9 @@ export default function Footer() {
         <Link href="/term-of-use" title="smbCloud term of use page">
           Term of Use
         </Link>
+        <Link href="/contact" title="smbCloud contact page">
+          Contact
+        </Link>
       </div>
       <p className="m-2">
         &copy; {new Date().getFullYear()}{" "}
