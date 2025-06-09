@@ -6,7 +6,8 @@ import siteMetadata from '@/content/siteMetadata'
 export const metadata = genPageMetadata({ title: `${siteMetadata.title}` })
 
 export default function Home() {
-  const publishedPosts = allPosts.filter((post) => post.published)
+  let publishedPosts = allPosts.filter((post) => post.published)
+  publishedPosts = publishedPosts.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
   return (
     <div className="prose dark:prose-invert">
       <h1>smbCloud</h1>
