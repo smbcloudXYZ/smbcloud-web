@@ -2,6 +2,7 @@ import { allPosts } from "@/.contentlayer/generated";
 import Link from "next/link";
 import { genPageMetadata } from "./seo";
 import siteMetadata from '@/content/siteMetadata'
+import { JSX } from "react";
 
 export const metadata = genPageMetadata({ title: `${siteMetadata.title}` })
 
