@@ -1,5 +1,5 @@
 # smbCloud
 
-smbCloud website.
+smbCloud website runs on smbCloud platform.
 
 https://smbcloud.xyz
