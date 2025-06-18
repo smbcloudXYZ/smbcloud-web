@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className="prose dark:prose-invert">
       <h1>smbCloud</h1>
-      <p className="text-lg">Deploy your NextJS app with one command: </p>
+      <p className="text-lg">Deploy your NextJS, Astro, or any NodeJS frontend app with one command: </p>
       <TabbedRunner />
       <hr />
       <h2>Resources</h2>
