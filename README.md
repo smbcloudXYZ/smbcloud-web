@@ -1,5 +1,3 @@
 # smbCloud
 
-smbCloud website runs on smbCloud platform.
-
-https://smbcloud.xyz
+smbCloud website. Yes, it runs on the [smbCloud platform](https://smbcloud.xyz).
