@@ -25,7 +25,7 @@ const runnerSnippets = {
 ✔ Deployment complete.`,
   Swift: `$ smb
 ✔ Valid config
-✔ Swift 🟧 runner detected (coming soon)
+✔ Swift 🟧 runner detected
 ✔ Valid project
 ✔ Valid deployment setup
 ☱ Deploying > Use key path: ~/.ssh/id_11@smbcloud
@@ -39,8 +39,8 @@ export default function TabbedRunner() {
   const [tab, setTab] = useState<keyof typeof runnerSnippets>('NodeJS');
   const tabs: { key: keyof typeof runnerSnippets; label: string }[] = [
     { key: 'NodeJS', label: 'NodeJS' },
+    { key: 'Swift', label: 'Swift' },
     { key: 'Ruby', label: 'Ruby (coming soon)' },
-    { key: 'Swift', label: 'Swift (coming soon)' }
   ];
   return (
     <div>
