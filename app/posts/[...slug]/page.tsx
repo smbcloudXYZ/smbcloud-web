@@ -35,6 +35,7 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.description,
+    metadataBase: new URL("https://smbcloud.xyz"),
   };
 }
 

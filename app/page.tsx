@@ -4,7 +4,10 @@ import { genPageMetadata } from "./seo";
 import siteMetadata from "@/content/siteMetadata";
 import TabbedRunner from "./components/TabbedRunner";
 
-export const metadata = genPageMetadata({ title: `${siteMetadata.title}` });
+export const metadata = {
+  ...genPageMetadata({ title: `${siteMetadata.title}` }),
+  metadataBase: new URL("https://smbcloud.xyz"),
+};
 
 export default function Home() {
   let publishedPosts = allPosts.filter((post) => post.published);
