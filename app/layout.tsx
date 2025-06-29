@@ -9,6 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "smbCloud",
   description: "The next generation cloud computing platform",
+  metadataBase: new URL("https://smbcloud.xyz"),
 };
 
 interface RootLayoutProps {
