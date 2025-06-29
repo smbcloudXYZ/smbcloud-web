@@ -13,8 +13,8 @@ interface PostProps {
 async function getPostFromParams(params: PostProps["params"]) {
   const slug = params?.slug?.join("/");
   const post = allPosts
-                .filter((post) => post.published)
-                .find((post) => post.slugAsParams === slug);
+    .filter((post) => post.published)
+    .find((post) => post.slugAsParams === slug);
 
   if (!post) {
     null;
@@ -57,6 +57,11 @@ export default async function PostPage({ params }: PostProps) {
       {post.description && (
         <p className="text-xl mt-0 text-slate-700 dark:text-slate-200">
           {post.description}
+        </p>
+      )}
+      {post.lastmod && (
+        <p className="italic text-base text-gray-500 mt-2 mb-0">
+          Last updated: {new Date(post.lastmod).toLocaleDateString()}
         </p>
       )}
       <hr className="my-4" />
