@@ -39,7 +39,7 @@ export default function Footer() {
       </div>
       <p className="m-2">
         &copy; {new Date().getFullYear()}{" "}
-        <a href="https://www.smbcloud.xyz">smbCloud</a>
+        <a href="https://smbcloud.xyz">smbCloud</a>
       </p>
     </footer>
   );
