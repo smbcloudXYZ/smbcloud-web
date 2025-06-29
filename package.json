@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:content": "contentlayer2 build",
     "preview": "next build && next start",
     "start": "next start",
     "start-smbcloudweb": "next start -p 3015",
