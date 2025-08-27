@@ -13,8 +13,11 @@ export default function Home() {
   );
   return (
     <div className="prose dark:prose-invert">
-      <h1>smbCloud</h1>
-      <p className="text-lg">Deploy your NodeJS (NextJS, Astro) or Swift (Vapor) app with one command: </p>
+      <h1>Kong Hackathon</h1>
+      <p className="text-lg">
+        Deploy your NodeJS (NextJS, Astro) or Swift (Vapor) app with one
+        command:{" "}
+      </p>
       <TabbedRunner />
       <hr />
       <h2>Resources</h2>
