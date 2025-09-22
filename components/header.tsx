@@ -8,8 +8,9 @@ export default function Header() {
         <ModeToggle />
         <nav className="ml-auto text-sm font-medium space-x-6">
           <Link href="/">Home</Link>
-          <Link href="https://docs.smbcloud.xyz" target="__blank">Docs</Link>
-          <Link href="https://console.smbcloud.xyz" target="__blank">Console</Link>
+          <Link href="https://console.smbcloud.xyz" target="__blank">
+            Console
+          </Link>
         </nav>
       </div>
     </header>
