@@ -12,7 +12,7 @@ export const metadata = {
 export default function Home() {
   let publishedPosts = allPosts.filter((post) => post.published);
   publishedPosts = publishedPosts.sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
   return (
     <div className="prose dark:prose-invert">
