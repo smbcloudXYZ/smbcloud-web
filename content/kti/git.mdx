@@ -1,0 +1,638 @@
+---
+title: "Git"
+term: "apa-itu-git"
+category: "Software Development"
+tags: ["version-control", "collaboration", "github", "gitlab", "source-code"]
+description: "Sistem version control terdistribusi untuk tracking perubahan kode, berkolaborasi dengan tim, dan mengelola history project."
+englishTerm: "Git"
+relatedTerms: ["apa-itu-github", "apa-itu-gitlab", "apa-itu-version-control", "apa-itu-devops", "apa-itu-ci-cd"]
+difficulty: "pemula"
+lastmod: 2024-01-15
+published: true
+---
+
+## Apa itu Git?
+
+**Git** adalah sistem version control terdistribusi yang paling populer di dunia. Git memungkinkan developer untuk:
+- Track perubahan kode dari waktu ke waktu
+- Berkolaborasi dengan tim tanpa konflik
+- Kembali ke versi sebelumnya jika ada masalah
+- Bekerja di berbagai fitur secara parallel
+
+Dibuat oleh Linus Torvalds (creator of Linux) pada tahun 2005, Git sekarang menjadi standar industri untuk version control.
+
+## Mengapa Git Penting?
+
+### Sebelum Git
+Bayangkan Anda bekerja tanpa Git:
+
+```
+project/
+├── app.js
+├── app_backup.js
+├── app_backup_final.js
+├── app_backup_final_FINAL.js
+├── app_backup_final_FINAL_v2.js
+└── app_backup_THIS_ONE_USE_THIS.js
+```
+
+**Masalah**:
+- File duplikat di mana-mana
+- Tidak tahu perubahan apa saja yang terjadi
+- Sulit kolaborasi dengan tim
+- Takut hapus kode karena tidak bisa kembali
+
+### Dengan Git
+```bash
+$ git log --oneline
+a1b2c3d (HEAD -> main) Add user authentication
+d4e5f6g Refactor database queries
+g7h8i9j Initial commit
+```
+
+**Keuntungan**:
+- ✅ History lengkap semua perubahan
+- ✅ Siapa yang mengubah apa dan kapan
+- ✅ Bisa kembali ke versi manapun
+- ✅ Kolaborasi tim tanpa konflik
+
+## Konsep Dasar Git
+
+### Repository (Repo)
+Folder project yang di-track oleh Git. Repository berisi:
+- Source code
+- History semua perubahan
+- Branches dan tags
+- Configuration
+
+```bash
+# Initialize repository baru
+git init
+
+# Clone repository existing
+git clone https://github.com/username/project.git
+```
+
+### Commit
+Snapshot dari perubahan code Anda. Seperti "save point" dalam game.
+
+```bash
+# Lihat status files
+git status
+
+# Add files ke staging
+git add index.html
+git add .  # Add semua files
+
+# Commit changes
+git commit -m "Add homepage design"
+```
+
+### Branch
+Cabang development terpisah. Seperti "parallel universe" untuk code Anda.
+
+```bash
+# List branches
+git branch
+
+# Create branch baru
+git branch feature-login
+
+# Switch ke branch
+git checkout feature-login
+# atau dengan Git 2.23+
+git switch feature-login
+
+# Create dan switch sekaligus
+git checkout -b feature-login
+```
+
+### Merge
+Menggabungkan perubahan dari satu branch ke branch lain.
+
+```bash
+# Switch ke branch tujuan
+git checkout main
+
+# Merge branch lain
+git merge feature-login
+```
+
+## Git Workflow Dasar
+
+### 1. Setup Awal
+
+```bash
+# Configure identity
+git config --global user.name "Nama Anda"
+git config --global user.email "email@example.com"
+
+# Lihat configuration
+git config --list
+```
+
+### 2. Daily Workflow
+
+```bash
+# 1. Check status
+git status
+
+# 2. Pull latest changes
+git pull origin main
+
+# 3. Create feature branch
+git checkout -b feature-new-button
+
+# 4. Make changes, then add
+git add .
+
+# 5. Commit changes
+git commit -m "Add new button to homepage"
+
+# 6. Push to remote
+git push origin feature-new-button
+```
+
+### 3. Merge ke Main Branch
+
+```bash
+# Switch ke main
+git checkout main
+
+# Pull latest
+git pull origin main
+
+# Merge feature branch
+git merge feature-new-button
+
+# Push to remote
+git push origin main
+```
+
+## Git Commands Essential
+
+### Status & Information
+
+```bash
+# Status files
+git status
+
+# View commit history
+git log
+git log --oneline
+git log --graph --oneline --all
+
+# Show changes
+git diff
+git diff --staged
+
+# Show specific commit
+git show a1b2c3d
+```
+
+### Working with Changes
+
+```bash
+# Add files
+git add file.txt
+git add *.js
+git add .
+
+# Remove from staging
+git reset file.txt
+
+# Discard changes
+git checkout -- file.txt
+git restore file.txt  # Git 2.23+
+
+# Stash changes (temporary save)
+git stash
+git stash list
+git stash pop
+```
+
+### Branches
+
+```bash
+# List branches
+git branch
+git branch -a  # Include remote branches
+
+# Create branch
+git branch feature-name
+
+# Switch branch
+git switch feature-name
+
+# Delete branch
+git branch -d feature-name
+git branch -D feature-name  # Force delete
+```
+
+### Remote Operations
+
+```bash
+# List remotes
+git remote -v
+
+# Add remote
+git remote add origin https://github.com/user/repo.git
+
+# Fetch changes (don't merge)
+git fetch origin
+
+# Pull changes (fetch + merge)
+git pull origin main
+
+# Push changes
+git push origin main
+git push -u origin main  # Set upstream
+```
+
+### Undo Changes
+
+```bash
+# Undo last commit (keep changes)
+git reset --soft HEAD~1
+
+# Undo last commit (discard changes)
+git reset --hard HEAD~1
+
+# Revert commit (create new commit)
+git revert a1b2c3d
+
+# Amend last commit
+git commit --amend -m "New message"
+```
+
+## Branching Strategies
+
+### Git Flow
+Popular strategy untuk production apps:
+
+```
+main (production)
+├── develop (integration)
+    ├── feature/login
+    ├── feature/payment
+    └── feature/dashboard
+
+release/1.0.0
+hotfix/critical-bug
+```
+
+### GitHub Flow
+Simpler strategy untuk continuous deployment:
+
+```
+main (always deployable)
+├── feature/user-auth
+├── feature/api-endpoint
+└── bugfix/login-error
+```
+
+## .gitignore File
+
+File untuk exclude files/folders dari Git:
+
+```gitignore
+# Node.js
+node_modules/
+npm-debug.log
+.env
+
+# Python
+__pycache__/
+*.pyc
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build files
+dist/
+build/
+*.log
+```
+
+## Git dengan GitHub/GitLab
+
+### SSH Setup
+
+```bash
+# Generate SSH key
+ssh-keygen -t ed25519 -C "email@example.com"
+
+# Copy public key
+cat ~/.ssh/id_ed25519.pub
+
+# Add to GitHub/GitLab settings
+# Test connection
+ssh -T git@github.com
+```
+
+### Pull Requests / Merge Requests
+
+Workflow kolaborasi:
+
+1. **Fork/Clone** repository
+2. **Create branch** untuk feature
+3. **Commit changes** dengan descriptive messages
+4. **Push** ke remote
+5. **Create PR/MR** di GitHub/GitLab
+6. **Code review** dari tim
+7. **Merge** setelah approved
+
+## Git Best Practices
+
+### 1. Commit Messages
+
+❌ **Bad:**
+```bash
+git commit -m "fix"
+git commit -m "update"
+git commit -m "asdfasdf"
+```
+
+✅ **Good:**
+```bash
+git commit -m "Fix login validation bug"
+git commit -m "Add user profile endpoint"
+git commit -m "Refactor database connection logic"
+```
+
+**Format yang baik:**
+```
+<type>: <subject>
+
+<body>
+
+<footer>
+```
+
+**Contoh:**
+```
+feat: Add user authentication
+
+- Implement JWT token generation
+- Add login/register endpoints
+- Create middleware for auth check
+
+Closes #123
+```
+
+**Types:**
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation
+- `style`: Formatting, no code change
+- `refactor`: Code restructure
+- `test`: Add tests
+- `chore`: Maintenance tasks
+
+### 2. Commit Often, Perfect Later
+
+```bash
+# Commit frequently during development
+git commit -m "WIP: Add user model"
+git commit -m "WIP: Add validation"
+git commit -m "WIP: Add tests"
+
+# Squash commits before merge
+git rebase -i HEAD~3
+```
+
+### 3. Never Commit Sensitive Data
+
+❌ **Jangan commit:**
+- API keys
+- Passwords
+- Database credentials
+- Private keys
+- `.env` files
+
+✅ **Use environment variables:**
+```javascript
+// config.js
+module.exports = {
+  apiKey: process.env.API_KEY,
+  dbPassword: process.env.DB_PASSWORD
+}
+```
+
+### 4. Pull Before Push
+
+```bash
+# Always pull first
+git pull origin main
+
+# Resolve conflicts if any
+# Then push
+git push origin main
+```
+
+## Handling Merge Conflicts
+
+Ketika Git tidak bisa auto-merge:
+
+```bash
+$ git merge feature-branch
+Auto-merging index.html
+CONFLICT (content): Merge conflict in index.html
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+**File dengan conflict:**
+```html
+<!DOCTYPE html>
+<html>
+<<<<<<< HEAD
+  <title>Main Branch Title</title>
+=======
+  <title>Feature Branch Title</title>
+>>>>>>> feature-branch
+</html>
+```
+
+**Resolve:**
+1. Edit file, remove conflict markers
+2. Keep one version or combine both
+3. `git add` the file
+4. `git commit` to complete merge
+
+```bash
+# After resolving
+git add index.html
+git commit -m "Resolve merge conflict in index.html"
+```
+
+## Git Aliases (Shortcuts)
+
+```bash
+# Setup aliases
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ci commit
+git config --global alias.st status
+git config --global alias.unstage 'reset HEAD --'
+git config --global alias.last 'log -1 HEAD'
+git config --global alias.visual 'log --graph --oneline --all'
+
+# Usage
+git co main
+git br feature-new
+git ci -m "message"
+git st
+```
+
+## Common Mistakes & Solutions
+
+### 1. Committed to Wrong Branch
+
+```bash
+# Create branch from current state
+git branch correct-branch
+
+# Reset current branch
+git reset --hard HEAD~1
+
+# Switch to correct branch
+git checkout correct-branch
+```
+
+### 2. Need to Change Last Commit Message
+
+```bash
+git commit --amend -m "Correct message"
+```
+
+### 3. Accidentally Deleted File
+
+```bash
+# Restore from last commit
+git checkout HEAD -- file.txt
+```
+
+### 4. Want to Undo All Local Changes
+
+```bash
+# Discard all local changes
+git reset --hard HEAD
+
+# Clean untracked files
+git clean -fd
+```
+
+## Git untuk Tim
+
+### Code Review Checklist
+
+- ✅ Code follows style guide
+- ✅ Tests are included
+- ✅ No sensitive data committed
+- ✅ Commit messages are clear
+- ✅ Documentation updated
+- ✅ No merge conflicts
+
+### Protected Branches
+
+Di GitHub/GitLab, set rules untuk main branch:
+- Require pull request reviews
+- Require status checks to pass
+- Require branches to be up to date
+- No force push
+
+## Git Tips untuk Developer Indonesia
+
+### 1. Mulai dari Project Pribadi
+
+```bash
+# Create simple project
+mkdir my-first-repo
+cd my-first-repo
+git init
+echo "# My First Repo" > README.md
+git add README.md
+git commit -m "Initial commit"
+```
+
+### 2. Practice dengan GitHub
+
+- Create GitHub account (gratis)
+- Fork open source projects
+- Contribute to Indonesian projects
+- Build portfolio dengan public repos
+
+### 3. Learn by Doing
+
+Praktek scenarios:
+- Create branches
+- Make conflicts intentionally, then resolve
+- Try different merge strategies
+- Experiment with rebase
+
+### 4. Use GUI Tools (Optional)
+
+Untuk yang lebih nyaman dengan visual:
+- **GitHub Desktop** - Simple, beginner-friendly
+- **SourceTree** - More features
+- **GitKraken** - Beautiful interface
+- **VS Code** - Built-in Git support
+
+## Git dengan smbCloud
+
+smbCloud terintegrasi dengan Git untuk auto-deployment:
+
+```bash
+# Setup remote
+git remote add smb https://git.smbcloud.xyz/yourapp.git
+
+# Deploy dengan git push
+git push smb main
+
+# smbCloud otomatis:
+# ✅ Pull latest code
+# ✅ Install dependencies
+# ✅ Run tests
+# ✅ Build application
+# ✅ Deploy to production
+```
+
+## Resources untuk Belajar
+
+### Interactive Tutorials
+- **Learn Git Branching** - learngitbranching.js.org
+- **GitHub Skills** - skills.github.com
+
+### Cheat Sheets
+- **GitHub Git Cheat Sheet** - education.github.com/git-cheat-sheet-education.pdf
+- **Atlassian Git Cheat Sheet** - atlassian.com/git/tutorials/atlassian-git-cheatsheet
+
+### Books
+- **Pro Git** (Free) - git-scm.com/book
+- **Git Pocket Guide** - O'Reilly
+
+## Kesimpulan
+
+Git adalah skill fundamental yang wajib dikuasai setiap developer. Dengan Git, Anda bisa:
+
+- 📝 **Track history** - Never lose code again
+- 🤝 **Collaborate** - Work with team seamlessly
+- 🔄 **Experiment** - Try things without fear
+- ⏮️ **Time travel** - Go back to any version
+- 🚀 **Deploy** - Integrate dengan CI/CD
+
+**Langkah Selanjutnya:**
+1. Install Git di komputer Anda
+2. Create GitHub account
+3. Initialize Git di project Anda
+4. Practice commit, branch, merge
+5. Contribute ke open source
+
+Git bukan hanya tool, tapi **way of working** dalam modern software development. Master Git, dan pintu karir IT terbuka lebar! 🎯

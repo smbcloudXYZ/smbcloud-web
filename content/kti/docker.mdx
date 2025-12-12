@@ -1,0 +1,598 @@
+---
+title: "Docker"
+term: "apa-itu-docker"
+category: "Cloud & Infrastructure"
+tags: ["container", "virtualization", "devops", "deployment", "microservices"]
+description: "Platform untuk develop, ship, dan run aplikasi dalam containers yang isolated, portable, dan lightweight."
+englishTerm: "Docker"
+relatedTerms: ["apa-itu-container", "apa-itu-kubernetes", "apa-itu-devops", "apa-itu-microservices", "apa-itu-virtualisasi"]
+difficulty: "menengah"
+lastmod: 2024-01-15
+published: true
+---
+
+## Apa itu Docker?
+
+**Docker** adalah platform open-source yang memungkinkan developer untuk package aplikasi beserta semua dependencies-nya ke dalam unit standar yang disebut **container**. Container ini bisa dijalankan di mana saja - laptop developer, server staging, cloud production - dengan konsistensi yang sama.
+
+Bayangkan Docker seperti "kontainer shipping" di dunia software. Sama seperti kontainer fisik yang bisa diangkut kapal, truk, atau kereta tanpa peduli isinya, Docker container bisa dijalankan di berbagai environment tanpa masalah kompatibilitas.
+
+## Masalah yang Dipecahkan Docker
+
+### "It Works on My Machine" 🤷‍♂️
+
+Sebelum Docker, ini adalah masalah klasik:
+- Developer: "Aplikasi jalan di laptop saya kok"
+- Ops: "Tapi error di production!"
+
+**Penyebab**:
+- Beda versi dependencies
+- Beda konfigurasi environment
+- Beda OS atau libraries
+
+**Solusi Docker**:
+Container membawa semua yang dibutuhkan aplikasi, ensuring consistency across environments.
+
+## Docker vs Virtual Machines
+
+| Aspek | Docker Container | Virtual Machine |
+|-------|-----------------|-----------------|
+| **Size** | MB (megabytes) | GB (gigabytes) |
+| **Startup** | Detik | Menit |
+| **Performance** | Near-native | Overhead significant |
+| **Isolation** | Process-level | Hardware-level |
+| **OS** | Share host kernel | Full OS per VM |
+| **Resource Usage** | Efficient | Heavy |
+
+### Visualisasi
+
+```
+Virtual Machine:
+┌─────────────────────────┐
+│   App A   │   App B     │
+├───────────┼─────────────┤
+│  Guest OS │  Guest OS   │
+├───────────┴─────────────┤
+│     Hypervisor          │
+├─────────────────────────┤
+│     Host OS             │
+├─────────────────────────┤
+│     Hardware            │
+└─────────────────────────┘
+
+Docker:
+┌─────────────────────────┐
+│   App A   │   App B     │
+├───────────┼─────────────┤
+│ Container │ Container   │
+├───────────┴─────────────┤
+│    Docker Engine        │
+├─────────────────────────┤
+│      Host OS            │
+├─────────────────────────┤
+│      Hardware           │
+└─────────────────────────┘
+```
+
+## Konsep Penting Docker
+
+### 1. Docker Image
+
+**Image** adalah template read-only yang berisi instruksi untuk membuat container. Seperti "blueprint" atau "snapshot" dari aplikasi.
+
+```bash
+# Download image dari Docker Hub
+docker pull nginx:latest
+docker pull node:18-alpine
+docker pull postgres:15
+```
+
+### 2. Docker Container
+
+**Container** adalah running instance dari image. Satu image bisa digunakan untuk membuat banyak containers.
+
+```bash
+# Jalankan container dari image
+docker run -d -p 8080:80 nginx:latest
+
+# List running containers
+docker ps
+
+# Stop container
+docker stop <container_id>
+```
+
+### 3. Dockerfile
+
+File instruksi untuk build Docker image. Seperti "recipe" untuk membuat image.
+
+```dockerfile
+# Contoh Dockerfile untuk Node.js app
+FROM node:18-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm ci --production
+
+# Copy source code
+COPY . .
+
+# Expose port
+EXPOSE 3000
+
+# Set environment
+ENV NODE_ENV=production
+
+# Command to run
+CMD ["node", "server.js"]
+```
+
+### 4. Docker Compose
+
+Tool untuk define dan run multi-container applications.
+
+```yaml
+# docker-compose.yml
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgres://db:5432/myapp
+    depends_on:
+      - db
+      - redis
+  
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=myapp
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:
+```
+
+```bash
+# Jalankan semua services
+docker-compose up -d
+
+# Stop semua services
+docker-compose down
+```
+
+## Docker Commands Essentials
+
+### Image Management
+
+```bash
+# List images
+docker images
+
+# Build image dari Dockerfile
+docker build -t myapp:v1 .
+
+# Tag image
+docker tag myapp:v1 username/myapp:v1
+
+# Push ke registry
+docker push username/myapp:v1
+
+# Remove image
+docker rmi myapp:v1
+```
+
+### Container Management
+
+```bash
+# Run container
+docker run -d --name myapp -p 8080:3000 myapp:v1
+
+# Run dengan environment variables
+docker run -d -e DATABASE_URL=postgres://... myapp:v1
+
+# Run dengan volumes
+docker run -d -v /host/path:/container/path myapp:v1
+
+# Execute command di running container
+docker exec -it myapp /bin/sh
+
+# View logs
+docker logs myapp
+docker logs -f myapp  # Follow logs
+
+# Stop container
+docker stop myapp
+
+# Start stopped container
+docker start myapp
+
+# Remove container
+docker rm myapp
+
+# Remove all stopped containers
+docker container prune
+```
+
+### System Commands
+
+```bash
+# Show Docker info
+docker info
+
+# Show disk usage
+docker system df
+
+# Clean up unused resources
+docker system prune -a
+
+# View container resource usage
+docker stats
+```
+
+## Dockerfile Best Practices
+
+### 1. Gunakan Official Base Images
+
+❌ **Hindari:**
+```dockerfile
+FROM ubuntu
+RUN apt-get update && apt-get install -y nodejs
+```
+
+✅ **Lebih Baik:**
+```dockerfile
+FROM node:18-alpine
+```
+
+### 2. Minimize Layers
+
+❌ **Tidak Efisien:**
+```dockerfile
+RUN apt-get update
+RUN apt-get install -y git
+RUN apt-get install -y curl
+```
+
+✅ **Efisien:**
+```dockerfile
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+```
+
+### 3. Multi-Stage Builds
+
+Untuk mengurangi final image size:
+
+```dockerfile
+# Build stage
+FROM node:18 AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+# Production stage
+FROM node:18-alpine
+WORKDIR /app
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
+COPY package*.json ./
+EXPOSE 3000
+CMD ["node", "dist/server.js"]
+```
+
+### 4. .dockerignore File
+
+Exclude files dari build context:
+
+```
+# .dockerignore
+node_modules
+npm-debug.log
+.git
+.env
+.DS_Store
+dist
+coverage
+*.md
+```
+
+### 5. Security Best Practices
+
+```dockerfile
+# Don't run as root
+FROM node:18-alpine
+
+# Create non-root user
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S nodejs -u 1001
+
+WORKDIR /app
+COPY --chown=nodejs:nodejs . .
+RUN npm ci --production
+
+# Switch to non-root user
+USER nodejs
+
+EXPOSE 3000
+CMD ["node", "server.js"]
+```
+
+## Docker Networking
+
+### Bridge Network (Default)
+
+Containers di network yang sama bisa communicate by name.
+
+```bash
+# Create custom network
+docker network create mynetwork
+
+# Run containers di network yang sama
+docker run -d --name db --network mynetwork postgres
+docker run -d --name app --network mynetwork myapp
+
+# App bisa connect ke db dengan: postgres://db:5432
+```
+
+### Port Mapping
+
+```bash
+# Map container port ke host port
+docker run -p 8080:3000 myapp  # host:container
+
+# Multiple ports
+docker run -p 8080:3000 -p 8081:3001 myapp
+
+# All ports
+docker run -P myapp
+```
+
+## Docker Volumes
+
+Untuk persistent data storage:
+
+### Named Volumes
+
+```bash
+# Create volume
+docker volume create mydata
+
+# Use volume
+docker run -v mydata:/app/data myapp
+
+# List volumes
+docker volume ls
+
+# Inspect volume
+docker volume inspect mydata
+```
+
+### Bind Mounts
+
+Mount host directory ke container:
+
+```bash
+# Development: Live reload
+docker run -v $(pwd):/app myapp
+
+# Windows
+docker run -v %cd%:/app myapp
+```
+
+## Real-World Use Cases
+
+### 1. Development Environment
+
+```yaml
+# docker-compose.dev.yml
+version: '3.8'
+services:
+  app:
+    build: .
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    command: npm run dev
+```
+
+### 2. Microservices Architecture
+
+```yaml
+version: '3.8'
+services:
+  frontend:
+    image: myapp/frontend
+    ports:
+      - "80:80"
+  
+  api-gateway:
+    image: myapp/api-gateway
+    ports:
+      - "8080:8080"
+  
+  user-service:
+    image: myapp/user-service
+  
+  product-service:
+    image: myapp/product-service
+  
+  order-service:
+    image: myapp/order-service
+```
+
+### 3. CI/CD Integration
+
+```yaml
+# .github/workflows/docker.yml
+name: Docker Build and Push
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Build Docker image
+        run: docker build -t myapp:${{ github.sha }} .
+      
+      - name: Push to registry
+        run: |
+          echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+          docker push myapp:${{ github.sha }}
+```
+
+## Docker di Production
+
+### Orchestration Tools
+
+Untuk manage containers di scale:
+
+1. **Docker Swarm** - Built-in Docker orchestration
+2. **Kubernetes** - Industry standard untuk container orchestration
+3. **AWS ECS** - Amazon's container service
+4. **Google Cloud Run** - Serverless containers
+
+### Health Checks
+
+```dockerfile
+HEALTHCHECK --interval=30s --timeout=3s \
+  CMD curl -f http://localhost:3000/health || exit 1
+```
+
+### Resource Limits
+
+```bash
+# Limit memory dan CPU
+docker run -m 512m --cpus=1 myapp
+```
+
+## Docker untuk Developer Indonesia
+
+### Keuntungan
+
+1. **Consistency** - Environment sama dari dev sampai production
+2. **Isolation** - Multiple projects dengan dependencies berbeda
+3. **Speed** - Setup project baru dalam menit
+4. **Collaboration** - Tim share exact same environment
+5. **Learning** - Coba berbagai technologies tanpa install di host
+
+### Tantangan
+
+1. **Learning Curve** - Banyak konsep baru
+2. **Disk Space** - Images dan containers butuh storage
+3. **Windows/Mac** - Perlu Docker Desktop (overhead)
+4. **Networking** - Bisa tricky di awal
+
+### Tips Mulai dengan Docker
+
+1. **Start Simple** - Containerize satu service dulu
+2. **Use Docker Hub** - Banyak official images siap pakai
+3. **Learn Docker Compose** - Lebih mudah dari manual commands
+4. **Practice** - Rebuild existing projects dengan Docker
+5. **Join Community** - Docker Indonesia di Telegram/Discord
+
+## Alternatif Docker
+
+- **Podman** - Daemonless, rootless containers
+- **LXC/LXD** - System containers
+- **rkt** - Alternative container runtime (deprecated)
+- **containerd** - Core container runtime (Docker menggunakan ini)
+
+## Docker dengan smbCloud
+
+smbCloud support Docker-based deployments dengan zero configuration:
+
+```bash
+# smbCloud auto-detect Dockerfile
+$ cat Dockerfile
+FROM node:18-alpine
+WORKDIR /app
+COPY . .
+RUN npm install
+CMD ["npm", "start"]
+
+$ git push smb main
+# smbCloud build image dan deploy otomatis!
+```
+
+**Keunggulan**:
+- No Docker registry setup needed
+- Auto build dari Dockerfile
+- Auto scaling containers
+- Built-in monitoring
+
+## Troubleshooting Common Issues
+
+### Container Exits Immediately
+
+```bash
+# Check logs
+docker logs <container_id>
+
+# Run interactively untuk debug
+docker run -it myapp /bin/sh
+```
+
+### Port Already in Use
+
+```bash
+# Find process using port
+lsof -i :8080  # Mac/Linux
+netstat -ano | findstr :8080  # Windows
+
+# Kill process atau use different port
+docker run -p 8081:3000 myapp
+```
+
+### Out of Disk Space
+
+```bash
+# Remove unused images
+docker image prune -a
+
+# Remove unused volumes
+docker volume prune
+
+# Clean everything
+docker system prune -a --volumes
+```
+
+## Kesimpulan
+
+Docker adalah game-changer dalam software development. Dengan Docker, developer bisa:
+
+- 🚀 **Deploy faster** - Container startup in seconds
+- 🔄 **Consistent environments** - Dev = Staging = Production
+- 📦 **Easy distribution** - Ship aplikasi dengan semua dependencies
+- 🎯 **Efficient resources** - Lightweight vs VMs
+- 🌐 **Portability** - Run anywhere Docker runs
+
+Untuk developer Indonesia yang ingin masuk ke modern development, Docker adalah skill fundamental yang wajib dikuasai. Mulai dengan containerize aplikasi sederhana, lalu expand ke microservices dan orchestration.
+
+**Remember**: Docker bukan hanya tool, tapi way of thinking tentang application packaging dan deployment! 🐳
