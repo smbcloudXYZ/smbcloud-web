@@ -10,7 +10,7 @@ interface PageProps {
   }>;
 }
 
-async function getPageFromParams(params: PageProps["params"]) {
+async function getPageFromParams(params: Awaited<PageProps["params"]>) {
   const slug = params?.slug?.join("/");
   const page = allPages.find((page) => page.slugAsParams === slug);
 
@@ -35,7 +35,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
   };
 }
 
-export async function generateStaticParams(): Promise<PageProps["params"][]> {
+export async function generateStaticParams() {
   return allPages.map((page) => ({
     slug: page.slugAsParams.split("/"),
   }));
@@ -54,7 +54,7 @@ export default async function PagePage(props: PageProps) {
       <h1>{page.title}</h1>
       {page.description && <p className="text-xl">{page.description}</p>}
       <hr />
-      {page.slugAsParams === 'about' && <AboutMedia />}
+      {page.slugAsParams === "about" && <AboutMedia />}
       <Mdx code={page.body.code} />
     </article>
   );
