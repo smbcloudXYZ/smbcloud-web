@@ -14,9 +14,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { term: string };
+  params: Promise<{ term: string }>;
 }) {
-  const kti = allKtis.find((kti) => kti.term === params.term);
+  const { term } = await params;
+  const kti = allKtis.find((kti) => kti.term === term);
 
   if (!kti) {
     return {};
@@ -53,8 +54,13 @@ export async function generateMetadata({
   };
 }
 
-export default function KtiTermPage({ params }: { params: { term: string } }) {
-  const kti = allKtis.find((kti) => kti.term === params.term);
+export default async function KtiTermPage({
+  params,
+}: {
+  params: Promise<{ term: string }>;
+}) {
+  const { term } = await params;
+  const kti = allKtis.find((kti) => kti.term === term);
 
   if (!kti || !kti.published) {
     notFound();
