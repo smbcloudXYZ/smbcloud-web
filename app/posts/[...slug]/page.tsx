@@ -10,7 +10,7 @@ interface PostProps {
   }>;
 }
 
-async function getPostFromParams(params: PostProps["params"]) {
+async function getPostFromParams(params: Awaited<PostProps["params"]>) {
   const slug = params?.slug?.join("/");
   const post = allPosts
     .filter((post) => post.published)
@@ -38,7 +38,7 @@ export async function generateMetadata(props: PostProps): Promise<Metadata> {
   };
 }
 
-export async function generateStaticParams(): Promise<PostProps["params"][]> {
+export async function generateStaticParams() {
   return allPosts.map((post) => ({
     slug: post.slugAsParams.split("/"),
   }));
