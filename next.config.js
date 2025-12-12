@@ -3,10 +3,8 @@ const { withContentlayer } = require("next-contentlayer2");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  eslint: {
-    // Disable ESLint during build due to ESLint 9 compatibility issues
-    ignoreDuringBuilds: true,
-  },
+  // Empty Turbopack config to silence webpack compatibility warning
+  turbopack: {},
 };
 
 module.exports = withContentlayer(nextConfig);
