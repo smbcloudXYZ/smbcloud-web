@@ -5,9 +5,9 @@ import { Metadata } from "next";
 import { Mdx } from "@/components/mdx-components";
 
 interface PostProps {
-  params: {
+  params: Promise<{
     slug: string[];
-  };
+  }>;
 }
 
 async function getPostFromParams(params: PostProps["params"]) {
@@ -23,9 +23,8 @@ async function getPostFromParams(params: PostProps["params"]) {
   return post;
 }
 
-export async function generateMetadata({
-  params,
-}: PostProps): Promise<Metadata> {
+export async function generateMetadata(props: PostProps): Promise<Metadata> {
+  const params = await props.params;
   const post = await getPostFromParams(params);
 
   if (!post) {
@@ -45,7 +44,8 @@ export async function generateStaticParams(): Promise<PostProps["params"][]> {
   }));
 }
 
-export default async function PostPage({ params }: PostProps) {
+export default async function PostPage(props: PostProps) {
+  const params = await props.params;
   const post = await getPostFromParams(params);
 
   if (!post) {

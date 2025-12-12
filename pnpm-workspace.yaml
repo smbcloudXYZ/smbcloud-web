@@ -3,3 +3,6 @@ ignoredBuiltDependencies:
   - esbuild
   - protobufjs
   - unrs-resolver
+
+onlyBuiltDependencies:
+  - sharp
