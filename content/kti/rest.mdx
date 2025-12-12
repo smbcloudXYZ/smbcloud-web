@@ -1,0 +1,466 @@
+---
+title: "REST (Representational State Transfer)"
+term: "apa-itu-rest"
+category: "Pemrograman"
+tags: ["api", "web", "http", "backend", "restful", "web-service"]
+description: "Arsitektur software untuk membuat web services yang menggunakan HTTP methods standar untuk operasi CRUD pada resources."
+englishTerm: "Representational State Transfer"
+acronym: "REST"
+relatedTerms: ["apa-itu-api", "apa-itu-http", "apa-itu-json", "apa-itu-graphql", "apa-itu-crud"]
+difficulty: "menengah"
+lastmod: 2024-01-15
+published: true
+---
+
+## Apa itu REST?
+
+**REST (Representational State Transfer)** adalah gaya arsitektur software yang mendefinisikan sekumpulan constraint untuk membuat web services. REST API adalah API yang mengikuti prinsip-prinsip REST, menggunakan HTTP requests untuk melakukan operasi CRUD (Create, Read, Update, Delete) pada data.
+
+REST bukan protokol atau standar, tetapi sekumpulan aturan atau best practices yang membuat API lebih mudah dipahami, scalable, dan maintainable.
+
+## Prinsip-prinsip REST
+
+### 1. Client-Server Architecture
+Client dan server terpisah, memungkinkan keduanya berkembang secara independen.
+
+### 2. Stateless
+Setiap request dari client ke server harus mengandung semua informasi yang diperlukan. Server tidak menyimpan state client.
+
+### 3. Cacheable
+Response harus mendefinisikan apakah data bisa di-cache untuk meningkatkan performa.
+
+### 4. Uniform Interface
+Interface yang konsisten antara client dan server, termasuk:
+- Resource identification via URI
+- Manipulation melalui representations
+- Self-descriptive messages
+- HATEOAS (Hypermedia as the Engine of Application State)
+
+### 5. Layered System
+Architecture bisa tersusun dari multiple layers (security, load balancing, caching).
+
+### 6. Code on Demand (Optional)
+Server bisa mengirim executable code ke client (misalnya JavaScript).
+
+## HTTP Methods dalam REST
+
+REST menggunakan HTTP methods standar untuk operasi:
+
+### GET - Membaca Data
+```javascript
+// Mendapatkan semua users
+GET /api/users
+
+// Mendapatkan user spesifik
+GET /api/users/123
+```
+
+### POST - Membuat Data Baru
+```javascript
+POST /api/users
+Content-Type: application/json
+
+{
+  "name": "Budi Santoso",
+  "email": "budi@example.com"
+}
+```
+
+### PUT - Update Data (Replace)
+```javascript
+PUT /api/users/123
+Content-Type: application/json
+
+{
+  "name": "Budi Santoso Updated",
+  "email": "budi.new@example.com"
+}
+```
+
+### PATCH - Update Data Sebagian
+```javascript
+PATCH /api/users/123
+Content-Type: application/json
+
+{
+  "email": "budi.new@example.com"
+}
+```
+
+### DELETE - Hapus Data
+```javascript
+DELETE /api/users/123
+```
+
+## HTTP Status Codes
+
+REST API menggunakan HTTP status codes untuk mengindikasikan hasil request:
+
+### 2xx - Success
+- `200 OK` - Request berhasil
+- `201 Created` - Resource baru berhasil dibuat
+- `204 No Content` - Request berhasil, tidak ada content yang dikembalikan
+
+### 3xx - Redirection
+- `301 Moved Permanently` - Resource dipindah permanent
+- `304 Not Modified` - Resource tidak berubah (cache masih valid)
+
+### 4xx - Client Errors
+- `400 Bad Request` - Request tidak valid
+- `401 Unauthorized` - Authentication required
+- `403 Forbidden` - Authenticated tapi tidak ada permission
+- `404 Not Found` - Resource tidak ditemukan
+- `422 Unprocessable Entity` - Validation error
+
+### 5xx - Server Errors
+- `500 Internal Server Error` - Error di server
+- `502 Bad Gateway` - Invalid response dari upstream server
+- `503 Service Unavailable` - Server temporary down
+
+## Contoh REST API Lengkap
+
+### Resource: Products
+
+```javascript
+// GET /api/products - List semua products
+Response: 200 OK
+[
+  {
+    "id": 1,
+    "name": "Laptop ASUS",
+    "price": 8500000,
+    "stock": 15
+  },
+  {
+    "id": 2,
+    "name": "Mouse Logitech",
+    "price": 250000,
+    "stock": 50
+  }
+]
+
+// GET /api/products/1 - Detail product
+Response: 200 OK
+{
+  "id": 1,
+  "name": "Laptop ASUS",
+  "price": 8500000,
+  "stock": 15,
+  "description": "Laptop gaming dengan spesifikasi tinggi",
+  "created_at": "2024-01-01T10:00:00Z"
+}
+
+// POST /api/products - Create product baru
+Request Body:
+{
+  "name": "Keyboard Mechanical",
+  "price": 750000,
+  "stock": 30
+}
+
+Response: 201 Created
+{
+  "id": 3,
+  "name": "Keyboard Mechanical",
+  "price": 750000,
+  "stock": 30,
+  "created_at": "2024-01-15T14:30:00Z"
+}
+
+// PUT /api/products/1 - Update product
+Request Body:
+{
+  "name": "Laptop ASUS ROG",
+  "price": 9000000,
+  "stock": 12
+}
+
+Response: 200 OK
+{
+  "id": 1,
+  "name": "Laptop ASUS ROG",
+  "price": 9000000,
+  "stock": 12,
+  "updated_at": "2024-01-15T15:00:00Z"
+}
+
+// DELETE /api/products/1 - Hapus product
+Response: 204 No Content
+```
+
+## Best Practices REST API
+
+### 1. Gunakan Nouns, Bukan Verbs
+❌ **Salah:**
+```
+GET /getUsers
+POST /createUser
+PUT /updateUser
+DELETE /deleteUser
+```
+
+✅ **Benar:**
+```
+GET /users
+POST /users
+PUT /users/123
+DELETE /users/123
+```
+
+### 2. Gunakan Plural untuk Collection
+✅ **Benar:**
+```
+GET /users
+GET /products
+GET /orders
+```
+
+### 3. Nested Resources untuk Relationships
+```javascript
+// Orders milik user tertentu
+GET /users/123/orders
+
+// Comments milik post tertentu
+GET /posts/456/comments
+
+// Specific comment
+GET /posts/456/comments/789
+```
+
+### 4. Filtering, Sorting, dan Pagination
+```javascript
+// Filtering
+GET /products?category=laptop&price_min=5000000
+
+// Sorting
+GET /products?sort=price&order=desc
+
+// Pagination
+GET /products?page=2&limit=20
+
+// Kombinasi
+GET /products?category=laptop&sort=price&order=asc&page=1&limit=10
+```
+
+### 5. Versioning
+```javascript
+// URL versioning (paling umum)
+GET /api/v1/users
+GET /api/v2/users
+
+// Header versioning
+GET /api/users
+Headers: Accept: application/vnd.api.v1+json
+
+// Query parameter
+GET /api/users?version=1
+```
+
+### 6. Consistent Error Responses
+```javascript
+{
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Data yang dikirim tidak valid",
+    "details": [
+      {
+        "field": "email",
+        "message": "Email format tidak valid"
+      },
+      {
+        "field": "password",
+        "message": "Password minimal 8 karakter"
+      }
+    ]
+  }
+}
+```
+
+## Implementasi REST API
+
+### Node.js dengan Express
+```javascript
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+// GET all users
+app.get('/api/users', async (req, res) => {
+  const users = await db.users.findAll();
+  res.json(users);
+});
+
+// GET user by ID
+app.get('/api/users/:id', async (req, res) => {
+  const user = await db.users.findById(req.params.id);
+  if (!user) {
+    return res.status(404).json({ error: 'User not found' });
+  }
+  res.json(user);
+});
+
+// POST create user
+app.post('/api/users', async (req, res) => {
+  const { name, email } = req.body;
+  const user = await db.users.create({ name, email });
+  res.status(201).json(user);
+});
+
+// PUT update user
+app.put('/api/users/:id', async (req, res) => {
+  const user = await db.users.update(req.params.id, req.body);
+  res.json(user);
+});
+
+// DELETE user
+app.delete('/api/users/:id', async (req, res) => {
+  await db.users.delete(req.params.id);
+  res.status(204).send();
+});
+
+app.listen(3000);
+```
+
+### Ruby on Rails
+```ruby
+class Api::UsersController < ApplicationController
+  # GET /api/users
+  def index
+    @users = User.all
+    render json: @users
+  end
+
+  # GET /api/users/:id
+  def show
+    @user = User.find(params[:id])
+    render json: @user
+  end
+
+  # POST /api/users
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      render json: @user, status: :created
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
+  # PUT /api/users/:id
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      render json: @user
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
+  # DELETE /api/users/:id
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    head :no_content
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:name, :email)
+  end
+end
+```
+
+## Authentication di REST API
+
+### 1. API Keys
+```javascript
+GET /api/users
+Headers: 
+  X-API-Key: your_api_key_here
+```
+
+### 2. Bearer Token (JWT)
+```javascript
+POST /api/login
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+
+Response:
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+
+// Subsequent requests
+GET /api/users
+Headers:
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+```
+
+### 3. OAuth 2.0
+Untuk third-party authentication (Google, Facebook, GitHub).
+
+## REST vs GraphQL
+
+| Aspek | REST | GraphQL |
+|-------|------|---------|
+| **Endpoints** | Multiple endpoints | Single endpoint |
+| **Data Fetching** | Over/under fetching mungkin terjadi | Client specify exact data |
+| **Learning Curve** | Mudah dipelajari | Lebih kompleks |
+| **Caching** | HTTP caching built-in | Perlu custom implementation |
+| **Maturity** | Sangat mature, widely adopted | Relatif baru, growing |
+
+## Tools untuk Testing REST API
+
+### 1. Postman
+GUI tool paling populer untuk testing API.
+
+### 2. cURL
+Command line tool untuk HTTP requests.
+```bash
+curl -X GET https://api.example.com/users
+curl -X POST https://api.example.com/users \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Budi","email":"budi@example.com"}'
+```
+
+### 3. HTTPie
+User-friendly command line HTTP client.
+```bash
+http GET https://api.example.com/users
+http POST https://api.example.com/users name=Budi email=budi@example.com
+```
+
+### 4. Insomnia
+Alternative GUI tool seperti Postman.
+
+## Kesalahan Umum dalam REST API
+
+1. **Menggunakan Verbs di URL** - `/getUser` instead of `/users`
+2. **Tidak Consistent dengan Status Codes** - Return 200 untuk semua response
+3. **Tidak Handle Errors dengan Baik** - Error message tidak jelas
+4. **Exposing Internal Structure** - URL mencerminkan database structure
+5. **Tidak Implement Rate Limiting** - API bisa di-abuse
+6. **Tidak Versioning** - Breaking changes tanpa backward compatibility
+
+## Tips untuk Developer
+
+1. **Design First** - Plan API structure sebelum coding
+2. **Document Everything** - Gunakan Swagger/OpenAPI untuk dokumentasi
+3. **Test Thoroughly** - Write integration tests untuk API endpoints
+4. **Monitor Performance** - Track response times dan error rates
+5. **Security First** - Always validate input, use HTTPS, implement authentication
+6. **Follow Standards** - Gunakan HTTP methods dan status codes dengan benar
+
+## Kesimpulan
+
+REST adalah arsitektur API yang paling populer dan widely adopted. Dengan memahami prinsip REST dan best practices-nya, Anda dapat membuat API yang:
+- Mudah dipahami dan digunakan
+- Scalable dan maintainable
+- Consistent dan predictable
+- Secure dan reliable
+
+REST API adalah skill fundamental untuk backend developer dan akan terus relevan di tahun-tahun mendatang. Mulai practice dengan membuat REST API sederhana, lalu tingkatkan kompleksitasnya seiring pengalaman Anda bertambah!

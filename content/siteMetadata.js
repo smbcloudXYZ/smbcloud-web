@@ -1,20 +1,21 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'smbCloud | A next-gen cloud platform powering small and medium-sized businesses.',
-  author: 'hello@smbcloud.xyz',
-  headerTitle: 'smbCloud',
+  title:
+    "smbCloud | A next-gen cloud platform powering small and medium-sized businesses.",
+  author: "hello@smbcloud.xyz",
+  headerTitle: "smbCloud",
   description:
-    'smbCloud offers small and medium-sized businesses easy, on-demand access to powerful, open-source software solutions in the cloud—without the hassle of installation or expensive licenses.',
-  language: 'en-us',
-  theme: 'dark', // system, dark or light
-  siteUrl: 'https://smbcloud.xyz',
-  siteLogo: `${process.env.BASE_PATH || ''}/logo.png`,
-  socialBanner: `${process.env.BASE_PATH || ''}/twitter-card.png`,
-  email: 'hello@smbcloud.xyz',
-  facebook: 'https://facebook.com/smbCloudXYZ',
-  youtube: 'https://youtube.com/@smbCloudXYZ',
-  instagram: 'https://www.instagram.com/smbCloudXYZ',
-  locale: 'en-US',
+    "smbCloud offers small and medium-sized businesses easy, on-demand access to powerful, open-source software solutions in the cloud—without the hassle of installation or expensive licenses. Explore our comprehensive Kamus Teknologi Informasi (KTI) for Indonesian IT professionals.",
+  language: "en-us",
+  theme: "dark", // system, dark or light
+  siteUrl: "https://smbcloud.xyz",
+  siteLogo: `${process.env.BASE_PATH || ""}/logo.png`,
+  socialBanner: `${process.env.BASE_PATH || ""}/twitter-card.png`,
+  email: "hello@smbcloud.xyz",
+  facebook: "https://facebook.com/smbCloudXYZ",
+  youtube: "https://youtube.com/@smbCloudXYZ",
+  instagram: "https://www.instagram.com/smbCloudXYZ",
+  locale: "en-US",
   // set to true if you want a navbar fixed to the top
   stickyNav: false,
   analytics: {
@@ -22,11 +23,11 @@ const siteMetadata = {
     // content security policy in the `next.config.js` file.
     // supports Plausible, Simple Analytics, Umami, Posthog or Google Analytics.
     // umamiAnalytics: {
-      // We use an env variable for this site to avoid other users cloning our analytics ID
-      // umamiWebsiteId: process.env.NEXT_UMAMI_ID, // e.g. 123e4567-e89b-12d3-a456-426614174000
-      // You may also need to overwrite the script if you're storing data in the US - ex:
-      // src: 'https://us.umami.is/script.js'
-      // Remember to add 'us.umami.is' in `next.config.js` as a permitted domain for the CSP
+    // We use an env variable for this site to avoid other users cloning our analytics ID
+    // umamiWebsiteId: process.env.NEXT_UMAMI_ID, // e.g. 123e4567-e89b-12d3-a456-426614174000
+    // You may also need to overwrite the script if you're storing data in the US - ex:
+    // src: 'https://us.umami.is/script.js'
+    // Remember to add 'us.umami.is' in `next.config.js` as a permitted domain for the CSP
     // },
     // plausibleAnalytics: {
     //   plausibleDataDomain: '', // e.g. tailwind-nextjs-starter-blog.vercel.app
@@ -59,27 +60,27 @@ const siteMetadata = {
       repositoryId: process.env.NEXT_PUBLIC_GISCUS_REPOSITORY_ID,
       category: process.env.NEXT_PUBLIC_GISCUS_CATEGORY,
       categoryId: process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID,
-      mapping: 'pathname', // supported options: pathname, url, title
-      reactions: '1', // Emoji reactions: 1 = enable / 0 = disable
+      mapping: "pathname", // supported options: pathname, url, title
+      reactions: "1", // Emoji reactions: 1 = enable / 0 = disable
       // Send discussion metadata periodically to the parent window: 1 = enable / 0 = disable
-      metadata: '0',
+      metadata: "0",
       // theme example: light, dark, dark_dimmed, dark_high_contrast
       // transparent_dark, preferred_color_scheme, custom
-      theme: 'light',
+      theme: "light",
       // theme when dark mode
-      darkTheme: 'transparent_dark',
+      darkTheme: "transparent_dark",
       // If the theme option above is set to 'custom`
       // please provide a link below to your custom theme css file.
       // example: https://giscus.app/themes/custom_example.css
-      themeURL: '',
+      themeURL: "",
       // This corresponds to the `data-lang="en"` in giscus's configurations
-      lang: 'en',
+      lang: "en",
     },
   },
   search: {
     // provider: 'kbar', // kbar or algolia
     // kbarConfig: {
-      // searchDocumentsPath: `${process.env.BASE_PATH || ''}/search.json`, // path to load documents to search
+    // searchDocumentsPath: `${process.env.BASE_PATH || ''}/search.json`, // path to load documents to search
     // },
     // provider: 'algolia',
     // algoliaConfig: {
@@ -90,6 +91,6 @@ const siteMetadata = {
     //   indexName: 'docsearch',
     // },
   },
-}
+};
 
-module.exports = siteMetadata
+module.exports = siteMetadata;
