@@ -1,0 +1,31 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "2TQF86ZACD.xyz.smbcloud.SiGit",
+        "paths": [
+          "*"
+        ]
+      },
+      {
+        "appID": "2TQF86ZACD.xyz.smbcloud.Movibe",
+        "paths": [
+          "*"
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "2TQF86ZACD.xyz.smbcloud.SiGit",
+      "2TQF86ZACD.xyz.smbcloud.Movibe"
+    ]
+  },
+  "appclips": {
+    "apps": [
+      "2TQF86ZACD.xyz.smbcloud.SiGit.Clip",
+      "2TQF86ZACD.xyz.smbcloud.Movibe.Clip"
+    ]
+  }
+}
