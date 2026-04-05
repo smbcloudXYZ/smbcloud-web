@@ -1,0 +1,28 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "xyz.smbcloud.Movibe",
+      "sha256_cert_fingerprints": [
+        "54:F1:0C:41:80:58:3B:C2:FF:CC:F9:80:7A:DF:CD:3A:19:00:39:40:8C:9D:6F:30:A1:69:C9:35:19:E4:0D:18"
+      ]
+    }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "xyz.smbcloud.SiGit",
+      "sha256_cert_fingerprints": [
+        "89:57:A3:94:18:6E:2B:60:3C:E1:C4:11:AD:8B:79:FB:1A:A8:2E:21:1D:A7:8F:E7:A4:9F:55:BC:A5:B8:9E:71"
+      ]
+    }
+  }
+]
