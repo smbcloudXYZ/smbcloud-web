@@ -32,21 +32,43 @@ export const metadata = {
   },
 };
 
+const difficultyConfig = {
+  pemula: {
+    label: "Pemula",
+    badge:
+      "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20",
+    bar: "bg-emerald-500",
+    tag: "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-500/20",
+  },
+  menengah: {
+    label: "Menengah",
+    badge:
+      "bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/20",
+    bar: "bg-amber-500",
+    tag: "bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 hover:bg-amber-100 dark:hover:bg-amber-500/20",
+  },
+  lanjut: {
+    label: "Lanjut",
+    badge:
+      "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/20",
+    bar: "bg-indigo-500",
+    tag: "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 hover:bg-indigo-100 dark:hover:bg-indigo-500/20",
+  },
+} as const;
+
+type Difficulty = keyof typeof difficultyConfig;
+
 export default function KtiPage() {
-  // Filter published KTI entries
   let publishedKtis = allKtis.filter((kti) => kti.published);
 
-  // Sort alphabetically by term
   publishedKtis = publishedKtis.sort((a, b) =>
     a.term.toLowerCase().localeCompare(b.term.toLowerCase()),
   );
 
-  // Group by category
   const categories = Array.from(
     new Set(publishedKtis.map((kti) => kti.category)),
   ).sort();
 
-  // Group by difficulty
   const difficultyGroups = {
     pemula: publishedKtis.filter((kti) => kti.difficulty === "pemula"),
     menengah: publishedKtis.filter((kti) => kti.difficulty === "menengah"),
@@ -54,72 +76,49 @@ export default function KtiPage() {
   };
 
   return (
-    <div className="prose dark:prose-invert max-w-none">
-      {/* Hero Section */}
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-4">
-          📚 Kamus Teknologi Informasi (KTI)
+    <div className="mx-auto max-w-5xl px-6 py-16 lg:px-8">
+      {/* ── Page header ─────────────────────────────────── */}
+      <div className="mb-16">
+        <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
+          Referensi
+        </p>
+        <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-5xl">
+          Kamus Teknologi Informasi
         </h1>
-        <p className="text-xl text-slate-600 dark:text-slate-400">
+        <p className="mt-4 max-w-2xl text-lg text-slate-500 dark:text-slate-400">
           Panduan lengkap istilah teknologi informasi dalam Bahasa Indonesia
           untuk tenaga kerja muda dan profesional IT.
         </p>
       </div>
 
-      {/* Introduction */}
-      <div className="bg-blue-50 dark:bg-blue-950 p-6 rounded-lg mb-8 border-l-4 border-blue-500">
-        <h2 className="mt-0 text-2xl">Mengapa KTI?</h2>
-        <p className="mb-2">
-          Dalam era transformasi digital, memahami istilah teknologi informasi
-          adalah kunci sukses karir IT Anda. KTI hadir untuk:
+      {/* ── Stats row ───────────────────────────────────── */}
+      <div className="mb-16 grid grid-cols-2 gap-4 sm:grid-cols-4">
+        {[
+          { value: publishedKtis.length, label: "Total Istilah" },
+          { value: categories.length, label: "Kategori" },
+          { value: difficultyGroups.pemula.length, label: "Level Pemula" },
+          { value: difficultyGroups.lanjut.length, label: "Level Lanjut" },
+        ].map((stat) => (
+          <div
+            key={stat.label}
+            className="rounded-xl border border-slate-200 dark:border-white/[0.06] bg-white dark:bg-white/[0.02] p-5"
+          >
+            <p className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+              {stat.value}
+            </p>
+            <p className="mt-1 text-xs text-slate-500 dark:text-slate-500">
+              {stat.label}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {/* ── Browse by category ──────────────────────────── */}
+      <section className="mb-16">
+        <p className="mb-8 text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
+          Berdasarkan Kategori
         </p>
-        <ul className="mb-0">
-          <li>
-            🎯 <strong>Mempercepat pembelajaran</strong> - Pahami konsep IT
-            dengan cepat
-          </li>
-          <li>
-            💼 <strong>Tingkatkan karir</strong> - Kuasai terminologi
-            profesional
-          </li>
-          <li>
-            🌐 <strong>Bahasa Indonesia</strong> - Penjelasan mudah dipahami
-          </li>
-          <li>
-            🚀 <strong>Selalu update</strong> - Mengikuti perkembangan teknologi
-            terkini
-          </li>
-        </ul>
-      </div>
-
-      {/* Statistics */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 not-prose">
-        <div className="bg-gradient-to-br from-purple-500 to-purple-600 text-white p-4 rounded-lg shadow-lg">
-          <div className="text-3xl font-bold">{publishedKtis.length}</div>
-          <div className="text-sm">Total Istilah</div>
-        </div>
-        <div className="bg-gradient-to-br from-green-500 to-green-600 text-white p-4 rounded-lg shadow-lg">
-          <div className="text-3xl font-bold">{categories.length}</div>
-          <div className="text-sm">Kategori</div>
-        </div>
-        <div className="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-4 rounded-lg shadow-lg">
-          <div className="text-3xl font-bold">
-            {difficultyGroups.pemula.length}
-          </div>
-          <div className="text-sm">Level Pemula</div>
-        </div>
-        <div className="bg-gradient-to-br from-orange-500 to-orange-600 text-white p-4 rounded-lg shadow-lg">
-          <div className="text-3xl font-bold">
-            {difficultyGroups.lanjut.length}
-          </div>
-          <div className="text-sm">Level Lanjut</div>
-        </div>
-      </div>
-
-      {/* Browse by Category */}
-      <div className="mb-12">
-        <h2>🗂️ Telusuri berdasarkan Kategori</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 not-prose">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {categories.map((category) => {
             const categoryKtis = publishedKtis.filter(
               (kti) => kti.category === category,
@@ -127,26 +126,28 @@ export default function KtiPage() {
             return (
               <div
                 key={category}
-                className="border border-slate-200 dark:border-slate-800 rounded-lg p-4 hover:shadow-lg transition-shadow"
+                className="rounded-xl border border-slate-200 dark:border-white/[0.06] bg-white dark:bg-white/[0.02] p-5 transition-colors hover:border-indigo-300 dark:hover:border-indigo-700/50"
               >
-                <h3 className="text-xl font-bold mb-3 text-slate-900 dark:text-slate-100">
-                  {category}
-                </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">
-                  {categoryKtis.length} istilah
-                </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="mb-4 flex items-center justify-between">
+                  <h3 className="font-semibold text-slate-900 dark:text-white">
+                    {category}
+                  </h3>
+                  <span className="text-xs text-slate-400 dark:text-slate-600">
+                    {categoryKtis.length} istilah
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
                   {categoryKtis.slice(0, 6).map((kti) => (
                     <Link
                       key={kti.term}
                       href={kti.slug}
-                      className="text-sm bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors"
+                      className="rounded-md bg-slate-100 dark:bg-white/[0.05] px-2.5 py-1 text-xs text-slate-600 dark:text-slate-400 transition-colors hover:bg-indigo-50 dark:hover:bg-indigo-500/10 hover:text-indigo-700 dark:hover:text-indigo-400"
                     >
                       {kti.term}
                     </Link>
                   ))}
                   {categoryKtis.length > 6 && (
-                    <span className="text-sm text-slate-500 px-3 py-1">
+                    <span className="px-2.5 py-1 text-xs text-slate-400 dark:text-slate-600">
                       +{categoryKtis.length - 6} lainnya
                     </span>
                   )}
@@ -155,153 +156,113 @@ export default function KtiPage() {
             );
           })}
         </div>
-      </div>
+      </section>
 
-      {/* Browse by Difficulty */}
-      <div className="mb-12">
-        <h2>📊 Telusuri berdasarkan Level</h2>
+      {/* ── Browse by difficulty ────────────────────────── */}
+      <section className="mb-16">
+        <p className="mb-8 text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
+          Berdasarkan Level
+        </p>
         <div className="space-y-6">
-          {/* Pemula */}
-          <div className="border-l-4 border-green-500 pl-4">
-            <h3 className="text-lg font-bold text-green-600 dark:text-green-400">
-              🌱 Pemula ({difficultyGroups.pemula.length})
-            </h3>
-            <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">
-              Istilah dasar yang wajib dipahami untuk memulai karir IT
-            </p>
-            <div className="flex flex-wrap gap-2 not-prose">
-              {difficultyGroups.pemula.slice(0, 10).map((kti) => (
-                <Link
-                  key={kti.term}
-                  href={kti.slug}
-                  className="text-sm bg-green-50 dark:bg-green-950 text-green-700 dark:text-green-300 px-3 py-1 rounded-md hover:bg-green-100 dark:hover:bg-green-900 transition-colors"
-                >
-                  {kti.term}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Menengah */}
-          <div className="border-l-4 border-blue-500 pl-4">
-            <h3 className="text-lg font-bold text-blue-600 dark:text-blue-400">
-              📈 Menengah ({difficultyGroups.menengah.length})
-            </h3>
-            <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">
-              Konsep intermediate untuk meningkatkan keahlian teknis
-            </p>
-            <div className="flex flex-wrap gap-2 not-prose">
-              {difficultyGroups.menengah.slice(0, 10).map((kti) => (
-                <Link
-                  key={kti.term}
-                  href={kti.slug}
-                  className="text-sm bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 px-3 py-1 rounded-md hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors"
-                >
-                  {kti.term}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Lanjut */}
-          <div className="border-l-4 border-purple-500 pl-4">
-            <h3 className="text-lg font-bold text-purple-600 dark:text-purple-400">
-              🚀 Lanjut ({difficultyGroups.lanjut.length})
-            </h3>
-            <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">
-              Konsep advanced untuk profesional berpengalaman
-            </p>
-            <div className="flex flex-wrap gap-2 not-prose">
-              {difficultyGroups.lanjut.slice(0, 10).map((kti) => (
-                <Link
-                  key={kti.term}
-                  href={kti.slug}
-                  className="text-sm bg-purple-50 dark:bg-purple-950 text-purple-700 dark:text-purple-300 px-3 py-1 rounded-md hover:bg-purple-100 dark:hover:bg-purple-900 transition-colors"
-                >
-                  {kti.term}
-                </Link>
-              ))}
-            </div>
-          </div>
+          {(["pemula", "menengah", "lanjut"] as Difficulty[]).map((level) => {
+            const config = difficultyConfig[level];
+            const group = difficultyGroups[level];
+            return (
+              <div
+                key={level}
+                className="rounded-xl border border-slate-200 dark:border-white/[0.06] bg-white dark:bg-white/[0.02] p-5"
+              >
+                <div className="mb-4 flex items-center gap-3">
+                  <span
+                    className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${config.badge}`}
+                  >
+                    {config.label}
+                  </span>
+                  <span className="text-xs text-slate-400 dark:text-slate-600">
+                    {group.length} istilah
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {group.slice(0, 12).map((kti) => (
+                    <Link
+                      key={kti.term}
+                      href={kti.slug}
+                      className={`rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${config.tag}`}
+                    >
+                      {kti.term}
+                    </Link>
+                  ))}
+                  {group.length > 12 && (
+                    <span className="px-2.5 py-1 text-xs text-slate-400 dark:text-slate-600">
+                      +{group.length - 12} lainnya
+                    </span>
+                  )}
+                </div>
+              </div>
+            );
+          })}
         </div>
-      </div>
+      </section>
 
-      {/* All Terms Alphabetically */}
-      <div className="mb-12">
-        <h2>📖 Semua Istilah (A-Z)</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 not-prose">
-          {publishedKtis.map((kti) => (
-            <Link
-              key={kti.term}
-              href={kti.slug}
-              className="group p-4 border border-slate-200 dark:border-slate-800 rounded-lg hover:border-blue-500 dark:hover:border-blue-500 hover:shadow-md transition-all"
-            >
-              <div className="flex items-start justify-between">
-                <div className="flex-1">
-                  <h3 className="font-bold text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 mb-1">
+      {/* ── All terms A–Z ───────────────────────────────── */}
+      <section className="mb-16">
+        <p className="mb-8 text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
+          Semua Istilah (A–Z)
+        </p>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {publishedKtis.map((kti) => {
+            const config =
+              difficultyConfig[kti.difficulty as Difficulty] ??
+              difficultyConfig.pemula;
+            return (
+              <Link
+                key={kti.term}
+                href={kti.slug}
+                className="group rounded-xl border border-slate-200 dark:border-white/[0.06] bg-white dark:bg-white/[0.02] p-4 transition-colors hover:border-indigo-300 dark:hover:border-indigo-700/50 hover:bg-slate-50 dark:hover:bg-white/[0.04]"
+              >
+                <div className="mb-2 flex items-start justify-between gap-2">
+                  <h3 className="font-semibold text-slate-900 dark:text-white transition-colors group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
                     {kti.term}
                   </h3>
-                  {kti.englishTerm && (
-                    <p className="text-xs text-slate-500 dark:text-slate-500 mb-2">
-                      {kti.englishTerm}
-                    </p>
-                  )}
-                  <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">
-                    {kti.description}
-                  </p>
+                  <span
+                    className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold ${config.badge}`}
+                  >
+                    {config.label}
+                  </span>
                 </div>
-                <span
-                  className={`text-xs px-2 py-1 rounded-full ml-2 flex-shrink-0 ${
-                    kti.difficulty === "pemula"
-                      ? "bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300"
-                      : kti.difficulty === "menengah"
-                        ? "bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300"
-                        : "bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300"
-                  }`}
-                >
-                  {kti.difficulty}
-                </span>
-              </div>
-            </Link>
-          ))}
+                {kti.englishTerm && (
+                  <p className="mb-1.5 text-xs text-slate-400 dark:text-slate-600">
+                    {kti.englishTerm}
+                  </p>
+                )}
+                <p className="line-clamp-2 text-sm leading-relaxed text-slate-500 dark:text-slate-400">
+                  {kti.description}
+                </p>
+              </Link>
+            );
+          })}
         </div>
-      </div>
+      </section>
 
-      {/* CTA Section */}
-      <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-8 rounded-lg text-center not-prose">
-        <h2 className="text-2xl font-bold mb-4 text-white">
-          Siap Tingkatkan Karir IT Anda?
-        </h2>
-        <p className="mb-6 text-blue-50">
-          Bergabunglah dengan ribuan profesional IT Indonesia yang menggunakan
-          smbCloud untuk mengembangkan aplikasi mereka.
-        </p>
-        <Link
-          href="https://console.smbcloud.xyz/login"
-          target="__blank"
-          className="inline-block bg-white text-blue-600 px-6 py-3 rounded-lg font-bold hover:bg-blue-50 transition-colors"
-        >
-          Mulai dengan smbCloud →
-        </Link>
-      </div>
-
-      {/* SEO Content */}
-      <div className="mt-12 text-sm text-slate-600 dark:text-slate-400">
-        <h3>Tentang Kamus Teknologi Informasi</h3>
-        <p>
-          Kamus Teknologi Informasi (KTI) adalah sumber referensi komprehensif
-          untuk tenaga kerja muda Indonesia yang ingin memahami istilah-istilah
-          penting dalam dunia IT. Kami menyediakan penjelasan dalam Bahasa
-          Indonesia yang mudah dipahami, mencakup berbagai topik seperti cloud
-          computing, pemrograman, DevOps, keamanan siber, dan teknologi terkini
-          lainnya.
-        </p>
-        <p>
-          Setiap istilah dilengkapi dengan definisi, contoh penggunaan, dan
-          hubungan dengan konsep lainnya untuk membantu Anda membangun pemahaman
-          yang mendalam tentang ekosistem teknologi informasi modern.
-        </p>
-      </div>
+      {/* ── CTA ─────────────────────────────────────────── */}
+      <section>
+        <div className="relative overflow-hidden rounded-2xl bg-indigo-600 px-8 py-14 text-center shadow-2xl shadow-indigo-500/20">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.1),transparent)]" />
+          <h2 className="relative text-2xl font-bold tracking-tight text-white">
+            Siap membangun dengan smbCloud?
+          </h2>
+          <p className="relative mt-3 text-indigo-200">
+            Deploy aplikasi NodeJS, Swift, dan Ruby dengan satu perintah.
+          </p>
+          <Link
+            href="https://console.smbcloud.xyz/login"
+            target="_blank"
+            className="relative mt-8 inline-block rounded-lg bg-white px-8 py-3.5 text-sm font-semibold text-indigo-700 shadow-sm transition-colors hover:bg-indigo-50"
+          >
+            Mulai dengan smbCloud →
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }
