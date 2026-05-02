@@ -27,6 +27,12 @@ export default function Header() {
               Home
             </Link>
             <Link
+              href="/services"
+              className="hover:text-slate-900 dark:hover:text-white transition-colors"
+            >
+              Services
+            </Link>
+            <Link
               href="/kti"
               className="hover:text-slate-900 dark:hover:text-white transition-colors"
             >
