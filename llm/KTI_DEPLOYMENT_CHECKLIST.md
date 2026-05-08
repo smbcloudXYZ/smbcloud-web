@@ -219,7 +219,7 @@ If critical issues are found:
 - **Technical Docs**: `KTI_SUMMARY.md`
 - **SEO Strategy**: `APA-ITU-SEO-STRATEGY.md`
 - **Content Guidelines**: `content/kti/README.md`
-- **Contact**: hello@smbcloud.xyz
+- **Contact**: support@smbcloud.xyz
 
 ## Notes
 

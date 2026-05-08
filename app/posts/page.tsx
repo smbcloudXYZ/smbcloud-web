@@ -1,13 +1,72 @@
+import type { Metadata } from "next";
 import { allPosts } from "@/.contentlayer/generated";
 import Link from "next/link";
-import { genPageMetadata } from "../seo";
+import { StructuredData } from "@/components/structured-data";
+import siteMetadata from "@/content/siteMetadata";
+import { absoluteUrl, genPageMetadata } from "../seo";
 
-export const metadata = {
+export const metadata: Metadata = {
   ...genPageMetadata({
-    title: "Posts",
-    description: "Updates, guides, and deep dives from the smbCloud team.",
+    title: "Blog",
+    description:
+      "Product updates, deployment guides, and infrastructure notes from the smbCloud team.",
+    path: "/posts",
+    keywords: [
+      "smbCloud blog",
+      "deployment guides",
+      "Node.js deployment guide",
+      "Rails deployment guide",
+      "Vapor deployment guide",
+    ],
   }),
-  metadataBase: new URL("https://smbcloud.xyz"),
+};
+
+const blogStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": absoluteUrl("/posts#webpage"),
+      url: absoluteUrl("/posts"),
+      name: "smbCloud Blog",
+      description:
+        "Product updates, deployment guides, and infrastructure notes from the smbCloud team.",
+      isPartOf: {
+        "@id": absoluteUrl("/#website"),
+      },
+      about: {
+        "@id": absoluteUrl("/#organization"),
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: absoluteUrl("/"),
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Blog",
+          item: absoluteUrl("/posts"),
+        },
+      ],
+    },
+    {
+      "@type": "Blog",
+      name: "smbCloud Blog",
+      url: absoluteUrl("/posts"),
+      description:
+        "Product updates, deployment guides, and infrastructure notes from the smbCloud team.",
+      publisher: {
+        "@id": absoluteUrl("/#organization"),
+      },
+      inLanguage: siteMetadata.language,
+    },
+  ],
 };
 
 export default function PostsPage() {
@@ -18,20 +77,21 @@ export default function PostsPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-16 lg:px-8">
-      {/* Page header */}
+      <StructuredData data={blogStructuredData} />
+
       <div className="mb-14">
         <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
           Blog
         </p>
         <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
-          Posts
+          smbCloud Blog
         </h1>
         <p className="mt-3 text-slate-500 dark:text-slate-400">
-          Updates, guides, and deep dives from the smbCloud team.
+          Product updates, deployment guides, and infrastructure notes from the
+          smbCloud team.
         </p>
       </div>
 
-      {/* Post list */}
       {publishedPosts.length === 0 ? (
         <p className="text-sm text-slate-400 dark:text-slate-600">
           No posts published yet. Check back soon.

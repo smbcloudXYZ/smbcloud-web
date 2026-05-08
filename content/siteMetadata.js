@@ -1,20 +1,35 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: "smbCloud | One-command deploys for NodeJS, Swift, and Ruby",
+  title: "smbCloud",
   author: "smbCloud Team",
   headerTitle: "smbCloud",
+  tagline: "Enterprise Power at Startup Velocity",
   description:
-    "Deploy NodeJS, Swift, and Ruby apps with one command. No Docker. No config files. Then browse KTI, our Indonesian IT glossary.",
+    "Enterprise Power at Startup Velocity. smbCloud is an SSH-first cloud deploy platform for small teams shipping Node.js, Ruby on Rails, and Swift/Vapor apps with one-command deploys, live logs, and fast rollbacks.",
+  keywords: [
+    "smbCloud",
+    "SSH deploy platform",
+    "Node.js deployment",
+    "Ruby on Rails deployment",
+    "Swift Vapor deployment",
+    "developer platform",
+    "cloud deployment",
+    "app hosting for developers",
+  ],
   language: "en-us",
+  locale: "en-US",
   theme: "dark", // system, dark or light
   siteUrl: "https://smbcloud.xyz",
   siteLogo: `${process.env.BASE_PATH || ""}/logo.png`,
   socialBanner: `${process.env.BASE_PATH || ""}/twitter-card.png`,
-  email: "hello@smbcloud.xyz",
+  email: "support@smbcloud.xyz",
+  organizationName: "smbCloud",
+  companyName: "Splitfire AB",
+  companyLocation: "Stockholm, Sweden",
+  github: "https://github.com/smbcloudXYZ",
   facebook: "https://facebook.com/smbCloudXYZ",
   youtube: "https://youtube.com/@smbCloudXYZ",
   instagram: "https://www.instagram.com/smbCloudXYZ",
-  locale: "en-US",
   // set to true if you want a navbar fixed to the top
   stickyNav: false,
   analytics: {

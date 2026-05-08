@@ -6,7 +6,6 @@ export default function Footer() {
     <footer className="border-t border-slate-200 dark:border-white/[0.06] px-6 py-12 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
-          {/* Brand */}
           <div>
             <Link href="/" className="mb-3 flex items-center gap-2">
               <div className="flex h-6 w-[30px] items-center justify-center rounded bg-indigo-600 text-white">
@@ -21,7 +20,6 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Links */}
           <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm text-slate-500 dark:text-slate-500">
             <Link
               href="/about"
@@ -50,6 +48,7 @@ export default function Footer() {
             <Link
               href="https://github.com/smbcloudXYZ"
               target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-1.5 hover:text-slate-900 dark:hover:text-slate-300 transition-colors"
             >
               <FaGithub className="h-3.5 w-3.5" />
@@ -63,14 +62,7 @@ export default function Footer() {
             © {new Date().getFullYear()} smbCloud. All rights reserved.
           </p>
           <p className="text-xs text-slate-400 dark:text-slate-600">
-            Powered by{" "}
-            <a
-              href="https://debian.org"
-              target="_blank"
-              className="font-medium hover:text-slate-600 dark:hover:text-slate-400 transition-colors"
-            >
-              Debian
-            </a>
+            support@smbcloud.xyz
           </p>
         </div>
       </div>

@@ -18,7 +18,6 @@ export default function Header() {
       </div>
       <div className="mx-auto max-w-5xl px-6 lg:px-8">
         <div className="flex h-14 items-center justify-between">
-          {/* Logo wordmark */}
           <Link href="/" className="flex items-center gap-2.5">
             <div className="flex h-7 w-[38px] items-center justify-center rounded-md bg-indigo-600 text-white">
               <span className="text-[10px] font-bold tracking-tight leading-none">
@@ -30,7 +29,6 @@ export default function Header() {
             </span>
           </Link>
 
-          {/* Center nav */}
           <nav className="hidden sm:flex items-center gap-6 text-sm font-medium text-slate-500 dark:text-slate-400">
             <Link
               href="/"
@@ -48,25 +46,25 @@ export default function Header() {
               href="/kti"
               className="hover:text-slate-900 dark:hover:text-white transition-colors"
             >
-              KTI
+              KTI (ID)
             </Link>
             <Link
               href="/posts"
               className="hover:text-slate-900 dark:hover:text-white transition-colors"
             >
-              Posts
+              Blog
             </Link>
           </nav>
 
-          {/* Right side */}
           <div className="flex items-center gap-3">
             <ModeToggle />
             <Link
               href="https://console.smbcloud.xyz"
               target="_blank"
+              rel="noopener noreferrer"
               className="hidden sm:inline-flex items-center rounded-md bg-slate-900 dark:bg-white px-3.5 py-1.5 text-xs font-semibold text-white dark:text-slate-900 hover:bg-slate-700 dark:hover:bg-slate-100 transition-colors"
             >
-              Console →
+              Create account →
             </Link>
           </div>
         </div>

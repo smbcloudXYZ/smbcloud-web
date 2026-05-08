@@ -247,4 +247,4 @@ Code examples are licensed under MIT
 
 **Maintained by**: smbCloud Team
 **Last Updated**: January 2024
-**Contact**: hello@smbcloud.xyz
+**Contact**: support@smbcloud.xyz

@@ -1,0 +1,40 @@
+# smbCloud
+
+> smbCloud is an SSH-first cloud deploy platform for small teams. It helps developers deploy Node.js, Ruby on Rails, and Swift/Vapor apps with one command, live logs, fast rollbacks, and a clean web console.
+
+Website: https://smbcloud.xyz/
+Organization: smbCloud
+Company: Splitfire AB
+Location: Stockholm, Sweden
+Contact: support@smbcloud.xyz
+GitHub: https://github.com/smbcloudXYZ
+
+## Primary pages
+- Home: https://smbcloud.xyz/
+- Services: https://smbcloud.xyz/services
+- Blog: https://smbcloud.xyz/posts
+- CLI install guide: https://smbcloud.xyz/posts/cli
+- Contact: https://smbcloud.xyz/contact
+- About: https://smbcloud.xyz/about
+- Heroku alternative: https://smbcloud.xyz/heroku-alternative
+- Railway alternative: https://smbcloud.xyz/railway-alternative
+- KTI glossary: https://smbcloud.xyz/kti
+
+## Core topics
+- SSH-first application deployment
+- Node.js deployment
+- Ruby on Rails deployment
+- Swift Vapor deployment
+- Developer infrastructure for small teams
+- Hosted deploy workflows, logs, and rollbacks
+
+## Products and services
+- smbCloud Deploy: application deployment over SSH
+- smbCloud Auth: hosted authentication flows
+- smbCloud Mail: domain mail routing and inbox workflows
+- GresIQ: data layer service within the smbCloud platform
+- siGit Code & Deploy: mobile and desktop companion app for code review and deployment workflows
+
+## Editorial resources
+- Product updates and deployment guides live on the blog: https://smbcloud.xyz/posts
+- Indonesian technology glossary (KTI) lives here: https://smbcloud.xyz/kti

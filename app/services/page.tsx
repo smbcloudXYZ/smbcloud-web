@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { genPageMetadata } from "../seo";
+import { StructuredData } from "@/components/structured-data";
 import siteMetadata from "@/content/siteMetadata";
+import { absoluteUrl, genPageMetadata } from "../seo";
 
 const services = [
   {
@@ -55,6 +56,7 @@ export const metadata: Metadata = {
     title: "Services",
     description:
       "Explore smbCloud services for deploys, auth, mail, and GresIQ. One platform for shipping apps, handling accounts, routing email, and managing the data layer.",
+    path: "/services",
   }),
   keywords: [
     "smbCloud services",
@@ -84,8 +86,53 @@ export const metadata: Metadata = {
 };
 
 export default function ServicesPage() {
+  const servicesStructuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": absoluteUrl("/services#webpage"),
+        url: absoluteUrl("/services"),
+        name: "smbCloud Services",
+        description:
+          "Deploy, Auth, Mail, and GresIQ live under one smbCloud platform instead of four disconnected tools.",
+        isPartOf: {
+          "@id": absoluteUrl("/#website"),
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: absoluteUrl("/"),
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Services",
+            item: absoluteUrl("/services"),
+          },
+        ],
+      },
+      {
+        "@type": "ItemList",
+        name: "smbCloud services",
+        itemListElement: services.map((service, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: service.name,
+          description: service.description,
+        })),
+      },
+    ],
+  };
+
   return (
     <div>
+      <StructuredData data={servicesStructuredData} />
       <section className="relative overflow-hidden px-6 pt-24 pb-16 sm:pt-32 sm:pb-20 lg:px-8">
         <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[520px] bg-[radial-gradient(ellipse_75%_50%_at_50%_0%,rgba(99,102,241,0.18),transparent)] dark:bg-[radial-gradient(ellipse_75%_50%_at_50%_0%,rgba(99,102,241,0.12),transparent)]" />
 
@@ -102,9 +149,9 @@ export default function ServicesPage() {
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
-            smbCloud is built around four core services: Deploy, Auth, Mail, and
-            GresIQ. They are separate products, but they belong together. That
-            is the point.
+            Deploy apps, handle auth, route domain email, and keep the data
+            layer close to the rest of your stack without stitching together
+            four disconnected vendors.
           </p>
 
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">

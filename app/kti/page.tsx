@@ -1,13 +1,17 @@
+import type { Metadata } from "next";
 import { allKtis } from "@/.contentlayer/generated";
 import Link from "next/link";
-import { genPageMetadata } from "../seo";
+import { StructuredData } from "@/components/structured-data";
 import siteMetadata from "@/content/siteMetadata";
+import { absoluteUrl, genPageMetadata } from "../seo";
 
-export const metadata = {
+export const metadata: Metadata = {
   ...genPageMetadata({
     title: "KTI - Kamus Teknologi Informasi",
     description:
       "Kamus Teknologi Informasi lengkap untuk tenaga kerja muda Indonesia. Pelajari istilah-istilah IT, pemrograman, cloud computing, dan teknologi terkini dengan penjelasan dalam Bahasa Indonesia.",
+    path: "/kti",
+    locale: "id_ID",
   }),
   keywords: [
     "kamus teknologi informasi",
@@ -75,8 +79,59 @@ export default function KtiPage() {
     lanjut: publishedKtis.filter((kti) => kti.difficulty === "lanjut"),
   };
 
+  const ktiStructuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": absoluteUrl("/kti#webpage"),
+        url: absoluteUrl("/kti"),
+        name: "KTI - Kamus Teknologi Informasi",
+        description:
+          "Kamus Teknologi Informasi lengkap untuk tenaga kerja muda Indonesia.",
+        inLanguage: "id-ID",
+        isPartOf: {
+          "@id": absoluteUrl("/#website"),
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: absoluteUrl("/"),
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "KTI",
+            item: absoluteUrl("/kti"),
+          },
+        ],
+      },
+      {
+        "@type": "DefinedTermSet",
+        name: "Kamus Teknologi Informasi",
+        url: absoluteUrl("/kti"),
+        description:
+          "Glosarium istilah teknologi informasi dalam Bahasa Indonesia.",
+        inLanguage: "id-ID",
+        hasDefinedTerm: publishedKtis.map((kti) => ({
+          "@type": "DefinedTerm",
+          name: kti.title,
+          description: kti.description,
+          url: absoluteUrl(kti.slug),
+          inLanguage: "id-ID",
+        })),
+      },
+    ],
+  };
+
   return (
     <div className="mx-auto max-w-5xl px-6 py-16 lg:px-8">
+      <StructuredData data={ktiStructuredData} />
       {/* ── Page header ─────────────────────────────────── */}
       <div className="mb-16">
         <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
@@ -252,11 +307,13 @@ export default function KtiPage() {
             Siap membangun dengan smbCloud?
           </h2>
           <p className="relative mt-3 text-indigo-200">
-            Deploy aplikasi NodeJS, Swift, dan Ruby dengan satu perintah.
+            Deploy aplikasi Node.js, Ruby on Rails, dan Swift/Vapor dengan satu
+            perintah.
           </p>
           <Link
             href="https://console.smbcloud.xyz/login"
             target="_blank"
+            rel="noopener noreferrer"
             className="relative mt-8 inline-block rounded-lg bg-white px-8 py-3.5 text-sm font-semibold text-indigo-700 shadow-sm transition-colors hover:bg-indigo-50"
           >
             Mulai dengan smbCloud →
