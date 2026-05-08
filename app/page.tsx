@@ -18,27 +18,26 @@ const features = [
   },
   {
     icon: "🔄",
-    title: "Instant rollbacks",
-    description:
-      "Every deployment is versioned. Roll back to any previous version in one command.",
+    title: "Roll back fast",
+    description: "Each deploy is versioned, so going back is one command too.",
   },
   {
     icon: "📊",
-    title: "Real-time monitoring",
+    title: "Watch deploys live",
     description:
-      "Watch deployments unfold live. Logs, metrics, and health checks built in.",
+      "See logs, health checks, and deploy status while the release runs.",
   },
   {
     icon: "🌐",
-    title: "Multi-runtime support",
+    title: "Built for multiple runtimes",
     description:
-      "NodeJS, Swift on Vapor, and Ruby on Rails — all supported out of the box.",
+      "Deploy Rust, Node.js, Swift/Vapor, and Ruby on Rails apps on one platform.",
   },
   {
     icon: "⚙️",
-    title: "Zero config",
+    title: "Less setup",
     description:
-      "Auto-detects your runtime. No YAML, no Dockerfiles, no DevOps degree required.",
+      "We detect the runtime for you. No YAML maze. No Dockerfiles unless you want them.",
   },
 ];
 
@@ -65,7 +64,7 @@ export default function Home() {
           </div>
 
           <h1 className="text-5xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-7xl leading-[1.05]">
-            Deploy with{" "}
+            Deploy your app with{" "}
             <span className="text-indigo-600 dark:text-indigo-400">
               one command.
             </span>
@@ -73,6 +72,10 @@ export default function Home() {
 
           <p className="mx-auto mt-8 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
             The unified cloud platform for{" "}
+            <span className="font-semibold text-slate-800 dark:text-slate-200">
+              Rust
+            </span>
+            ,{" "}
             <span className="font-semibold text-slate-800 dark:text-slate-200">
               NodeJS
             </span>
@@ -84,32 +87,8 @@ export default function Home() {
             <span className="font-semibold text-slate-800 dark:text-slate-200">
               Ruby
             </span>{" "}
-            apps. No Docker. No config files. Just ship.
+            apps.
           </p>
-
-          <div className="mx-auto mt-8 max-w-2xl rounded-2xl border border-amber-200/80 bg-white/80 px-5 py-4 text-left shadow-sm dark:border-amber-500/20 dark:bg-white/[0.04]">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-700 dark:text-amber-300">
-              New from smbCloud
-            </p>
-            <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <p className="text-base font-semibold text-slate-900 dark:text-white">
-                  Get a free @smbcloud.xyz inbox with smbCloud MailX
-                </p>
-                <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
-                  Create your account in MailX. No verification email.
-                </p>
-              </div>
-              <Link
-                href="https://console.smbcloud.xyz/signup-mailx"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex shrink-0 items-center justify-center rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100"
-              >
-                Create account →
-              </Link>
-            </div>
-          </div>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
@@ -117,13 +96,13 @@ export default function Home() {
               target="_blank"
               className="w-full rounded-lg bg-indigo-600 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-500 hover:shadow-indigo-500/30 active:scale-[0.98] sm:w-auto"
             >
-              Open Console →
+              Open the console →
             </Link>
             <Link
               href="/posts"
               className="flex w-full items-center justify-center gap-1.5 text-sm font-semibold text-slate-600 dark:text-slate-400 transition-colors hover:text-slate-900 dark:hover:text-white sm:w-auto"
             >
-              Read the docs
+              Read docs
             </Link>
           </div>
         </div>
@@ -133,7 +112,7 @@ export default function Home() {
       <section className="px-6 pb-28 lg:px-8">
         <div className="mx-auto max-w-3xl">
           <p className="mb-8 text-center text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
-            One tool · Every runtime
+            One CLI. Multiple runtimes.
           </p>
           <TabbedRunner />
         </div>
@@ -144,11 +123,11 @@ export default function Home() {
         <div className="mx-auto max-w-5xl">
           <div className="mb-16 text-center">
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
-              Everything you need to ship.
+              The deploy flow, without the usual mess.
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-slate-500 dark:text-slate-400">
-              Built for engineering teams who move fast and care about
-              reliability.
+              Deploy, roll back, and watch logs without wiring up half your
+              stack first.
             </p>
           </div>
 
@@ -178,17 +157,18 @@ export default function Home() {
             {/* Inner glow */}
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.1),transparent)]" />
             <h2 className="relative text-3xl font-bold tracking-tight text-white">
-              Ready to deploy?
+              Try smbCloud with a real app.
             </h2>
             <p className="relative mt-4 text-indigo-200">
-              Free to start. Scale as you grow. No credit card required.
+              Start free, deploy something small, and see if it fits your
+              workflow. No credit card required.
             </p>
             <Link
               href="https://console.smbcloud.xyz"
               target="_blank"
               className="relative mt-8 inline-block rounded-lg bg-white px-8 py-3.5 text-sm font-semibold text-indigo-700 shadow-sm transition-colors hover:bg-indigo-50"
             >
-              Create free account →
+              Create your free account →
             </Link>
           </div>
         </div>
@@ -219,11 +199,11 @@ export default function Home() {
 
             <p className="mb-2 max-w-md text-sm leading-relaxed text-slate-300 dark:text-slate-400">
               <span className="font-semibold text-white">smbcloud-cli</span>,
-              reimagined as a beautiful native experience. Forget the friction.
-              Forget the command line hassle.
+              turned into a native app. Review changes, make quick edits, and
+              trigger deploys when you are away from your laptop.
             </p>
             <p className="mb-8 text-xs italic text-slate-500">
-              Stay hungry, keep deploying.
+              Available on iPhone, Android, and Windows.
             </p>
 
             {/* Platform buttons */}
