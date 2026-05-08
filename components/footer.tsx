@@ -17,7 +17,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="max-w-xs text-xs leading-relaxed text-slate-500 dark:text-slate-500">
-              The unified cloud platform for modern app deployment.
+              Enterprise Power at Startup Velocity
             </p>
           </div>
 
