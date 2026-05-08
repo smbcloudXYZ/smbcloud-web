@@ -87,6 +87,30 @@ export default function Home() {
             apps. No Docker. No config files. Just ship.
           </p>
 
+          <div className="mx-auto mt-8 max-w-2xl rounded-2xl border border-amber-200/80 bg-white/80 px-5 py-4 text-left shadow-sm dark:border-amber-500/20 dark:bg-white/[0.04]">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-700 dark:text-amber-300">
+              New from smbCloud
+            </p>
+            <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="text-base font-semibold text-slate-900 dark:text-white">
+                  Get a free @smbcloud.xyz inbox with smbCloud MailX
+                </p>
+                <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+                  Create your account in MailX. No verification email.
+                </p>
+              </div>
+              <Link
+                href="https://console.smbcloud.xyz/signup-mailx"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex shrink-0 items-center justify-center rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100"
+              >
+                Create account →
+              </Link>
+            </div>
+          </div>
+
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="https://console.smbcloud.xyz"

@@ -4,6 +4,18 @@ import { ModeToggle } from "./mode-toggle";
 export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/60 dark:border-white/[0.06] bg-white/80 dark:bg-[#0A0E14]/90 backdrop-blur-md">
+      <div className="border-b border-slate-200/60 bg-slate-900 text-white dark:border-white/[0.06] dark:bg-[#11162A]">
+        <div className="mx-auto flex max-w-5xl items-center justify-center px-6 py-2 text-center text-[11px] font-medium tracking-wide text-slate-200 lg:px-8">
+          <Link
+            href="https://console.smbcloud.xyz/signup-mailx"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-white"
+          >
+            Get a free @smbcloud.xyz inbox with smbCloud MailX →
+          </Link>
+        </div>
+      </div>
       <div className="mx-auto max-w-5xl px-6 lg:px-8">
         <div className="flex h-14 items-center justify-between">
           {/* Logo wordmark */}
