@@ -1,11 +1,10 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title:
-    "smbCloud | A next-gen cloud platform powering small and medium-sized businesses.",
-  author: "hello@smbcloud.xyz",
+  title: "smbCloud | One-command deploys for NodeJS, Swift, and Ruby",
+  author: "smbCloud Team",
   headerTitle: "smbCloud",
   description:
-    "smbCloud offers small and medium-sized businesses easy, on-demand access to powerful, open-source software solutions in the cloud—without the hassle of installation or expensive licenses. Explore our comprehensive Kamus Teknologi Informasi (KTI) for Indonesian IT professionals.",
+    "Deploy NodeJS, Swift, and Ruby apps with one command. No Docker. No config files. Then browse KTI, our Indonesian IT glossary.",
   language: "en-us",
   theme: "dark", // system, dark or light
   siteUrl: "https://smbcloud.xyz",

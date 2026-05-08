@@ -14,9 +14,9 @@ published: true
 
 ## Apa itu REST?
 
-**REST (Representational State Transfer)** adalah gaya arsitektur software yang mendefinisikan sekumpulan constraint untuk membuat web services. REST API adalah API yang mengikuti prinsip-prinsip REST, menggunakan HTTP requests untuk melakukan operasi CRUD (Create, Read, Update, Delete) pada data.
+**REST (Representational State Transfer)** adalah gaya arsitektur untuk membuat web service yang memakai HTTP secara konsisten. REST API biasanya menggunakan request HTTP untuk melakukan operasi seperti membuat, membaca, mengubah, dan menghapus data.
 
-REST bukan protokol atau standar, tetapi sekumpulan aturan atau best practices yang membuat API lebih mudah dipahami, scalable, dan maintainable.
+REST bukan protokol resmi yang kaku. Lebih tepatnya, REST adalah sekumpulan prinsip yang membantu API terasa lebih rapi, mudah dipahami, dan lebih mudah dipelihara.
 
 ## Prinsip-prinsip REST
 
@@ -191,7 +191,7 @@ Response: 204 No Content
 ## Best Practices REST API
 
 ### 1. Gunakan Nouns, Bukan Verbs
-❌ **Salah:**
+**Kurang tepat:**
 ```
 GET /getUsers
 POST /createUser
@@ -199,7 +199,7 @@ PUT /updateUser
 DELETE /deleteUser
 ```
 
-✅ **Benar:**
+**Lebih baik:**
 ```
 GET /users
 POST /users
@@ -208,7 +208,7 @@ DELETE /users/123
 ```
 
 ### 2. Gunakan Plural untuk Collection
-✅ **Benar:**
+**Lebih baik:**
 ```
 GET /users
 GET /products
@@ -407,16 +407,16 @@ Untuk third-party authentication (Google, Facebook, GitHub).
 
 | Aspek | REST | GraphQL |
 |-------|------|---------|
-| **Endpoints** | Multiple endpoints | Single endpoint |
-| **Data Fetching** | Over/under fetching mungkin terjadi | Client specify exact data |
-| **Learning Curve** | Mudah dipelajari | Lebih kompleks |
-| **Caching** | HTTP caching built-in | Perlu custom implementation |
-| **Maturity** | Sangat mature, widely adopted | Relatif baru, growing |
+| **Endpoints** | Banyak endpoint | Satu endpoint |
+| **Data Fetching** | Over-fetching atau under-fetching bisa terjadi | Client bisa memilih data yang dibutuhkan |
+| **Learning Curve** | Lebih mudah dipelajari | Lebih kompleks |
+| **Caching** | Dukungan HTTP caching lebih langsung | Biasanya perlu pendekatan khusus |
+| **Maturity** | Sudah lama dipakai luas | Relatif lebih baru dan masih berkembang |
 
 ## Tools untuk Testing REST API
 
 ### 1. Postman
-GUI tool paling populer untuk testing API.
+GUI tool yang sering dipakai untuk testing API.
 
 ### 2. cURL
 Command line tool untuk HTTP requests.
@@ -457,10 +457,6 @@ Alternative GUI tool seperti Postman.
 
 ## Kesimpulan
 
-REST adalah arsitektur API yang paling populer dan widely adopted. Dengan memahami prinsip REST dan best practices-nya, Anda dapat membuat API yang:
-- Mudah dipahami dan digunakan
-- Scalable dan maintainable
-- Consistent dan predictable
-- Secure dan reliable
+REST masih menjadi pendekatan yang sangat umum untuk membangun API, terutama di aplikasi web. Dengan memahami prinsip dasarnya, Anda bisa merancang endpoint yang lebih jelas, response yang lebih konsisten, dan integrasi yang lebih mudah dipakai tim lain.
 
-REST API adalah skill fundamental untuk backend developer dan akan terus relevan di tahun-tahun mendatang. Mulai practice dengan membuat REST API sederhana, lalu tingkatkan kompleksitasnya seiring pengalaman Anda bertambah!
+Kalau Anda sedang belajar backend, REST adalah tempat yang bagus untuk mulai. Coba bangun API sederhana dulu, pahami penggunaan HTTP methods dan status code, lalu pelan-pelan tambah fitur seperti autentikasi, pagination, filtering, dan versioning.
