@@ -42,18 +42,6 @@ export default function Header() {
             >
               Services
             </Link>
-            <Link
-              href="/kti"
-              className="hover:text-slate-900 dark:hover:text-white transition-colors"
-            >
-              KTI (ID)
-            </Link>
-            <Link
-              href="/posts"
-              className="hover:text-slate-900 dark:hover:text-white transition-colors"
-            >
-              Blog
-            </Link>
           </nav>
 
           <div className="flex items-center gap-3">

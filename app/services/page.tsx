@@ -266,9 +266,6 @@ export default function ServicesPage() {
             <h2 className="relative text-3xl font-bold tracking-tight text-white">
               Start with one service. Add the rest when you need them.
             </h2>
-            <p className="relative mt-4 text-indigo-200">
-              That is usually the better path anyway.
-            </p>
             <Link
               href="https://console.smbcloud.xyz"
               target="_blank"

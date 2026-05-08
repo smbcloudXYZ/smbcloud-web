@@ -77,6 +77,41 @@ const deployComparisonPages = [
   },
 ];
 
+const authComparisonPages = [
+  {
+    href: "/auth0-alternative",
+    eyebrow: "Auth comparison",
+    title: "Auth0 alternative",
+    description:
+      "If you want hosted auth flows without turning identity into its own platform project.",
+    bullets: [
+      "Compare hosted sign-in, signup, and session flows against a bigger identity stack",
+      "See where smbCloud Auth fits for smaller teams that want less auth sprawl",
+    ],
+  },
+  {
+    href: "/clerk-alternative",
+    eyebrow: "Auth comparison",
+    title: "Clerk alternative",
+    description: "If you want auth to stay simple, hosted, and out of the way.",
+    bullets: [
+      "Compare developer-friendly hosted auth against a calmer auth workflow",
+      "See when smbCloud Auth is a better fit and when Clerk still makes more sense",
+    ],
+  },
+  {
+    href: "/supabase-auth-alternative",
+    eyebrow: "Auth comparison",
+    title: "Supabase Auth alternative",
+    description:
+      "If you want hosted auth without adopting a bigger backend platform than you need.",
+    bullets: [
+      "Compare focused auth flows against auth bundled inside a larger platform",
+      "See when smbCloud Auth is the cleaner fit for accounts and sessions",
+    ],
+  },
+];
+
 const mailComparisonPages = [
   {
     href: "/resend-alternative",
@@ -410,6 +445,53 @@ export default function Home() {
 
               <div className="grid gap-6 lg:grid-cols-2">
                 {deployComparisonPages.map((page) => (
+                  <Link
+                    key={page.href}
+                    href={page.href}
+                    className="group rounded-2xl border border-slate-200 dark:border-white/[0.06] bg-white dark:bg-white/[0.02] p-8 transition-colors hover:border-indigo-300 dark:hover:border-indigo-700/50 hover:bg-slate-50 dark:hover:bg-white/[0.04]"
+                  >
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
+                      {page.eyebrow}
+                    </p>
+                    <h4 className="mt-4 text-2xl font-semibold tracking-tight text-slate-900 transition-colors group-hover:text-indigo-600 dark:text-white dark:group-hover:text-indigo-400">
+                      {page.title}
+                    </h4>
+                    <p className="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-400">
+                      {page.description}
+                    </p>
+                    <ul className="mt-5 space-y-3 text-sm leading-6 text-slate-500 dark:text-slate-400">
+                      {page.bullets.map((bullet) => (
+                        <li key={bullet} className="flex gap-3">
+                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500" />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="mt-6 text-sm font-semibold text-indigo-600 dark:text-indigo-400">
+                      Read comparison →
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="border-t border-slate-200 pt-16 dark:border-white/[0.06]">
+              <div className="mb-10 max-w-3xl">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
+                  smbCloud Auth
+                </p>
+                <h3 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+                  Looking at Auth0, Clerk, or Supabase Auth?
+                </h3>
+                <p className="mt-4 text-base leading-8 text-slate-600 dark:text-slate-400">
+                  That is the smbCloud Auth side of the business. Some teams
+                  want a giant identity stack. Others just want sign-in, signup,
+                  sessions, and hosted auth flows that stay out of the way.
+                </p>
+              </div>
+
+              <div className="grid gap-6 lg:grid-cols-3">
+                {authComparisonPages.map((page) => (
                   <Link
                     key={page.href}
                     href={page.href}
