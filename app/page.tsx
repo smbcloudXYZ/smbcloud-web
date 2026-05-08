@@ -6,50 +6,50 @@ import { FaApple, FaGooglePlay, FaWindows } from "react-icons/fa";
 import { StructuredData } from "@/components/structured-data";
 import siteMetadata from "@/content/siteMetadata";
 import { absoluteUrl, genPageMetadata } from "./seo";
+import {
+  ServiceWordCycler,
+  FrameworkWordCycler,
+} from "@/components/word-cycler";
 
 const proofPoints = [
   {
     title: "One command",
-    description: "Deploy from your project with the `smb` CLI.",
+    description: "Run `smb` to deploy.",
   },
   {
     title: "SSH-first",
-    description: "Keep the deploy flow closer to how developers already work.",
+    description: "No extra layer between you and the server.",
   },
   {
     title: "Live logs",
-    description:
-      "Watch deploy progress, app checks, and runtime feedback in real time.",
+    description: "Watch the deploy as it happens.",
   },
   {
     title: "Fast rollbacks",
-    description: "Go back quickly when a release needs to be reversed.",
+    description: "One command back when something breaks.",
   },
 ];
 
 const reasonsToChoose = [
   {
     title: "No platform maze",
-    description:
-      "We built smbCloud so deploys would feel boring again. Run `smb`, watch the release, move on.",
+    description: "Run `smb`, watch the release, move on.",
   },
   {
     title: "Built for real stacks",
-    description:
-      "Node.js, Rails, and Vapor are the stacks we actually care about. This product is shaped around them on purpose.",
+    description: "Node.js, Rails, and Vapor. That's it.",
   },
   {
     title: "Closer to normal ops",
-    description:
-      "If your team already likes SSH and straightforward deploys, smbCloud will make sense fast.",
+    description: "SSH in, deploy out. Nothing new to learn.",
   },
 ];
 
 const bestFit = [
-  "Small product teams shipping web apps and APIs",
-  "Agencies and consultants managing client deployments",
-  "Founders who miss when deploys felt simple",
-  "Teams that already like SSH and fewer moving parts",
+  "Small teams shipping web apps and APIs",
+  "Agencies managing client deployments",
+  "Founders who want deploys to be boring",
+  "Teams that like SSH and fewer moving parts",
 ];
 
 const deployComparisonPages = [
@@ -57,8 +57,7 @@ const deployComparisonPages = [
     href: "/heroku-alternative",
     eyebrow: "Deploy comparison",
     title: "Heroku alternative",
-    description:
-      "If you still want simplicity, but with less platform in the middle.",
+    description: "Simpler deploys, less platform in the middle.",
     bullets: [
       "Why some Rails, Node.js, and Vapor teams leave Heroku",
       "Where smbCloud fits, and where it does not",
@@ -68,8 +67,7 @@ const deployComparisonPages = [
     href: "/railway-alternative",
     eyebrow: "Deploy comparison",
     title: "Railway alternative",
-    description:
-      "If Railway feels a bit too broad and you want a calmer deploy flow.",
+    description: "A calmer deploy flow for teams that want less surface area.",
     bullets: [
       "What you gain from a narrower platform",
       "Why some teams prefer less surface area",
@@ -82,8 +80,7 @@ const authComparisonPages = [
     href: "/auth0-alternative",
     eyebrow: "Auth comparison",
     title: "Auth0 alternative",
-    description:
-      "If you want hosted auth flows without turning identity into its own platform project.",
+    description: "Hosted auth without the identity platform overhead.",
     bullets: [
       "Compare hosted sign-in, signup, and session flows against a bigger identity stack",
       "See where smbCloud Auth fits for smaller teams that want less auth sprawl",
@@ -93,7 +90,7 @@ const authComparisonPages = [
     href: "/clerk-alternative",
     eyebrow: "Auth comparison",
     title: "Clerk alternative",
-    description: "If you want auth to stay simple, hosted, and out of the way.",
+    description: "Auth that stays out of the way.",
     bullets: [
       "Compare developer-friendly hosted auth against a calmer auth workflow",
       "See when smbCloud Auth is a better fit and when Clerk still makes more sense",
@@ -103,11 +100,45 @@ const authComparisonPages = [
     href: "/supabase-auth-alternative",
     eyebrow: "Auth comparison",
     title: "Supabase Auth alternative",
-    description:
-      "If you want hosted auth without adopting a bigger backend platform than you need.",
+    description: "Just auth, without adopting a full backend platform.",
     bullets: [
       "Compare focused auth flows against auth bundled inside a larger platform",
       "See when smbCloud Auth is the cleaner fit for accounts and sessions",
+    ],
+  },
+];
+
+const gresiqComparisonPages = [
+  {
+    href: "/supabase-alternative",
+    eyebrow: "GresIQ comparison",
+    title: "Supabase alternative",
+    description: "A data layer that doesn't become its own platform.",
+    bullets: [
+      "Compare focused database management against a full BaaS platform",
+      "See when smbCloud GresIQ is the simpler fit and when Supabase still makes sense",
+    ],
+  },
+  {
+    href: "/planetscale-alternative",
+    eyebrow: "GresIQ comparison",
+    title: "PlanetScale alternative",
+    description:
+      "A database that ships with your app, no branching workflow required.",
+    bullets: [
+      "Compare database-per-project workflows against branch-based schema management",
+      "Honest tradeoffs between simplicity and scale",
+    ],
+  },
+  {
+    href: "/neon-alternative",
+    eyebrow: "GresIQ comparison",
+    title: "Neon alternative",
+    description:
+      "Always-on Postgres without cold starts or serverless trade-offs.",
+    bullets: [
+      "Compare always-on managed databases against serverless Postgres",
+      "See which fits better for teams that already use smbCloud Deploy or Auth",
     ],
   },
 ];
@@ -117,8 +148,7 @@ const mailComparisonPages = [
     href: "/resend-alternative",
     eyebrow: "Mail comparison",
     title: "Resend alternative",
-    description:
-      "If your problem starts with the inbox, not just the send API.",
+    description: "Starts with the inbox, not the send API.",
     bullets: [
       "Compare inbox-first mail workflows against sending-first tools",
       "See where smbCloud Mail fits for routing, forwarding, and stored inbound mail",
@@ -128,8 +158,7 @@ const mailComparisonPages = [
     href: "/usesend-alternative",
     eyebrow: "Mail comparison",
     title: "useSend alternative",
-    description:
-      "If you want managed mail workflows instead of running the email stack yourself.",
+    description: "Managed mail without running the stack yourself.",
     bullets: [
       "A cleaner fit for domain inbox routes and forwarding",
       "Honest tradeoffs between hosted mail and open-source sending infrastructure",
@@ -139,8 +168,7 @@ const mailComparisonPages = [
     href: "/sendgrid-alternative",
     eyebrow: "Mail comparison",
     title: "SendGrid alternative",
-    description:
-      "If you need domain inboxes and inbound routing more than a giant email suite.",
+    description: "Domain inboxes and inbound routing without the giant suite.",
     bullets: [
       "Compare inbox routes, forwarding, and stored inbound mail against send-heavy tooling",
       "See when smbCloud Mail is the better bet and when it is not",
@@ -216,31 +244,16 @@ export default function Home() {
 
         <div className="mx-auto max-w-4xl text-center">
           <p className="mb-8 text-sm font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-500">
-            Enterprise Power at Startup Velocity
+            Start at the finish line: distribution.
           </p>
 
           <h1 className="text-5xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-7xl leading-[1.05]">
-            Deploy your app without the{" "}
-            <span className="text-indigo-600 dark:text-indigo-400">
-              platform maze.
-            </span>
+            <ServiceWordCycler />{" "}
+            <span className="text-slate-900 dark:text-white">your app.</span>
           </h1>
 
-          <p className="mx-auto mt-8 max-w-3xl text-lg leading-8 text-slate-600 dark:text-slate-400">
-            smbCloud is an SSH-first deploy platform for small teams shipping{" "}
-            <span className="font-semibold text-slate-800 dark:text-slate-200">
-              Node.js
-            </span>
-            ,{" "}
-            <span className="font-semibold text-slate-800 dark:text-slate-200">
-              Ruby on Rails
-            </span>
-            , and{" "}
-            <span className="font-semibold text-slate-800 dark:text-slate-200">
-              Swift/Vapor
-            </span>{" "}
-            apps. Run one command, watch the logs, and roll back fast when you
-            need to.
+          <p className="mx-auto mt-8 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
+            Don't just build. Deliver your <FrameworkWordCycler /> app.
           </p>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -258,41 +271,6 @@ export default function Home() {
             >
               Install the CLI
             </Link>
-          </div>
-
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-slate-500 dark:text-slate-400">
-            <Link
-              href="/heroku-alternative"
-              className="font-medium text-indigo-600 transition-colors hover:text-indigo-500 dark:text-indigo-400"
-            >
-              Heroku alternative
-            </Link>
-            <span className="text-slate-300 dark:text-slate-700">•</span>
-            <Link
-              href="/railway-alternative"
-              className="font-medium text-indigo-600 transition-colors hover:text-indigo-500 dark:text-indigo-400"
-            >
-              Railway alternative
-            </Link>
-          </div>
-
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs font-medium text-slate-500 dark:text-slate-500">
-            <span>Built by Splitfire AB</span>
-            <span className="hidden sm:inline text-slate-300 dark:text-slate-700">
-              •
-            </span>
-            <Link
-              href="https://github.com/smbcloudXYZ"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-colors hover:text-slate-800 dark:hover:text-slate-300"
-            >
-              Open source on GitHub
-            </Link>
-            <span className="hidden sm:inline text-slate-300 dark:text-slate-700">
-              •
-            </span>
-            <span>Stockholm, Sweden</span>
           </div>
         </div>
       </section>
@@ -331,11 +309,10 @@ export default function Home() {
               Why smbCloud
             </p>
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
-              Most teams do not need more platform.
+              Deploys should be boring.
             </h2>
             <p className="mt-5 text-base leading-8 text-slate-600 dark:text-slate-400">
-              We kept coming back to the same idea: deploys should be easy to
-              explain and hard to mess up. That is where smbCloud fits.
+              Run `smb`. Watch the logs. Move on.
             </p>
           </div>
 
@@ -364,7 +341,7 @@ export default function Home() {
               Who it fits best
             </p>
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
-              This is for teams like ours.
+              Good fit
             </h2>
             <ul className="mt-6 space-y-4 text-sm leading-7 text-slate-600 dark:text-slate-400">
               {bestFit.map((item) => (
@@ -381,7 +358,7 @@ export default function Home() {
               Stack focus
             </p>
             <h2 className="mt-4 text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
-              The stacks we care about.
+              Supported stacks
             </h2>
             <div className="mt-6 space-y-4 text-sm text-slate-600 dark:text-slate-400">
               <div className="rounded-xl border border-slate-200 dark:border-white/[0.06] bg-white dark:bg-white/[0.03] p-4">
@@ -389,8 +366,7 @@ export default function Home() {
                   Node.js
                 </p>
                 <p className="mt-1 leading-7">
-                  A strong fit for web apps, APIs, dashboards, and backend
-                  services.
+                  Web apps, APIs, dashboards, backend services.
                 </p>
               </div>
               <div className="rounded-xl border border-slate-200 dark:border-white/[0.06] bg-white dark:bg-white/[0.03] p-4">
@@ -398,8 +374,7 @@ export default function Home() {
                   Ruby on Rails
                 </p>
                 <p className="mt-1 leading-7">
-                  Still one of my favorite stacks when I want to ship fast
-                  without arguing with the tooling.
+                  Still my favorite stack for shipping fast.
                 </p>
               </div>
               <div className="rounded-xl border border-slate-200 dark:border-white/[0.06] bg-white dark:bg-white/[0.03] p-4">
@@ -407,8 +382,7 @@ export default function Home() {
                   Swift / Vapor
                 </p>
                 <p className="mt-1 leading-7">
-                  A good fit if you like Vapor and do not want to be treated
-                  like an afterthought.
+                  Works. Doesn't treat Vapor as an afterthought.
                 </p>
               </div>
             </div>
@@ -423,7 +397,7 @@ export default function Home() {
               Compare services
             </p>
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
-              Start with the service you are actually choosing.
+              Pick the service you're comparing.
             </h2>
           </div>
 
@@ -434,12 +408,11 @@ export default function Home() {
                   smbCloud Deploy
                 </p>
                 <h3 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
-                  Looking at Heroku or Railway?
+                  Heroku or Railway?
                 </h3>
                 <p className="mt-4 text-base leading-8 text-slate-600 dark:text-slate-400">
-                  Fair enough. We wrote the comparison pages I would actually
-                  want to read before switching: direct, specific, and honest
-                  about fit.
+                  Direct comparisons, honest about where smbCloud fits and where
+                  it doesn't.
                 </p>
               </div>
 
@@ -481,12 +454,10 @@ export default function Home() {
                   smbCloud Auth
                 </p>
                 <h3 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
-                  Looking at Auth0, Clerk, or Supabase Auth?
+                  Auth0, Clerk, or Supabase Auth?
                 </h3>
                 <p className="mt-4 text-base leading-8 text-slate-600 dark:text-slate-400">
-                  That is the smbCloud Auth side of the business. Some teams
-                  want a giant identity stack. Others just want sign-in, signup,
-                  sessions, and hosted auth flows that stay out of the way.
+                  Sign-in, signup, sessions. Hosted, out of the way.
                 </p>
               </div>
 
@@ -528,18 +499,59 @@ export default function Home() {
                   smbCloud Mail
                 </p>
                 <h3 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
-                  Looking at Resend, useSend, or SendGrid?
+                  Resend, useSend, or SendGrid?
                 </h3>
                 <p className="mt-4 text-base leading-8 text-slate-600 dark:text-slate-400">
-                  That is the smbCloud Mail side of the business. Most email
-                  tools start with sending. We started with the inbox: domain
-                  routes, forwarding, and keeping the messages that actually
-                  came in.
+                  Domain routes, forwarding, stored inbound mail.
                 </p>
               </div>
 
               <div className="grid gap-6 lg:grid-cols-3">
                 {mailComparisonPages.map((page) => (
+                  <Link
+                    key={page.href}
+                    href={page.href}
+                    className="group rounded-2xl border border-slate-200 dark:border-white/[0.06] bg-white dark:bg-white/[0.02] p-8 transition-colors hover:border-indigo-300 dark:hover:border-indigo-700/50 hover:bg-slate-50 dark:hover:bg-white/[0.04]"
+                  >
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
+                      {page.eyebrow}
+                    </p>
+                    <h4 className="mt-4 text-2xl font-semibold tracking-tight text-slate-900 transition-colors group-hover:text-indigo-600 dark:text-white dark:group-hover:text-indigo-400">
+                      {page.title}
+                    </h4>
+                    <p className="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-400">
+                      {page.description}
+                    </p>
+                    <ul className="mt-5 space-y-3 text-sm leading-6 text-slate-500 dark:text-slate-400">
+                      {page.bullets.map((bullet) => (
+                        <li key={bullet} className="flex gap-3">
+                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500" />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="mt-6 text-sm font-semibold text-indigo-600 dark:text-indigo-400">
+                      Read comparison →
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+            <div className="border-t border-slate-200 pt-16 dark:border-white/[0.06]">
+              <div className="mb-10 max-w-3xl">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
+                  smbCloud GresIQ
+                </p>
+                <h3 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+                  Supabase, PlanetScale, or Neon?
+                </h3>
+                <p className="mt-4 text-base leading-8 text-slate-600 dark:text-slate-400">
+                  A data layer that lives with your stack, not next to it.
+                </p>
+              </div>
+
+              <div className="grid gap-6 lg:grid-cols-3">
+                {gresiqComparisonPages.map((page) => (
                   <Link
                     key={page.href}
                     href={page.href}
@@ -578,11 +590,10 @@ export default function Home() {
           <div className="relative overflow-hidden rounded-2xl bg-indigo-600 px-8 py-14 text-center shadow-2xl shadow-indigo-500/20">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.1),transparent)]" />
             <h2 className="relative text-3xl font-bold tracking-tight text-white">
-              Ready to ship?
+              Try it on one app.
             </h2>
             <p className="relative mt-4 text-indigo-200">
-              Create an account, install the CLI, and see if it feels better on
-              a real project.
+              Create an account and install the CLI.
             </p>
             <div className="relative mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Link
@@ -662,9 +673,8 @@ export default function Home() {
             </div>
 
             <p className="mb-2 max-w-md text-sm leading-relaxed text-slate-300 dark:text-slate-400">
-              <span className="font-semibold text-white">smbcloud-cli</span>,
-              turned into a native app. Review changes, make quick edits, and
-              trigger deploys when you are away from your laptop.
+              <span className="font-semibold text-white">smbcloud-cli</span> as
+              a native app. Review changes, edit, and deploy from your phone.
             </p>
             <p className="mb-8 text-xs italic text-slate-500">
               Available on iPhone, Android, and Windows.
