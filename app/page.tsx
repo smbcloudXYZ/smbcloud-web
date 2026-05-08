@@ -52,10 +52,10 @@ const bestFit = [
   "Teams that already like SSH and fewer moving parts",
 ];
 
-const comparisonPages = [
+const deployComparisonPages = [
   {
     href: "/heroku-alternative",
-    eyebrow: "Comparison page",
+    eyebrow: "Deploy comparison",
     title: "Heroku alternative",
     description:
       "If you still want simplicity, but with less platform in the middle.",
@@ -66,13 +66,49 @@ const comparisonPages = [
   },
   {
     href: "/railway-alternative",
-    eyebrow: "Comparison page",
+    eyebrow: "Deploy comparison",
     title: "Railway alternative",
     description:
       "If Railway feels a bit too broad and you want a calmer deploy flow.",
     bullets: [
       "What you gain from a narrower platform",
       "Why some teams prefer less surface area",
+    ],
+  },
+];
+
+const mailComparisonPages = [
+  {
+    href: "/resend-alternative",
+    eyebrow: "Mail comparison",
+    title: "Resend alternative",
+    description:
+      "If your problem starts with the inbox, not just the send API.",
+    bullets: [
+      "Compare inbox-first mail workflows against sending-first tools",
+      "See where smbCloud Mail fits for routing, forwarding, and stored inbound mail",
+    ],
+  },
+  {
+    href: "/usesend-alternative",
+    eyebrow: "Mail comparison",
+    title: "useSend alternative",
+    description:
+      "If you want managed mail workflows instead of running the email stack yourself.",
+    bullets: [
+      "A cleaner fit for domain inbox routes and forwarding",
+      "Honest tradeoffs between hosted mail and open-source sending infrastructure",
+    ],
+  },
+  {
+    href: "/sendgrid-alternative",
+    eyebrow: "Mail comparison",
+    title: "SendGrid alternative",
+    description:
+      "If you need domain inboxes and inbound routing more than a giant email suite.",
+    bullets: [
+      "Compare inbox routes, forwarding, and stored inbound mail against send-heavy tooling",
+      "See when smbCloud Mail is the better bet and when it is not",
     ],
   },
 ];
@@ -347,48 +383,110 @@ export default function Home() {
 
       <section className="border-t border-slate-200 dark:border-white/[0.06] px-6 py-24 lg:px-8">
         <div className="mx-auto max-w-5xl">
-          <div className="mb-14 max-w-3xl">
+          <div className="mb-16 max-w-3xl">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
-              Compare platforms
+              Compare services
             </p>
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
-              Looking at Heroku or Railway?
+              Start with the service you are actually choosing.
             </h2>
-            <p className="mt-5 text-base leading-8 text-slate-600 dark:text-slate-400">
-              Fair enough. We wrote the comparison pages I would actually want
-              to read before switching: direct, specific, and honest about fit.
-            </p>
           </div>
 
-          <div className="grid gap-6 lg:grid-cols-2">
-            {comparisonPages.map((page) => (
-              <Link
-                key={page.href}
-                href={page.href}
-                className="group rounded-2xl border border-slate-200 dark:border-white/[0.06] bg-white dark:bg-white/[0.02] p-8 transition-colors hover:border-indigo-300 dark:hover:border-indigo-700/50 hover:bg-slate-50 dark:hover:bg-white/[0.04]"
-              >
+          <div className="space-y-16">
+            <div>
+              <div className="mb-10 max-w-3xl">
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
-                  {page.eyebrow}
+                  smbCloud Deploy
                 </p>
-                <h3 className="mt-4 text-2xl font-semibold tracking-tight text-slate-900 transition-colors group-hover:text-indigo-600 dark:text-white dark:group-hover:text-indigo-400">
-                  {page.title}
+                <h3 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+                  Looking at Heroku or Railway?
                 </h3>
-                <p className="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-400">
-                  {page.description}
+                <p className="mt-4 text-base leading-8 text-slate-600 dark:text-slate-400">
+                  Fair enough. We wrote the comparison pages I would actually
+                  want to read before switching: direct, specific, and honest
+                  about fit.
                 </p>
-                <ul className="mt-5 space-y-3 text-sm leading-6 text-slate-500 dark:text-slate-400">
-                  {page.bullets.map((bullet) => (
-                    <li key={bullet} className="flex gap-3">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500" />
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-6 text-sm font-semibold text-indigo-600 dark:text-indigo-400">
-                  Read comparison →
+              </div>
+
+              <div className="grid gap-6 lg:grid-cols-2">
+                {deployComparisonPages.map((page) => (
+                  <Link
+                    key={page.href}
+                    href={page.href}
+                    className="group rounded-2xl border border-slate-200 dark:border-white/[0.06] bg-white dark:bg-white/[0.02] p-8 transition-colors hover:border-indigo-300 dark:hover:border-indigo-700/50 hover:bg-slate-50 dark:hover:bg-white/[0.04]"
+                  >
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
+                      {page.eyebrow}
+                    </p>
+                    <h4 className="mt-4 text-2xl font-semibold tracking-tight text-slate-900 transition-colors group-hover:text-indigo-600 dark:text-white dark:group-hover:text-indigo-400">
+                      {page.title}
+                    </h4>
+                    <p className="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-400">
+                      {page.description}
+                    </p>
+                    <ul className="mt-5 space-y-3 text-sm leading-6 text-slate-500 dark:text-slate-400">
+                      {page.bullets.map((bullet) => (
+                        <li key={bullet} className="flex gap-3">
+                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500" />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="mt-6 text-sm font-semibold text-indigo-600 dark:text-indigo-400">
+                      Read comparison →
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="border-t border-slate-200 pt-16 dark:border-white/[0.06]">
+              <div className="mb-10 max-w-3xl">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
+                  smbCloud Mail
                 </p>
-              </Link>
-            ))}
+                <h3 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+                  Looking at Resend, useSend, or SendGrid?
+                </h3>
+                <p className="mt-4 text-base leading-8 text-slate-600 dark:text-slate-400">
+                  That is the smbCloud Mail side of the business. Most email
+                  tools start with sending. We started with the inbox: domain
+                  routes, forwarding, and keeping the messages that actually
+                  came in.
+                </p>
+              </div>
+
+              <div className="grid gap-6 lg:grid-cols-3">
+                {mailComparisonPages.map((page) => (
+                  <Link
+                    key={page.href}
+                    href={page.href}
+                    className="group rounded-2xl border border-slate-200 dark:border-white/[0.06] bg-white dark:bg-white/[0.02] p-8 transition-colors hover:border-indigo-300 dark:hover:border-indigo-700/50 hover:bg-slate-50 dark:hover:bg-white/[0.04]"
+                  >
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
+                      {page.eyebrow}
+                    </p>
+                    <h4 className="mt-4 text-2xl font-semibold tracking-tight text-slate-900 transition-colors group-hover:text-indigo-600 dark:text-white dark:group-hover:text-indigo-400">
+                      {page.title}
+                    </h4>
+                    <p className="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-400">
+                      {page.description}
+                    </p>
+                    <ul className="mt-5 space-y-3 text-sm leading-6 text-slate-500 dark:text-slate-400">
+                      {page.bullets.map((bullet) => (
+                        <li key={bullet} className="flex gap-3">
+                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500" />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="mt-6 text-sm font-semibold text-indigo-600 dark:text-indigo-400">
+                      Read comparison →
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>

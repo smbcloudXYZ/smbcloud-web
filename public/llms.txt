@@ -18,6 +18,9 @@ GitHub: https://github.com/smbcloudXYZ
 - About: https://smbcloud.xyz/about
 - Heroku alternative: https://smbcloud.xyz/heroku-alternative
 - Railway alternative: https://smbcloud.xyz/railway-alternative
+- Resend alternative: https://smbcloud.xyz/resend-alternative
+- useSend alternative: https://smbcloud.xyz/usesend-alternative
+- SendGrid alternative: https://smbcloud.xyz/sendgrid-alternative
 - KTI glossary: https://smbcloud.xyz/kti
 
 ## Core topics

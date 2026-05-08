@@ -36,6 +36,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    {
+      url: absoluteUrl("/resend-alternative"),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: absoluteUrl("/usesend-alternative"),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: absoluteUrl("/sendgrid-alternative"),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
   ];
 
   const postRoutes: MetadataRoute.Sitemap = allPosts
