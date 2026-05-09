@@ -1,0 +1,376 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { StructuredData } from "@/components/structured-data";
+import { absoluteUrl, genPageMetadata } from "../seo";
+
+const comparisonRows = [
+  {
+    label: "Primary job",
+    smbcloud:
+      "Route domain inboxes, forward mail, and keep the inbound messages.",
+    resend:
+      "Send transactional email and build developer email workflows.",
+  },
+  {
+    label: "Best fit",
+    smbcloud:
+      "Teams that care about where email lands after it is sent.",
+    resend:
+      "Teams whose first problem is sending product or transactional email.",
+  },
+  {
+    label: "Product shape",
+    smbcloud: "Mail service plus inbox workflows and MailX.",
+    resend: "Developer email API with sending-first tooling around it.",
+  },
+  {
+    label: "Why teams pick it",
+    smbcloud: "Because the inbox is part of the product.",
+    resend: "Because sending from code is the main job.",
+  },
+];
+
+const smbcloudFits = [
+  "You want domain inbox routes, forwarding, and stored inbound mail.",
+  "You care more about the inbox than the send API.",
+  "You want email to arrive somewhere real, not just trigger a webhook.",
+  "You want a simpler mail workflow for a small team.",
+];
+
+const resendStillFits = [
+  "Your main problem is sending transactional email from your app.",
+  "You want a developer email API first and everything else second.",
+  "Your team is already centered around outbound email workflows.",
+];
+
+const bestFor = [
+  "Support inboxes",
+  "Contact addresses on product sites",
+  "Project mailboxes that need forwarding plus stored copies",
+  "Small teams that want inbound mail to stay simple",
+  "Founders who want to stop duct-taping inbox workflows",
+];
+
+const faqs = [
+  {
+    question: "Is smbCloud Mail a Resend replacement?",
+    answer:
+      "For some teams, yes. If the inbox is the real problem and you need domain routes, forwarding, and stored inbound mail, smbCloud Mail may fit better. If outbound email from your app is the main job, Resend may fit better.",
+  },
+  {
+    question: "What is the biggest difference between smbCloud Mail and Resend?",
+    answer:
+      "Resend starts from sending. smbCloud Mail starts from the inbox.",
+  },
+  {
+    question: "Who should switch from Resend to smbCloud Mail?",
+    answer:
+      "Teams that keep running into inbox problems, forwarding rules, or the need to keep the actual messages that came in.",
+  },
+];
+
+export const metadata: Metadata = {
+  ...genPageMetadata({
+    title: "Resend alternative for inbox-first mail workflows",
+    description:
+      "smbCloud Mail is a Resend alternative for teams that care about domain inboxes, inbound routing, forwarding, and keeping the messages that actually arrived.",
+    path: "/resend-alternative",
+    keywords: [
+      "Resend alternative",
+      "email API alternative",
+      "inbound email routing",
+      "domain inbox routing",
+      "email forwarding platform",
+      "hosted inbox workflow",
+      "smbCloud Mail",
+    ],
+  }),
+};
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": absoluteUrl("/resend-alternative#webpage"),
+      url: absoluteUrl("/resend-alternative"),
+      name: "Resend alternative for inbox-first mail workflows",
+      description:
+        "Compare smbCloud Mail and Resend for inbox-first mail workflows.",
+      isPartOf: {
+        "@id": absoluteUrl("/#website"),
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: absoluteUrl("/"),
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Resend alternative",
+          item: absoluteUrl("/resend-alternative"),
+        },
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
+    },
+  ],
+};
+
+export default function ResendAlternativePage() {
+  return (
+    <div>
+      <StructuredData data={structuredData} />
+
+      <section className="relative overflow-hidden px-6 pt-24 pb-16 sm:pt-32 sm:pb-20 lg:px-8">
+        <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[520px] bg-[radial-gradient(ellipse_75%_50%_at_50%_0%,rgba(99,102,241,0.18),transparent)] dark:bg-[radial-gradient(ellipse_75%_50%_at_50%_0%,rgba(99,102,241,0.12),transparent)]" />
+
+        <div className="mx-auto max-w-4xl">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-4 py-1.5 dark:border-indigo-500/30 dark:bg-indigo-500/10">
+            <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
+            <span className="text-xs font-semibold uppercase tracking-widest text-indigo-700 dark:text-indigo-400">
+              smbCloud Mail
+            </span>
+          </div>
+
+          <h1 className="max-w-3xl text-4xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-6xl leading-[1.05]">
+            Looking for a Resend alternative?
+          </h1>
+
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600 dark:text-slate-400">
+            smbCloud Mail is a different kind of email product. Resend is great
+            when sending is the job. We built smbCloud Mail for teams that care
+            about where email lands after it gets sent.
+          </p>
+
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+            <Link
+              href="https://console.smbcloud.xyz/signup-mailx"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-500 hover:shadow-indigo-500/30 active:scale-[0.98]"
+            >
+              Get a free @smbcloud.xyz inbox
+            </Link>
+            <Link
+              href="/services"
+              className="inline-flex items-center justify-center rounded-lg border border-slate-300 px-8 py-3.5 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 dark:border-white/[0.12] dark:text-slate-200 dark:hover:bg-white/[0.04]"
+            >
+              Explore smbCloud Mail
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 pb-24 lg:px-8">
+        <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
+              Why teams compare them
+            </p>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+              The real split is sending-first versus inbox-first.
+            </h2>
+            <p className="mt-5 text-base leading-8 text-slate-600 dark:text-slate-400">
+              A lot of teams start by solving outbound email. Later they realize
+              the annoying part is inbound routing, forwarding, aliases, and
+              keeping a copy of what actually came in.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-8 dark:border-white/[0.06] dark:bg-white/[0.02]">
+            <p className="text-sm font-semibold text-slate-900 dark:text-white">
+              What smbCloud Mail does well
+            </p>
+            <ul className="mt-5 space-y-4 text-sm leading-7 text-slate-600 dark:text-slate-400">
+              <li className="flex gap-3">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500" />
+                <span>Route inboxes under your domain.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500" />
+                <span>Forward mail and keep a stored copy.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500" />
+                <span>Give the team an actual inbox workflow, not just an email API.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-slate-200 px-6 py-24 dark:border-white/[0.06] lg:px-8">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-12 max-w-3xl">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
+              smbCloud Mail vs Resend
+            </p>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+              Here is the actual trade.
+            </h2>
+          </div>
+
+          <div className="overflow-hidden rounded-2xl border border-slate-200 dark:border-white/[0.06]">
+            <div className="grid grid-cols-[0.8fr_1fr_1fr] bg-slate-50 text-sm font-semibold text-slate-900 dark:bg-white/[0.03] dark:text-white">
+              <div className="border-b border-slate-200 px-5 py-4 dark:border-white/[0.06]">
+                Area
+              </div>
+              <div className="border-b border-l border-slate-200 px-5 py-4 dark:border-white/[0.06]">
+                smbCloud Mail
+              </div>
+              <div className="border-b border-l border-slate-200 px-5 py-4 dark:border-white/[0.06]">
+                Resend
+              </div>
+            </div>
+            {comparisonRows.map((row) => (
+              <div
+                key={row.label}
+                className="grid grid-cols-[0.8fr_1fr_1fr] text-sm leading-7 text-slate-600 dark:text-slate-400"
+              >
+                <div className="border-b border-slate-200 bg-white px-5 py-5 font-semibold text-slate-900 dark:border-white/[0.06] dark:bg-white/[0.02] dark:text-white">
+                  {row.label}
+                </div>
+                <div className="border-b border-l border-slate-200 bg-white px-5 py-5 dark:border-white/[0.06] dark:bg-white/[0.02]">
+                  {row.smbcloud}
+                </div>
+                <div className="border-b border-l border-slate-200 bg-white px-5 py-5 dark:border-white/[0.06] dark:bg-white/[0.02]">
+                  {row.resend}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-24 lg:px-8">
+        <div className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-2">
+          <div className="rounded-2xl border border-slate-200 bg-white p-8 dark:border-white/[0.06] dark:bg-white/[0.02]">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
+              Pick smbCloud Mail if
+            </p>
+            <ul className="mt-6 space-y-4 text-sm leading-7 text-slate-600 dark:text-slate-400">
+              {smbcloudFits.map((item) => (
+                <li key={item} className="flex gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-8 dark:border-white/[0.06] dark:bg-white/[0.02]">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
+              Stay with Resend if
+            </p>
+            <ul className="mt-6 space-y-4 text-sm leading-7 text-slate-600 dark:text-slate-400">
+              {resendStillFits.map((item) => (
+                <li key={item} className="flex gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-slate-200 px-6 py-24 dark:border-white/[0.06] lg:px-8">
+        <div className="mx-auto max-w-5xl grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
+              Best fit
+            </p>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+              A good fit if the inbox is part of the product, not an afterthought.
+            </h2>
+          </div>
+          <ul className="rounded-2xl border border-slate-200 bg-white p-8 text-sm leading-7 text-slate-600 dark:border-white/[0.06] dark:bg-white/[0.02] dark:text-slate-400">
+            {bestFor.map((item) => (
+              <li
+                key={item}
+                className="flex gap-3 border-b border-slate-200 py-3 last:border-0 last:pb-0 first:pt-0 dark:border-white/[0.06]"
+              >
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="px-6 pb-24 lg:px-8">
+        <div className="mx-auto max-w-3xl">
+          <div className="mb-10">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
+              FAQ
+            </p>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+              Common questions
+            </h2>
+          </div>
+          <div className="space-y-4">
+            {faqs.map((faq) => (
+              <div
+                key={faq.question}
+                className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-white/[0.06] dark:bg-white/[0.02]"
+              >
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+                  {faq.question}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-400">
+                  {faq.answer}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 pb-20 lg:px-8">
+        <div className="mx-auto max-w-3xl">
+          <div className="relative overflow-hidden rounded-2xl bg-indigo-600 px-8 py-14 text-center shadow-2xl shadow-indigo-500/20">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.1),transparent)]" />
+            <h2 className="relative text-3xl font-bold tracking-tight text-white">
+              If the inbox is the real problem, start there.
+            </h2>
+            <p className="relative mt-4 text-indigo-200">
+              Get a free @smbcloud.xyz inbox and see if smbCloud Mail solves the part the send APIs do not.
+            </p>
+            <div className="relative mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <Link
+                href="https://console.smbcloud.xyz/signup-mailx"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex rounded-lg bg-white px-8 py-3.5 text-sm font-semibold text-indigo-700 shadow-sm transition-colors hover:bg-indigo-50"
+              >
+                Get a free inbox
+              </Link>
+              <Link
+                href="/sendgrid-alternative"
+                className="inline-flex rounded-lg border border-white/20 px-8 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+              >
+                Compare SendGrid alternative
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

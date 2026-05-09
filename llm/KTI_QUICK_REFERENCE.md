@@ -252,7 +252,7 @@ app/kti/
 - **SEO Questions**: See `APA-ITU-SEO-STRATEGY.md`
 - **Content Guidelines**: Read `content/kti/README.md`
 - **Deployment**: Use `KTI_DEPLOYMENT_CHECKLIST.md`
-- **Contact**: hello@smbcloud.xyz
+- **Contact**: support@smbcloud.xyz
 
 ## 🎯 Success Metrics
 

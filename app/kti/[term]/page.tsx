@@ -1,9 +1,11 @@
+import type { Metadata } from "next";
 import { allKtis } from "@/.contentlayer/generated";
 import { notFound } from "next/navigation";
 import { Mdx } from "@/components/mdx-components";
 import Link from "next/link";
-import { genPageMetadata } from "../../seo";
+import { StructuredData } from "@/components/structured-data";
 import siteMetadata from "@/content/siteMetadata";
+import { absoluteUrl, genPageMetadata } from "../../seo";
 
 export async function generateStaticParams() {
   return allKtis.map((kti) => ({
@@ -15,40 +17,45 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ term: string }>;
-}) {
+}): Promise<Metadata> {
   const { term } = await params;
   const kti = allKtis.find((kti) => kti.term === term);
 
   if (!kti) return {};
 
+  const keywords = [
+    kti.term,
+    kti.category,
+    ...(kti.tags || []),
+    "kamus teknologi informasi",
+    "istilah IT",
+    "bahasa Indonesia",
+  ];
+
+  if (kti.englishTerm) {
+    keywords.splice(1, 0, kti.englishTerm);
+  }
+
   return {
     ...genPageMetadata({
       title: `${kti.title} - Kamus Teknologi Informasi`,
       description: kti.description,
-    }),
-    keywords: [
-      kti.term,
-      kti.englishTerm,
-      kti.category,
-      ...(kti.tags || []),
-      "kamus teknologi informasi",
-      "istilah IT",
-      "bahasa Indonesia",
-    ].filter(Boolean),
-    openGraph: {
-      title: `${kti.title} - KTI`,
-      description: kti.description,
-      url: `${siteMetadata.siteUrl}/kti/${kti.term}`,
-      siteName: siteMetadata.title,
+      path: kti.slug,
       locale: "id_ID",
       type: "article",
-      publishedTime: kti.lastmod,
-      modifiedTime: kti.lastmod,
-      authors: [siteMetadata.author],
-    },
-    alternates: {
-      canonical: `${siteMetadata.siteUrl}/kti/${kti.term}`,
-    },
+      openGraph: {
+        title: `${kti.title} - KTI | ${siteMetadata.title}`,
+        description: kti.description,
+        url: absoluteUrl(kti.slug),
+        siteName: siteMetadata.title,
+        locale: "id_ID",
+        type: "article",
+        publishedTime: kti.lastmod,
+        modifiedTime: kti.lastmod,
+        authors: [siteMetadata.author],
+      },
+    }),
+    keywords,
   };
 }
 
@@ -107,8 +114,48 @@ export default async function KtiTermPage({
   const difficulty = kti.difficulty as Difficulty;
   const config = difficultyConfig[difficulty] ?? difficultyConfig.pemula;
 
+  const termStructuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "DefinedTerm",
+        name: kti.title,
+        description: kti.description,
+        url: absoluteUrl(kti.slug),
+        inLanguage: "id-ID",
+        termCode: kti.term,
+        alternateName: [kti.englishTerm, kti.acronym].filter(Boolean),
+        inDefinedTermSet: absoluteUrl("/kti"),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: absoluteUrl("/"),
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "KTI",
+            item: absoluteUrl("/kti"),
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: kti.title,
+            item: absoluteUrl(kti.slug),
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <div className="mx-auto max-w-3xl px-6 py-16 lg:px-8">
+      <StructuredData data={termStructuredData} />
       {/* ── Breadcrumb ──────────────────────────────────── */}
       <nav className="mb-10 flex items-center gap-2 text-xs text-slate-400 dark:text-slate-600">
         <Link
