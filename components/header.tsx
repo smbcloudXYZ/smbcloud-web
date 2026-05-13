@@ -52,6 +52,12 @@ export default function Header() {
             >
               Services
             </Link>
+            <Link
+              href="/mail"
+              className="hover:text-slate-900 dark:hover:text-white transition-colors"
+            >
+              Mail
+            </Link>
           </nav>
 
           {/* Right side */}
@@ -134,6 +140,13 @@ export default function Header() {
               className="flex items-center rounded-md px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 hover:text-slate-900 dark:hover:text-white transition-colors"
             >
               Services
+            </Link>
+            <Link
+              href="/mail"
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center rounded-md px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 hover:text-slate-900 dark:hover:text-white transition-colors"
+            >
+              Mail
             </Link>
             <div className="pt-2 pb-1">
               <Link
