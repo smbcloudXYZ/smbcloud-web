@@ -334,4 +334,4 @@ KTI is now a fully functional, SEO-optimized content marketing platform that pos
 **Build Status**: Passing ✅
 **Deployed**: Ready for deployment
 
-For questions or contributions: hello@smbcloud.xyz
+For questions or contributions: support@smbcloud.xyz
