@@ -4,6 +4,7 @@ import { FaGithub } from "react-icons/fa";
 const companyLinks = [
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
+  { href: "/mail", label: "Mail" },
   { href: "/contact", label: "Contact" },
   { href: "/privacy-policy", label: "Privacy" },
   { href: "/term-of-use", label: "Terms" },
