@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { allPosts } from "@/.contentlayer/generated";
+import { allPosts } from "contentlayer/generated";
 import Link from "next/link";
 import { StructuredData } from "@/components/structured-data";
 import siteMetadata from "@/content/siteMetadata";
