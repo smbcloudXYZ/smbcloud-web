@@ -14,7 +14,7 @@ const FREE_SIGNUP_URL = "https://console.smbcloud.xyz/signup-mailx";
 const BUSINESS_SIGNUP_URL =
   "https://console.smbcloud.xyz/signup-mailx?business=true";
 const MAILX_WEB_URL = "https://console.smbcloud.xyz/mail/x";
-const TESTFLIGHT_URL = "https://testflight.apple.com/join/pMq7WKRG";
+const TESTFLIGHT_URL = "https://testflight.apple.com/join/rXW6vYXJ";
 
 const offerings = [
   {
