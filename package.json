@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "SKIP_LINT=true next build",
+    "build": "pnpm build:content && SKIP_LINT=true next build",
     "build:content": "contentlayer2 build",
     "preview": "next build && next start",
     "start": "next start",
