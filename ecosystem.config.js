@@ -50,7 +50,7 @@ module.exports = {
       env_production: {
         NODE_ENV: "production",
         // The standalone server reads PORT and HOSTNAME from env.
-        PORT: "3028",
+        PORT: "3030",
         HOSTNAME: "127.0.0.1",
 
         NEXT_TELEMETRY_DISABLED: "1",
