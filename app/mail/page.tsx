@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { FaApple, FaCheckCircle, FaGlobe, FaInbox, FaShieldAlt } from "react-icons/fa";
+import {
+  FaApple,
+  FaCheckCircle,
+  FaGlobe,
+  FaInbox,
+  FaShieldAlt,
+} from "react-icons/fa";
 import { StructuredData } from "@/components/structured-data";
 import { absoluteUrl, genPageMetadata } from "../seo";
 
@@ -8,7 +14,7 @@ const FREE_SIGNUP_URL = "https://console.smbcloud.xyz/signup-mailx";
 const BUSINESS_SIGNUP_URL =
   "https://console.smbcloud.xyz/signup-mailx?business=true";
 const MAILX_WEB_URL = "https://console.smbcloud.xyz/mail/x";
-const TESTFLIGHT_URL = "https://testflight.apple.com/join/pMq7WKRG";
+const TESTFLIGHT_URL = "https://testflight.apple.com/join/rXW6vYXJ";
 
 const offerings = [
   {
@@ -43,6 +49,7 @@ const offerings = [
 
 const plans = [
   {
+    key: "starter",
     name: "Starter",
     price: "$15",
     period: "/mo",
@@ -57,6 +64,7 @@ const plans = [
     highlighted: false,
   },
   {
+    key: "business",
     name: "Business",
     price: "$49",
     period: "/mo",
@@ -71,6 +79,7 @@ const plans = [
     highlighted: true,
   },
   {
+    key: "premium",
     name: "Premium",
     price: "$99",
     period: "/mo",
@@ -151,21 +160,21 @@ export default function MailPage() {
             name: "smbCloud Mail Starter",
             price: "15",
             priceCurrency: "USD",
-            url: BUSINESS_SIGNUP_URL,
+            url: `${BUSINESS_SIGNUP_URL}&plan=starter`,
           },
           {
             "@type": "Offer",
             name: "smbCloud Mail Business",
             price: "49",
             priceCurrency: "USD",
-            url: BUSINESS_SIGNUP_URL,
+            url: `${BUSINESS_SIGNUP_URL}&plan=business`,
           },
           {
             "@type": "Offer",
             name: "smbCloud Mail Premium",
             price: "99",
             priceCurrency: "USD",
-            url: BUSINESS_SIGNUP_URL,
+            url: `${BUSINESS_SIGNUP_URL}&plan=premium`,
           },
         ],
       },
@@ -196,9 +205,10 @@ export default function MailPage() {
               <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
                 smbCloud Mail gives you two ways in. Start with a free hosted
                 inbox on <span className="font-semibold">@smbcloud.xyz</span>,
-                or set up <span className="font-semibold">smbCloud Mail Business</span>
-                {' '}with your own domain. Either way, you use MailX to read,
-                reply, and keep moving.
+                or set up{" "}
+                <span className="font-semibold">smbCloud Mail Business</span>{" "}
+                with your own domain. Either way, you use MailX to read, reply,
+                and keep moving.
               </p>
 
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -217,8 +227,8 @@ export default function MailPage() {
               </div>
 
               <p className="mt-4 text-sm text-slate-500 dark:text-slate-500">
-                Free personal inboxes live on @smbcloud.xyz. Business inboxes use
-                your own domain.
+                Free personal inboxes live on @smbcloud.xyz. Business inboxes
+                use your own domain.
               </p>
             </div>
 
@@ -245,7 +255,9 @@ export default function MailPage() {
                 </li>
                 <li className="flex gap-3">
                   <FaGlobe className="mt-1 h-4 w-4 shrink-0 text-orange-500" />
-                  <span>Android, Linux, and Windows through the Tauri client family</span>
+                  <span>
+                    Android, Linux, and Windows through the Tauri client family
+                  </span>
                 </li>
               </ul>
 
@@ -413,7 +425,7 @@ export default function MailPage() {
                 </ul>
 
                 <a
-                  href={BUSINESS_SIGNUP_URL}
+                  href={`${BUSINESS_SIGNUP_URL}&plan=${plan.key}`}
                   className={`mt-8 inline-flex w-full items-center justify-center rounded-lg px-5 py-3 text-sm font-semibold transition-colors ${
                     plan.highlighted
                       ? "bg-orange-500 text-white hover:bg-orange-400"

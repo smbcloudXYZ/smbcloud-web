@@ -3,8 +3,6 @@ description = "smbCloud website"
 
 [project]
 id = 15
-frontend_app_id = ""       # TODO: set to the FrontendApp UUID from smbCloud API
-deploy_repo_id = 0         # TODO: set to the DeployRepo ID from smbCloud API
 name = "smbcloudweb"
 runner = 0
 repository = "smbcloudweb"
