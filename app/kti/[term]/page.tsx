@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { allKtis } from "@/.contentlayer/generated";
+import { allKtis } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 import { Mdx } from "@/components/mdx-components";
 import Link from "next/link";
