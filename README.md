@@ -19,7 +19,7 @@
     <a href="LICENSE">License</a>
   </p>
   <p align="center">
-    <a href="https://smbcloud.xyz/"><img alt="Deploy to smbCloud" src="https://github.com/smbcloudXYZ/smbcloud-cli/blob/development/deploy.svg"></a>
+    <a href="https://smbcloud.xyz/"><img alt="Runs on smbCloud" src="https://img.shields.io/badge/Runs%20on-smbCloud-0f172a?style=for-the-badge"></a>
     <a href="LICENSE"><img alt="Apache-2.0 License" src="https://img.shields.io/badge/license-Apache%202.0-blue.svg"></a>
     <img alt="Next.js 16" src="https://img.shields.io/badge/Next.js-16-black?logo=next.js">
     <img alt="pnpm" src="https://img.shields.io/badge/pnpm-workspace-f69220?logo=pnpm&logoColor=white">
