@@ -191,7 +191,7 @@ export default function MailPage() {
         <div className="mx-auto max-w-5xl">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-4 py-1.5 dark:border-orange-500/30 dark:bg-orange-500/10">
             <span className="h-1.5 w-1.5 rounded-full bg-orange-500" />
-            <span className="text-xs font-semibold uppercase tracking-widest text-orange-700 dark:text-orange-300">
+            <span className="text-xs font-semibold tracking-widest text-orange-700 dark:text-orange-300">
               smbCloud Mail
             </span>
           </div>
