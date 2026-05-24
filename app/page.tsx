@@ -52,6 +52,39 @@ const bestFit = [
   "Teams that like SSH and fewer moving parts",
 ];
 
+const featuredServices = [
+  {
+    name: "smbCloud Auth",
+    eyebrow: "Accounts and access",
+    title: "Hosted auth that stays out of the way.",
+    description:
+      "Handle sign-in, signup, sessions, custom domains, collaborators, and billing without adopting a giant identity platform first.",
+    bullets: [
+      "Hosted auth apps for end-user accounts",
+      "Simple plans from Starter to Business",
+      "A calmer alternative to Auth0, Clerk, and bundled platform auth",
+    ],
+    href: "/auth",
+    cta: "Explore Auth",
+    accent: "indigo",
+  },
+  {
+    name: "smbCloud Mail",
+    eyebrow: "Domain mail routing",
+    title: "Mail built around the inbox, not just the send API.",
+    description:
+      "Route domain email, keep forwarding simple, and store inbound history without stitching together a bigger mail suite than you need.",
+    bullets: [
+      "One Mail app per project",
+      "Inbox routes, forwarding, and stored inbound messages",
+      "A cleaner fit for teams comparing Resend, useSend, or SendGrid",
+    ],
+    href: "/mail",
+    cta: "Explore Mail",
+    accent: "orange",
+  },
+];
+
 const deployComparisonPages = [
   {
     href: "/heroku-alternative",
@@ -178,17 +211,21 @@ const mailComparisonPages = [
 
 export const metadata: Metadata = {
   ...genPageMetadata({
-    title: "Deploy Node.js, Rails, and Vapor apps with one command",
+    title: "Deploy apps, handle auth, and run domain mail from one platform",
     description:
-      "smbCloud is an SSH-first deploy platform for small teams shipping Node.js, Ruby on Rails, and Swift/Vapor apps. Deploy with one command, live logs, fast rollbacks, and a clean console.",
+      "smbCloud helps small teams deploy Node.js, Ruby on Rails, and Swift/Vapor apps, run hosted auth, and manage domain mail from one calm console.",
     path: "/",
     keywords: [
       "SSH-first deploy platform",
       "deploy Node.js app",
       "deploy Ruby on Rails app",
       "deploy Vapor app",
+      "hosted auth",
+      "authentication service",
+      "domain mail routing",
       "Heroku alternative",
-      "Railway alternative",
+      "Auth0 alternative",
+      "Resend alternative",
       "small team deployment platform",
     ],
   }),
@@ -224,6 +261,39 @@ const homepageStructuredData = {
       audience: {
         "@type": "Audience",
         audienceType: "Developers and small software teams",
+      },
+    },
+    {
+      "@type": "Service",
+      name: "smbCloud Auth",
+      serviceType: "Hosted authentication service",
+      provider: {
+        "@id": absoluteUrl("/#organization"),
+      },
+      areaServed: "Worldwide",
+      url: absoluteUrl("/auth"),
+      description:
+        "Hosted auth apps for sign-in, signup, sessions, collaborators, and account management.",
+      audience: {
+        "@type": "Audience",
+        audienceType: "Developers and software teams shipping user accounts",
+      },
+    },
+    {
+      "@type": "Service",
+      name: "smbCloud Mail",
+      serviceType: "Domain mail routing service",
+      provider: {
+        "@id": absoluteUrl("/#organization"),
+      },
+      areaServed: "Worldwide",
+      url: absoluteUrl("/mail"),
+      description:
+        "Domain inbox routes, forwarding, and stored inbound mail for teams that want calmer mail infrastructure.",
+      audience: {
+        "@type": "Audience",
+        audienceType:
+          "Businesses and software teams handling inbound domain email",
       },
     },
   ],
@@ -271,6 +341,70 @@ export default function Home() {
             >
               Install the CLI
             </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 pb-14 lg:px-8">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-10 max-w-3xl">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
+              Start here
+            </p>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+              Auth and Mail are two of the clearest ways into smbCloud.
+            </h2>
+            <p className="mt-5 text-base leading-8 text-slate-600 dark:text-slate-400">
+              If you're comparing auth vendors or trying to clean up your domain
+              mail setup, start with the product page that matches the job.
+            </p>
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+            {featuredServices.map((service) => (
+              <Link
+                key={service.name}
+                href={service.href}
+                className={`group rounded-2xl border p-8 transition-colors ${
+                  service.accent === "orange"
+                    ? "border-orange-200 bg-orange-50/70 hover:border-orange-300 hover:bg-orange-50 dark:border-orange-500/20 dark:bg-orange-500/10 dark:hover:border-orange-500/35 dark:hover:bg-orange-500/14"
+                    : "border-indigo-200 bg-indigo-50/70 hover:border-indigo-300 hover:bg-indigo-50 dark:border-indigo-500/20 dark:bg-indigo-500/10 dark:hover:border-indigo-500/35 dark:hover:bg-indigo-500/14"
+                }`}
+              >
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-500">
+                  {service.eyebrow}
+                </p>
+                <h3 className="mt-4 text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                  {service.title}
+                </h3>
+                <p className="mt-4 text-base leading-8 text-slate-600 dark:text-slate-400">
+                  {service.description}
+                </p>
+                <ul className="mt-6 space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                  {service.bullets.map((bullet) => (
+                    <li key={bullet} className="flex gap-3">
+                      <span
+                        className={`mt-2 h-1.5 w-1.5 shrink-0 rounded-full ${
+                          service.accent === "orange"
+                            ? "bg-orange-500"
+                            : "bg-indigo-500"
+                        }`}
+                      />
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p
+                  className={`mt-6 text-sm font-semibold ${
+                    service.accent === "orange"
+                      ? "text-orange-600 dark:text-orange-400"
+                      : "text-indigo-600 dark:text-indigo-400"
+                  }`}
+                >
+                  {service.cta} →
+                </p>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -405,52 +539,6 @@ export default function Home() {
             <div>
               <div className="mb-10 max-w-3xl">
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
-                  smbCloud Deploy
-                </p>
-                <h3 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
-                  Heroku or Railway?
-                </h3>
-                <p className="mt-4 text-base leading-8 text-slate-600 dark:text-slate-400">
-                  Direct comparisons, honest about where smbCloud fits and where
-                  it doesn't.
-                </p>
-              </div>
-
-              <div className="grid gap-6 lg:grid-cols-2">
-                {deployComparisonPages.map((page) => (
-                  <Link
-                    key={page.href}
-                    href={page.href}
-                    className="group rounded-2xl border border-slate-200 dark:border-white/[0.06] bg-white dark:bg-white/[0.02] p-8 transition-colors hover:border-indigo-300 dark:hover:border-indigo-700/50 hover:bg-slate-50 dark:hover:bg-white/[0.04]"
-                  >
-                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
-                      {page.eyebrow}
-                    </p>
-                    <h4 className="mt-4 text-2xl font-semibold tracking-tight text-slate-900 transition-colors group-hover:text-indigo-600 dark:text-white dark:group-hover:text-indigo-400">
-                      {page.title}
-                    </h4>
-                    <p className="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-400">
-                      {page.description}
-                    </p>
-                    <ul className="mt-5 space-y-3 text-sm leading-6 text-slate-500 dark:text-slate-400">
-                      {page.bullets.map((bullet) => (
-                        <li key={bullet} className="flex gap-3">
-                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500" />
-                          <span>{bullet}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <p className="mt-6 text-sm font-semibold text-indigo-600 dark:text-indigo-400">
-                      Read comparison →
-                    </p>
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            <div className="border-t border-slate-200 pt-16 dark:border-white/[0.06]">
-              <div className="mb-10 max-w-3xl">
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
                   smbCloud Auth
                 </p>
                 <h3 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
@@ -537,6 +625,53 @@ export default function Home() {
                 ))}
               </div>
             </div>
+
+            <div className="border-t border-slate-200 pt-16 dark:border-white/[0.06]">
+              <div className="mb-10 max-w-3xl">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
+                  smbCloud Deploy
+                </p>
+                <h3 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+                  Heroku or Railway?
+                </h3>
+                <p className="mt-4 text-base leading-8 text-slate-600 dark:text-slate-400">
+                  Direct comparisons, honest about where smbCloud fits and where
+                  it doesn't.
+                </p>
+              </div>
+
+              <div className="grid gap-6 lg:grid-cols-2">
+                {deployComparisonPages.map((page) => (
+                  <Link
+                    key={page.href}
+                    href={page.href}
+                    className="group rounded-2xl border border-slate-200 dark:border-white/[0.06] bg-white dark:bg-white/[0.02] p-8 transition-colors hover:border-indigo-300 dark:hover:border-indigo-700/50 hover:bg-slate-50 dark:hover:bg-white/[0.04]"
+                  >
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
+                      {page.eyebrow}
+                    </p>
+                    <h4 className="mt-4 text-2xl font-semibold tracking-tight text-slate-900 transition-colors group-hover:text-indigo-600 dark:text-white dark:group-hover:text-indigo-400">
+                      {page.title}
+                    </h4>
+                    <p className="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-400">
+                      {page.description}
+                    </p>
+                    <ul className="mt-5 space-y-3 text-sm leading-6 text-slate-500 dark:text-slate-400">
+                      {page.bullets.map((bullet) => (
+                        <li key={bullet} className="flex gap-3">
+                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500" />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="mt-6 text-sm font-semibold text-indigo-600 dark:text-indigo-400">
+                      Read comparison →
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
             <div className="border-t border-slate-200 pt-16 dark:border-white/[0.06]">
               <div className="mb-10 max-w-3xl">
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
