@@ -3,9 +3,9 @@ const siteMetadata = {
   title: "smbCloud",
   author: "smbCloud Team",
   headerTitle: "smbCloud",
-  tagline: "Enterprise Power at Startup Velocity",
+  tagline: "Enterprise power at startup velocity",
   description:
-    "Enterprise Power at Startup Velocity. smbCloud is an SSH-first cloud deploy platform for small teams shipping Node.js, Ruby on Rails, and Swift/Vapor apps with one-command deploys, live logs, and fast rollbacks.",
+    "Enterprise power at startup velocity. smbCloud is an SSH-first cloud deploy platform for small teams shipping Node.js, Ruby on Rails, and Swift/Vapor apps with one-command deploys, live logs, and fast rollbacks.",
   keywords: [
     "smbCloud",
     "SSH deploy platform",

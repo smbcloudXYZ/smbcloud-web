@@ -55,11 +55,11 @@ export const metadata: Metadata = {
   ...genPageMetadata({
     title: "Services",
     description:
-      "Explore smbCloud services for deploys, auth, mail, and GresIQ. One platform for shipping apps, handling accounts, routing email, and managing the data layer.",
+      "Explore smbCloud Platform for deploys, auth, mail, and GresIQ. One platform for shipping apps, handling accounts, routing email, and managing the data layer.",
     path: "/services",
   }),
   keywords: [
-    "smbCloud services",
+    "smbCloud Platform",
     "app deployment platform",
     "hosted auth",
     "mail routing",
@@ -93,7 +93,7 @@ export default function ServicesPage() {
         "@type": "CollectionPage",
         "@id": absoluteUrl("/services#webpage"),
         url: absoluteUrl("/services"),
-        name: "smbCloud Services",
+        name: "smbCloud Platform",
         description:
           "Deploy, Auth, Mail, and GresIQ live under one smbCloud platform instead of four disconnected tools.",
         isPartOf: {
@@ -119,7 +119,7 @@ export default function ServicesPage() {
       },
       {
         "@type": "ItemList",
-        name: "smbCloud services",
+        name: "smbCloud Platform",
         itemListElement: services.map((service, index) => ({
           "@type": "ListItem",
           position: index + 1,
@@ -137,19 +137,12 @@ export default function ServicesPage() {
         <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[520px] bg-[radial-gradient(ellipse_75%_50%_at_50%_0%,rgba(99,102,241,0.18),transparent)] dark:bg-[radial-gradient(ellipse_75%_50%_at_50%_0%,rgba(99,102,241,0.12),transparent)]" />
 
         <div className="mx-auto max-w-4xl">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-200 dark:border-indigo-500/30 bg-indigo-50 dark:bg-indigo-500/10 px-4 py-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
-            <span className="text-xs font-semibold uppercase tracking-widest text-indigo-700 dark:text-indigo-400">
-              smbCloud services
-            </span>
-          </div>
-
           <h1 className="max-w-3xl text-4xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-6xl leading-[1.05]">
             Four services. One platform.
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
-            Deploy apps, handle auth, route domain email, and keep the data
+            Deploy apps, handle auth, manage business email, and keep the data
             layer close to the rest of your stack without stitching together
             four disconnected vendors.
           </p>

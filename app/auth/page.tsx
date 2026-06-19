@@ -224,13 +224,6 @@ export default function AuthPage() {
         <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[560px] bg-[radial-gradient(ellipse_75%_50%_at_50%_0%,rgba(99,102,241,0.22),transparent)] dark:bg-[radial-gradient(ellipse_75%_50%_at_50%_0%,rgba(99,102,241,0.16),transparent)]" />
 
         <div className="mx-auto max-w-5xl">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-4 py-1.5 dark:border-indigo-500/30 dark:bg-indigo-500/10">
-            <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
-            <span className="text-xs font-semibold tracking-widest text-indigo-700 dark:text-indigo-300">
-              smbCloud Auth
-            </span>
-          </div>
-
           <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
             <div>
               <h1 className="max-w-3xl text-4xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-6xl leading-[1.05]">

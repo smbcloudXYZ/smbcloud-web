@@ -34,18 +34,12 @@ export default function Header() {
               </span>
             </div>
             <span className="font-semibold text-slate-900 dark:text-white tracking-tight text-sm">
-              smbCloud
+              smbCloud Platform
             </span>
           </Link>
 
           {/* Desktop nav */}
           <nav className="hidden sm:flex items-center gap-6 text-sm font-medium text-slate-500 dark:text-slate-400">
-            <Link
-              href="/"
-              className="hover:text-slate-900 dark:hover:text-white transition-colors"
-            >
-              Home
-            </Link>
             <Link
               href="/auth"
               className="hover:text-slate-900 dark:hover:text-white transition-colors"
@@ -127,13 +121,6 @@ export default function Header() {
       {menuOpen && (
         <div className="sm:hidden border-t border-slate-200/60 dark:border-white/[0.06] bg-white dark:bg-[#0A0E14]">
           <nav className="mx-auto max-w-5xl flex flex-col px-6 py-3 gap-0.5">
-            <Link
-              href="/"
-              onClick={() => setMenuOpen(false)}
-              className="flex items-center rounded-md px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 hover:text-slate-900 dark:hover:text-white transition-colors"
-            >
-              Home
-            </Link>
             <Link
               href="/auth"
               onClick={() => setMenuOpen(false)}
