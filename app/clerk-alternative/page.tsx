@@ -361,10 +361,10 @@ export default function ClerkAlternativePage() {
                 Create free account
               </Link>
               <Link
-                href="/supabase-auth-alternative"
+                href="/auth0-alternative"
                 className="inline-flex rounded-lg border border-white/20 px-8 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
               >
-                Compare Supabase Auth alternative
+                Compare Auth0 alternative
               </Link>
             </div>
           </div>

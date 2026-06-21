@@ -269,7 +269,7 @@ export default function AuthPage() {
               </h2>
               <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-400">
                 smbCloud Auth covers the full auth lifecycle. Login flows,
-                session tokens, user management, and access control — all from
+                session tokens, user management, and access control, all from
                 one service with SDKs that work across platforms.
               </p>
 
@@ -361,7 +361,7 @@ export default function AuthPage() {
               Why smbCloud Auth
             </p>
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
-              Because auth is not a feature — it is the foundation.
+              Because auth is the foundation, not a bolted-on feature.
             </h2>
             <p className="mt-5 text-base leading-8 text-slate-600 dark:text-slate-400">
               Every app needs login. Most teams build it from scratch, bolt on a

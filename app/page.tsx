@@ -6,10 +6,7 @@ import { FaApple, FaGooglePlay, FaWindows } from "react-icons/fa";
 import { StructuredData } from "@/components/structured-data";
 import siteMetadata from "@/content/siteMetadata";
 import { absoluteUrl, genPageMetadata } from "./seo";
-import {
-  ServiceWordCycler,
-  FrameworkWordCycler,
-} from "@/components/word-cycler";
+import { FrameworkWordCycler } from "@/components/word-cycler";
 
 const proofPoints = [
   {
@@ -129,16 +126,6 @@ const authComparisonPages = [
       "See when smbCloud Auth is a better fit and when Clerk still makes more sense",
     ],
   },
-  {
-    href: "/supabase-auth-alternative",
-    eyebrow: "Auth comparison",
-    title: "Supabase Auth alternative",
-    description: "Just auth, without adopting a full backend platform.",
-    bullets: [
-      "Compare focused auth flows against auth bundled inside a larger platform",
-      "See when smbCloud Auth is the cleaner fit for accounts and sessions",
-    ],
-  },
 ];
 
 const gresiqComparisonPages = [
@@ -211,11 +198,12 @@ const mailComparisonPages = [
 
 export const metadata: Metadata = {
   ...genPageMetadata({
-    title: "Deploy apps, handle auth, and run domain mail from one platform",
+    title: "Deploy, Auth, Mail, and GresIQ on one platform",
     description:
-      "smbCloud helps small teams deploy Node.js, Ruby on Rails, and Swift/Vapor apps, run hosted auth, and manage domain mail from one calm console.",
+      "smbCloud Platform brings four services together: ship Node.js, Rails, and Vapor apps with Deploy, handle sign-in and accounts with Auth, route domain email with Mail, and run your database with GresIQ.",
     path: "/",
     keywords: [
+      "smbCloud Platform",
       "SSH-first deploy platform",
       "deploy Node.js app",
       "deploy Ruby on Rails app",
@@ -223,6 +211,7 @@ export const metadata: Metadata = {
       "hosted auth",
       "authentication service",
       "domain mail routing",
+      "managed Postgres database",
       "Heroku alternative",
       "Auth0 alternative",
       "Resend alternative",
@@ -318,12 +307,17 @@ export default function Home() {
           </p>
 
           <h1 className="text-5xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-7xl leading-[1.05]">
-            <ServiceWordCycler />{" "}
-            <span className="text-slate-900 dark:text-white">your app.</span>
+            Enterprise power at{" "}
+            <span className="text-indigo-600 dark:text-indigo-400">
+              startup velocity
+            </span>
+            .
           </h1>
 
           <p className="mx-auto mt-8 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
-            Don't just build. Deliver your <FrameworkWordCycler /> app.
+            smbCloud Platform brings Deploy, Auth, Mail, and GresIQ together. Ship
+            your <FrameworkWordCycler /> app without running four separate
+            vendors.
           </p>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -333,13 +327,13 @@ export default function Home() {
               rel="noopener noreferrer"
               className="w-full rounded-lg bg-indigo-600 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-500 hover:shadow-indigo-500/30 active:scale-[0.98] sm:w-auto"
             >
-              Start deploying →
+              Start free →
             </Link>
             <Link
-              href="/posts/cli"
+              href="/services"
               className="inline-flex w-full items-center justify-center rounded-lg border border-slate-300 dark:border-white/[0.12] px-8 py-3.5 text-sm font-semibold text-slate-700 dark:text-slate-200 transition-colors hover:bg-slate-50 dark:hover:bg-white/[0.04] sm:w-auto"
             >
-              Install the CLI
+              Explore the platform
             </Link>
           </div>
         </div>

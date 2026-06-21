@@ -13,9 +13,25 @@ const resourceLinks = [
   { href: "/posts", label: "Blog" },
   { href: "/kti", label: "KTI (ID)" },
   {
+    href: "https://docs.smbcloud.xyz",
+    label: "Docs",
+    external: true,
+  },
+  {
+    href: "https://sigit.si/",
+    label: "siGit",
+    external: true,
+  },
+  {
+    href: "https://ondeinference.com/",
+    label: "Onde Inference",
+    external: true,
+  },
+  {
     href: "https://github.com/smbcloudXYZ",
     label: "GitHub",
     external: true,
+    icon: FaGithub,
   },
 ];
 
@@ -73,7 +89,7 @@ export default function Footer() {
                       rel="noopener noreferrer"
                       className="flex items-center gap-1.5 hover:text-slate-900 dark:hover:text-slate-300 transition-colors"
                     >
-                      <FaGithub className="h-3.5 w-3.5" />
+                      {link.icon && <link.icon className="h-3.5 w-3.5" />}
                       {link.label}
                     </Link>
                   ) : (

@@ -29,7 +29,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
   return genPageMetadata({
     title: page.title,
     description: page.description,
-    path: page.slug,
+    path: `/${page.slugAsParams}`,
   });
 }
 
@@ -47,25 +47,27 @@ export default async function PagePage(props: PageProps) {
     notFound();
   }
 
+  const pagePath = `/${page.slugAsParams}`;
+
   const pageStructuredData = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": absoluteUrl(page.slug),
-        url: absoluteUrl(page.slug),
+        "@id": absoluteUrl(pagePath),
+        url: absoluteUrl(pagePath),
         name: page.title,
         description: page.description,
         isPartOf: {
           "@id": absoluteUrl("/#website"),
         },
         breadcrumb: {
-          "@id": `${absoluteUrl(page.slug)}#breadcrumb`,
+          "@id": `${absoluteUrl(pagePath)}#breadcrumb`,
         },
       },
       {
         "@type": "BreadcrumbList",
-        "@id": `${absoluteUrl(page.slug)}#breadcrumb`,
+        "@id": `${absoluteUrl(pagePath)}#breadcrumb`,
         itemListElement: [
           {
             "@type": "ListItem",
@@ -77,7 +79,7 @@ export default async function PagePage(props: PageProps) {
             "@type": "ListItem",
             position: 2,
             name: page.title,
-            item: absoluteUrl(page.slug),
+            item: absoluteUrl(pagePath),
           },
         ],
       },

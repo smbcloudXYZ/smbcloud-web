@@ -52,6 +52,14 @@ export default function Header() {
             >
               Mail
             </Link>
+            <Link
+              href="https://docs.smbcloud.xyz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-slate-900 dark:hover:text-white transition-colors"
+            >
+              Docs
+            </Link>
           </nav>
 
           {/* Right side */}
@@ -134,6 +142,15 @@ export default function Header() {
               className="flex items-center rounded-md px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 hover:text-slate-900 dark:hover:text-white transition-colors"
             >
               Mail
+            </Link>
+            <Link
+              href="https://docs.smbcloud.xyz"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center rounded-md px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 hover:text-slate-900 dark:hover:text-white transition-colors"
+            >
+              Docs
             </Link>
             <div className="pt-2 pb-1">
               <Link

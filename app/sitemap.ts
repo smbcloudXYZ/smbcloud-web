@@ -22,6 +22,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: absoluteUrl("/auth"),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: absoluteUrl("/posts"),
       changeFrequency: "weekly",
       priority: 0.8,
@@ -56,6 +61,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    {
+      url: absoluteUrl("/auth0-alternative"),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: absoluteUrl("/clerk-alternative"),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: absoluteUrl("/supabase-alternative"),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: absoluteUrl("/neon-alternative"),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: absoluteUrl("/planetscale-alternative"),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
   ];
 
   const postRoutes: MetadataRoute.Sitemap = allPosts
@@ -68,7 +98,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }));
 
   const pageRoutes: MetadataRoute.Sitemap = allPages.map((page) => ({
-    url: absoluteUrl(page.slug),
+    url: absoluteUrl(`/${page.slugAsParams}`),
     lastModified: page.lastmod,
     changeFrequency: "yearly",
     priority: 0.5,

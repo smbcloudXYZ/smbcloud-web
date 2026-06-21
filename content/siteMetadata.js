@@ -5,13 +5,17 @@ const siteMetadata = {
   headerTitle: "smbCloud",
   tagline: "Enterprise power at startup velocity",
   description:
-    "Enterprise power at startup velocity. smbCloud is an SSH-first cloud deploy platform for small teams shipping Node.js, Ruby on Rails, and Swift/Vapor apps with one-command deploys, live logs, and fast rollbacks.",
+    "Enterprise power at startup velocity. smbCloud Platform brings four services together: Deploy ships your Node.js, Rails, and Vapor apps with one command, Auth handles sign-in and accounts, Mail routes your domain email, and GresIQ runs your database. One platform instead of four vendors.",
   keywords: [
     "smbCloud",
+    "smbCloud Platform",
     "SSH deploy platform",
     "Node.js deployment",
     "Ruby on Rails deployment",
     "Swift Vapor deployment",
+    "hosted auth",
+    "domain mail routing",
+    "managed Postgres database",
     "developer platform",
     "cloud deployment",
     "app hosting for developers",

@@ -69,7 +69,7 @@ const faqs = [
   {
     question: "What happens to my schema migrations with GresIQ?",
     answer:
-      "You use your framework's standard migration tooling. GresIQ handles connection and service management — it does not add a new migration layer on top of your existing workflow.",
+      "You use your framework's standard migration tooling. GresIQ handles connection and service management. It does not add a new migration layer on top of your existing workflow.",
   },
   {
     question: "Who should consider switching from PlanetScale to GresIQ?",
@@ -82,7 +82,7 @@ export const metadata: Metadata = {
   ...genPageMetadata({
     title: "PlanetScale alternative for teams that want less tooling",
     description:
-      "Looking for a PlanetScale alternative? smbCloud GresIQ manages the data layer inside the same platform as your app, auth, and mail — no schema branching workflow required.",
+      "Looking for a PlanetScale alternative? smbCloud GresIQ manages the data layer inside the same platform as your app, auth, and mail, with no schema branching workflow required.",
     path: "/planetscale-alternative",
     keywords: [
       "PlanetScale alternative",
@@ -165,7 +165,7 @@ export default function PlanetScaleAlternativePage() {
             PlanetScale is a serious platform for teams that need MySQL at
             scale. But most teams do not need branch-based schema management.
             smbCloud GresIQ manages the data layer inside the same platform as
-            your app, auth, and mail — with your normal migration workflow and
+            your app, auth, and mail, with your normal migration workflow and
             nothing extra to learn.
           </p>
 
