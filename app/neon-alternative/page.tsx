@@ -26,7 +26,7 @@ const comparisonRows = [
     label: "Branching",
     smbcloud:
       "Standard database management. Use your framework migration tooling the same way you always have.",
-    neon: "Instant Postgres branching — a core feature for preview environments and development workflows.",
+    neon: "Instant Postgres branching, a core feature for preview environments and development workflows.",
   },
   {
     label: "Why teams pick it",
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
   ...genPageMetadata({
     title: "Neon alternative for teams that want always-on managed Postgres",
     description:
-      "Looking for a Neon alternative? smbCloud GresIQ is an always-on data layer inside the same platform as your app, auth, and mail — no cold starts, no serverless trade-offs.",
+      "Looking for a Neon alternative? smbCloud GresIQ is an always-on data layer inside the same platform as your app, auth, and mail, with no cold starts or serverless trade-offs.",
     path: "/neon-alternative",
     keywords: [
       "Neon alternative",
@@ -160,7 +160,7 @@ export default function NeonAlternativePage() {
             Neon built something clever with serverless Postgres. But
             scale-to-zero and cold starts are the wrong trade-off for most
             server-side apps. smbCloud GresIQ gives you an always-on data layer
-            inside the same platform as your app, auth, and mail — with no
+            inside the same platform as your app, auth, and mail, with no
             serverless surprises.
           </p>
 
@@ -209,7 +209,7 @@ export default function NeonAlternativePage() {
             <ul className="mt-5 space-y-4 text-sm leading-7 text-slate-600 dark:text-slate-400">
               <li className="flex gap-3">
                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500" />
-                <span>Always-on relational database management — no cold starts, no wake-up latency.</span>
+                <span>Always-on relational database management, with no cold starts or wake-up latency.</span>
               </li>
               <li className="flex gap-3">
                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500" />

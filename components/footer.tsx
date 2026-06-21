@@ -3,8 +3,7 @@ import { FaGithub } from "react-icons/fa";
 
 const companyLinks = [
   { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/mail", label: "Mail" },
+  { href: "/services", label: "Platform" },
   { href: "/contact", label: "Contact" },
   { href: "/privacy-policy", label: "Privacy" },
   { href: "/term-of-use", label: "Terms" },
@@ -14,9 +13,25 @@ const resourceLinks = [
   { href: "/posts", label: "Blog" },
   { href: "/kti", label: "KTI (ID)" },
   {
+    href: "https://docs.smbcloud.xyz",
+    label: "Docs",
+    external: true,
+  },
+  {
+    href: "https://sigit.si/",
+    label: "siGit",
+    external: true,
+  },
+  {
+    href: "https://ondeinference.com/",
+    label: "Onde Inference",
+    external: true,
+  },
+  {
     href: "https://github.com/smbcloudXYZ",
     label: "GitHub",
     external: true,
+    icon: FaGithub,
   },
 ];
 
@@ -31,11 +46,11 @@ export default function Footer() {
                 <span className="text-[9px] font-bold leading-none">smb</span>
               </div>
               <span className="text-sm font-semibold text-slate-900 dark:text-white tracking-tight">
-                smbCloud
+                smbCloud Platform
               </span>
             </Link>
             <p className="max-w-xs text-xs leading-relaxed text-slate-500 dark:text-slate-500">
-              Enterprise Power at Startup Velocity
+              Enterprise power at startup velocity
             </p>
             <p className="mt-2 text-xs text-slate-400 dark:text-slate-600">
               Built by Splitfire AB in Stockholm, Sweden.
@@ -74,7 +89,7 @@ export default function Footer() {
                       rel="noopener noreferrer"
                       className="flex items-center gap-1.5 hover:text-slate-900 dark:hover:text-slate-300 transition-colors"
                     >
-                      <FaGithub className="h-3.5 w-3.5" />
+                      {link.icon && <link.icon className="h-3.5 w-3.5" />}
                       {link.label}
                     </Link>
                   ) : (
@@ -94,7 +109,7 @@ export default function Footer() {
 
         <div className="mt-10 flex items-center justify-between border-t border-slate-200 dark:border-white/[0.06] pt-6">
           <p className="text-xs text-slate-400 dark:text-slate-600">
-            © {new Date().getFullYear()} smbCloud. All rights reserved.
+            © {new Date().getFullYear()} smbCloud Platform. All rights reserved.
           </p>
           <p className="text-xs text-slate-400 dark:text-slate-600">
             support@smbcloud.xyz

@@ -9,7 +9,7 @@ const comparisonRows = [
     smbcloud:
       "A data layer service that lives inside your smbCloud project alongside Deploy, Auth, and Mail.",
     supabase:
-      "A full BaaS platform: Postgres, auth, storage, realtime, edge functions — all bundled together.",
+      "A full BaaS platform: Postgres, auth, storage, realtime, edge functions, all bundled together.",
   },
   {
     label: "Best fit",
@@ -64,7 +64,7 @@ const faqs = [
   {
     question: "Does smbCloud GresIQ include auth or storage?",
     answer:
-      "No. Auth is a separate smbCloud service. GresIQ focuses on the data layer. That is intentional — you add what you need instead of inheriting everything.",
+      "No. Auth is a separate smbCloud service. GresIQ focuses on the data layer. That is intentional: you add what you need instead of inheriting everything.",
   },
   {
     question: "What type of database does GresIQ manage?",
@@ -82,7 +82,7 @@ export const metadata: Metadata = {
   ...genPageMetadata({
     title: "Supabase alternative for teams that want less BaaS",
     description:
-      "Looking for a Supabase alternative? smbCloud GresIQ is a focused data layer that lives inside the same platform as your app, auth, and mail — without the full BaaS overhead.",
+      "Looking for a Supabase alternative? smbCloud GresIQ is a focused data layer that lives inside the same platform as your app, auth, and mail, without the full BaaS overhead.",
     path: "/supabase-alternative",
     keywords: [
       "Supabase alternative",
@@ -164,7 +164,7 @@ export default function SupabaseAlternativePage() {
           <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600 dark:text-slate-400">
             Supabase does a lot. That is exactly why some teams want something
             smaller. smbCloud GresIQ is a data layer that lives inside the same
-            platform as your app, auth, and mail — without growing into its own
+            platform as your app, auth, and mail, without growing into its own
             product you have to manage on top of everything else.
           </p>
 
@@ -219,7 +219,7 @@ export default function SupabaseAlternativePage() {
               </li>
               <li className="flex gap-3">
                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500" />
-                <span>Built to stay focused — a data layer, not a backend platform.</span>
+                <span>Built to stay focused: a data layer, not a backend platform.</span>
               </li>
             </ul>
           </div>
