@@ -46,7 +46,7 @@ export default function Footer() {
                 <span className="text-[9px] font-bold leading-none">smb</span>
               </div>
               <span className="text-sm font-semibold text-slate-900 dark:text-white tracking-tight">
-                smbCloud Platform
+                smbCloud
               </span>
             </Link>
             <p className="max-w-xs text-xs leading-relaxed text-slate-500 dark:text-slate-500">
@@ -109,7 +109,7 @@ export default function Footer() {
 
         <div className="mt-10 flex items-center justify-between border-t border-slate-200 dark:border-white/[0.06] pt-6">
           <p className="text-xs text-slate-400 dark:text-slate-600">
-            © {new Date().getFullYear()} smbCloud Platform. All rights reserved.
+            © {new Date().getFullYear()} Splitfire AB (smbCloud). All rights reserved.
           </p>
           <p className="text-xs text-slate-400 dark:text-slate-600">
             support@smbcloud.xyz

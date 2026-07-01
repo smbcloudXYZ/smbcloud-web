@@ -200,10 +200,10 @@ export const metadata: Metadata = {
   ...genPageMetadata({
     title: "Deploy, Auth, Mail, and GresIQ on one platform",
     description:
-      "smbCloud Platform brings four services together: ship Node.js, Rails, and Vapor apps with Deploy, handle sign-in and accounts with Auth, route domain email with Mail, and run your database with GresIQ.",
+      "smbCloud brings four services together: ship Node.js, Rails, and Vapor apps with Deploy, handle sign-in and accounts with Auth, route domain email with Mail, and run your database with GresIQ.",
     path: "/",
     keywords: [
-      "smbCloud Platform",
+      "smbCloud",
       "SSH-first deploy platform",
       "deploy Node.js app",
       "deploy Ruby on Rails app",
@@ -331,7 +331,7 @@ export default function Home() {
           </h1>
 
           <p className="mx-auto mt-8 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
-            smbCloud Platform brings Deploy, Auth, Mail, and GresIQ together. Ship
+            smbCloud brings Deploy, Auth, Mail, and GresIQ together. Ship
             your <FrameworkWordCycler /> app without running four separate
             vendors.
           </p>

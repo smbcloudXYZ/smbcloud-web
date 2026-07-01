@@ -5,10 +5,10 @@ const siteMetadata = {
   headerTitle: "smbCloud",
   tagline: "Enterprise power at startup velocity",
   description:
-    "Enterprise power at startup velocity. smbCloud Platform brings four services together: Deploy ships your Node.js, Rails, and Vapor apps with one command, Auth handles sign-in and accounts, Mail routes your domain email, and GresIQ runs your database. One platform instead of four vendors.",
+    "Enterprise power at startup velocity. smbCloud brings four services together: Deploy ships your Node.js, Rails, and Vapor apps with one command, Auth handles sign-in and accounts, Mail routes your domain email, and GresIQ runs your database. One platform instead of four vendors.",
   keywords: [
     "smbCloud",
-    "smbCloud Platform",
+    "smbCloud",
     "SSH deploy platform",
     "Node.js deployment",
     "Ruby on Rails deployment",

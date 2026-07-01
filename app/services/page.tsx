@@ -55,11 +55,11 @@ export const metadata: Metadata = {
   ...genPageMetadata({
     title: "Services",
     description:
-      "Explore smbCloud Platform for deploys, auth, mail, and GresIQ. One platform for shipping apps, handling accounts, routing email, and managing the data layer.",
+      "Explore smbCloud for deploys, auth, mail, and GresIQ. One platform for shipping apps, handling accounts, routing email, and managing the data layer.",
     path: "/services",
   }),
   keywords: [
-    "smbCloud Platform",
+    "smbCloud",
     "app deployment platform",
     "hosted auth",
     "mail routing",
@@ -93,7 +93,7 @@ export default function ServicesPage() {
         "@type": "CollectionPage",
         "@id": absoluteUrl("/services#webpage"),
         url: absoluteUrl("/services"),
-        name: "smbCloud Platform",
+        name: "smbCloud",
         description:
           "Deploy, Auth, Mail, and GresIQ live under one smbCloud platform instead of four disconnected tools.",
         isPartOf: {
@@ -119,7 +119,7 @@ export default function ServicesPage() {
       },
       {
         "@type": "ItemList",
-        name: "smbCloud Platform",
+        name: "smbCloud",
         itemListElement: services.map((service, index) => ({
           "@type": "ListItem",
           position: index + 1,
