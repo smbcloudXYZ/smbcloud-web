@@ -285,6 +285,22 @@ const homepageStructuredData = {
           "Businesses and software teams handling inbound domain email",
       },
     },
+    {
+      "@type": "Service",
+      name: "GresIQ",
+      serviceType: "Data and memory layer for AI apps",
+      provider: {
+        "@id": absoluteUrl("/#organization"),
+      },
+      areaServed: "Worldwide",
+      url: "https://gresiq.com/",
+      description:
+        "A Postgres-backed backend for AI apps: schemaless documents, realtime, row-level security, and vector search behind one API.",
+      audience: {
+        "@type": "Audience",
+        audienceType: "Developers building AI apps and agents",
+      },
+    },
   ],
 };
 
