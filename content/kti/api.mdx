@@ -1,0 +1,97 @@
+---
+title: "API (Application Programming Interface)"
+term: "apa-itu-api"
+category: "Pemrograman"
+tags: ["web", "backend", "integrasi", "restful", "microservices"]
+description: "Antarmuka yang memungkinkan aplikasi berkomunikasi dan bertukar data dengan aplikasi lain secara terprogram."
+englishTerm: "Application Programming Interface"
+acronym: "API"
+relatedTerms: ["apa-itu-rest", "apa-itu-graphql", "apa-itu-webhook", "apa-itu-microservices"]
+difficulty: "pemula"
+lastmod: 2024-01-15
+published: true
+---
+
+## Apa itu API?
+
+**API (Application Programming Interface)** adalah cara dua aplikasi saling berkomunikasi lewat aturan yang sudah disepakati. API menjadi penghubung antara satu sistem dan sistem lain, sehingga aplikasi bisa meminta data atau menjalankan fungsi tertentu tanpa perlu tahu detail internal di baliknya.
+
+Kalau disederhanakan, API mirip seperti pelayan di restoran: Anda menyampaikan pesanan, pelayan meneruskannya ke dapur, lalu membawa hasilnya kembali. Anda tidak perlu masuk ke dapur untuk mendapatkan makanan.
+
+## Mengapa API Penting?
+
+API penting dalam pengembangan aplikasi modern karena:
+
+1. **Memudahkan integrasi** - Aplikasi bisa terhubung ke layanan lain tanpa membangun semuanya dari nol
+2. **Menghemat waktu pengembangan** - Fitur yang sudah tersedia bisa dipakai ulang
+3. **Membantu arsitektur modular** - Sistem lebih mudah dipisah menjadi beberapa komponen
+4. **Mendukung kerja tim** - Tim frontend, backend, atau mobile bisa bekerja paralel
+5. **Membuka peluang integrasi pihak ketiga** - Produk Anda bisa dipakai atau diperluas oleh layanan lain
+
+## Cara Kerja API
+
+API biasanya bekerja dengan pola request-response:
+
+1. **Client** (aplikasi yang membutuhkan data) mengirim **request** ke API
+2. **API** menerima request lalu meneruskannya ke layanan, server, atau database yang dibutuhkan
+3. **Server** memproses permintaan tersebut
+4. **Response** dikirim kembali ke client melalui API
+
+## Jenis-jenis API
+
+### 1. REST API
+Jenis API yang paling sering dipakai di aplikasi web. REST memakai HTTP methods seperti `GET`, `POST`, `PUT`, dan `DELETE` untuk operasi data.
+
+```javascript
+// Contoh REST API call
+fetch('https://api.example.com/users/123')
+  .then(response => response.json())
+  .then(data => console.log(data));
+```
+
+### 2. GraphQL API
+API yang memberi kebebasan pada client untuk menentukan data apa saja yang ingin diambil.
+
+### 3. SOAP API
+API berbasis XML dengan format yang lebih ketat. SOAP masih banyak dipakai di sistem enterprise atau integrasi lama.
+
+### 4. WebSocket API
+API untuk komunikasi dua arah secara real-time antara client dan server, misalnya pada chat app atau dashboard live.
+
+## Contoh Penggunaan API dalam Kehidupan Sehari-hari
+
+- **Login dengan Google/Facebook** - Menggunakan OAuth API
+- **Cek cuaca di aplikasi** - Menggunakan Weather API
+- **Payment gateway** - Layanan seperti Midtrans atau Xendit menyediakan API untuk pembayaran
+- **Google Maps di website** - Menggunakan Maps API
+- **Chatbot atau fitur AI** - Menggunakan API dari layanan AI seperti OpenAI
+
+## Best Practices dalam Menggunakan API
+
+1. **Gunakan HTTPS** - Lindungi data yang dikirim dan diterima
+2. **Terapkan rate limiting** - Batasi jumlah request agar layanan tidak mudah disalahgunakan
+3. **Gunakan versioning** - Pisahkan perubahan besar ke versi seperti `v1` dan `v2`
+4. **Tangani error dengan jelas** - Response error yang rapi akan lebih mudah dipahami developer lain
+5. **Tulis dokumentasi yang baik** - API yang bagus tetap sulit dipakai kalau dokumentasinya membingungkan
+6. **Gunakan autentikasi yang tepat** - Misalnya API key, OAuth, atau JWT
+
+## API di smbCloud
+
+smbCloud menyediakan REST API untuk membantu Anda mengelola deployment aplikasi secara terprogram. Melalui API, Anda dapat:
+
+- Menjalankan deploy otomatis dari pipeline CI/CD
+- Memantau status dan metrik aplikasi
+- Mengatur scaling resource sesuai kebutuhan
+- Mengelola database dan layanan pendukung
+
+## Tips untuk Pemula
+
+1. **Mulai dari API publik** - Coba layanan gratis seperti JSONPlaceholder untuk latihan
+2. **Gunakan Postman** - Cocok untuk mencoba request tanpa harus langsung menulis kode
+3. **Baca dokumentasi** - Hampir semua API punya aturan sendiri, jadi dokumentasi tetap penting
+4. **Siapkan penanganan error** - Jangan anggap semua request selalu berhasil
+5. **Perhatikan limit penggunaan** - Banyak API punya quota harian atau bulanan
+
+## Kesimpulan
+
+API ada di balik banyak hal yang kita pakai setiap hari di web dan aplikasi mobile. Dengan memahami API, Anda akan lebih mudah menghubungkan aplikasi ke layanan lain, membaca dokumentasi teknis, dan membangun sistem yang bisa berkembang tanpa harus membuat semuanya sendiri.

@@ -1,0 +1,795 @@
+---
+title: "Kubernetes (K8s)"
+term: "apa-itu-kubernetes"
+category: "Cloud & Infrastructure"
+tags: ["container", "orchestration", "devops", "cloud-native", "microservices", "k8s"]
+description: "Platform orchestration open-source untuk automasi deployment, scaling, dan management aplikasi berbasis container di production scale."
+englishTerm: "Kubernetes"
+acronym: "K8s"
+relatedTerms: ["apa-itu-docker", "apa-itu-container", "apa-itu-devops", "apa-itu-microservices", "apa-itu-cloud-computing"]
+difficulty: "lanjut"
+lastmod: 2024-01-15
+published: true
+---
+
+## Apa itu Kubernetes?
+
+**Kubernetes** (sering disingkat **K8s**) adalah platform open-source untuk mengatur deployment, scaling, dan manajemen aplikasi berbasis container. Kubernetes banyak dipakai saat aplikasi tidak lagi cukup dijalankan sebagai beberapa container terpisah di satu atau dua server.
+
+Awalnya Kubernetes dikembangkan oleh Google, lalu dikelola lebih lanjut oleh Cloud Native Computing Foundation (CNCF).
+
+**Asal nama**: "Kubernetes" berasal dari bahasa Yunani yang berarti "helmsman" atau "pilot". Singkatan **K8s** berarti huruf `K`, lalu delapan huruf di tengah, lalu `s`.
+
+## Mengapa Kubernetes Diperlukan?
+
+### Masalah jika Hanya Mengandalkan Docker
+
+Docker sangat berguna untuk menjalankan container, tetapi saat jumlah service dan server mulai bertambah, pekerjaan operasional ikut membesar.
+
+**Tanpa Kubernetes, tim biasanya harus menangani hal-hal berikut secara manual:**
+- Menjalankan dan menghentikan container di banyak server
+- Merestart container yang crash
+- Membagi traffic ke beberapa instance aplikasi
+- Menambah kapasitas saat traffic naik
+- Mengatur komunikasi antarservice
+- Mengembalikan deployment saat versi baru bermasalah
+
+**Kubernetes membantu merapikan semua itu dengan fitur seperti:**
+- **Auto-healing** - Pod yang gagal bisa dijalankan ulang
+- **Auto-scaling** - Jumlah instance bisa disesuaikan dengan beban
+- **Load balancing** - Traffic dibagi ke beberapa pod
+- **Rolling updates** - Versi baru dirilis bertahap
+- **Service discovery** - Service saling menemukan lewat DNS internal
+- **Secret management** - Credential dan konfigurasi sensitif bisa dipisahkan dari kode
+
+## Arsitektur Kubernetes
+
+### Control Plane (Master Node)
+
+Brain dari cluster yang manage semua operations:
+
+**1. API Server**
+- Entry point untuk semua commands
+- Handle REST operations
+- Validate dan process requests
+
+**2. etcd**
+- Key-value store untuk cluster state
+- Distributed dan highly-available
+
+**3. Scheduler**
+- Assign pods ke nodes
+- Consider resource requirements dan constraints
+
+**4. Controller Manager**
+- Run controllers (Deployment, ReplicaSet, etc.)
+- Ensure desired state = actual state
+
+### Worker Nodes
+
+Machines yang run aplikasi Anda:
+
+**1. kubelet**
+- Agent di setiap node
+- Manage pods dan containers
+- Report status ke control plane
+
+**2. kube-proxy**
+- Network proxy di setiap node
+- Maintain network rules
+- Handle load balancing
+
+**3. Container Runtime**
+- Docker, containerd, atau CRI-O
+- Actually run containers
+
+```
+┌─────────────────────────────────────┐
+│         Control Plane               │
+│  ┌──────────┐  ┌────────┐          │
+│  │API Server│  │  etcd  │          │
+│  └──────────┘  └────────┘          │
+│  ┌──────────┐  ┌─────────────────┐ │
+│  │Scheduler │  │Controller Manager│ │
+│  └──────────┘  └─────────────────┘ │
+└─────────────────────────────────────┘
+           │
+     ┌─────┴─────┐
+     │           │
+┌────▼────┐ ┌────▼────┐
+│ Node 1  │ │ Node 2  │
+│┌───────┐│ │┌───────┐│
+││kubelet││ ││kubelet││
+│└───────┘│ │└───────┘│
+│┌───────┐│ │┌───────┐│
+││kube-  ││ ││kube-  ││
+││proxy  ││ ││proxy  ││
+│└───────┘│ │└───────┘│
+│ Pods... │ │ Pods... │
+└─────────┘ └─────────┘
+```
+
+## Konsep Penting Kubernetes
+
+### 1. Pod
+
+Unit deployment terkecil di K8s. Bisa berisi 1+ containers yang share network dan storage.
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: myapp
+spec:
+  containers:
+  - name: myapp
+    image: myapp:v1
+    ports:
+    - containerPort: 3000
+```
+
+### 2. Deployment
+
+Manage ReplicaSets dan Pods. Untuk stateless applications.
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: myapp:v1
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+```
+
+### 3. Service
+
+Expose pods ke network. Provide stable IP dan DNS.
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: myapp
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+```
+
+**Service Types:**
+- **ClusterIP** - Internal only (default)
+- **NodePort** - Expose pada port di setiap node
+- **LoadBalancer** - External load balancer (cloud)
+- **ExternalName** - Map to external DNS
+
+### 4. ConfigMap
+
+Store configuration data as key-value pairs.
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: myapp-config
+data:
+  DATABASE_HOST: postgres.default.svc.cluster.local
+  DATABASE_PORT: "5432"
+  ENVIRONMENT: production
+```
+
+### 5. Secret
+
+Store sensitive data (encrypted at rest).
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: myapp-secret
+type: Opaque
+data:
+  # base64 encoded
+  database-password: cGFzc3dvcmQxMjM=
+  api-key: c2VjcmV0a2V5MTIz
+```
+
+### 6. Ingress
+
+HTTP/HTTPS routing ke services. Provide SSL termination.
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myapp-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  tls:
+  - hosts:
+    - myapp.example.com
+    secretName: myapp-tls
+  rules:
+  - host: myapp.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: myapp-service
+            port:
+              number: 80
+```
+
+### 7. StatefulSet
+
+Untuk stateful applications (databases, etc.). Provide stable network identity.
+
+```yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+spec:
+  serviceName: postgres
+  replicas: 3
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 10Gi
+```
+
+### 8. Namespace
+
+Virtual clusters untuk isolasi resources.
+
+```bash
+# Create namespace
+kubectl create namespace production
+kubectl create namespace staging
+
+# Deploy to namespace
+kubectl apply -f deployment.yaml -n production
+```
+
+## kubectl: Kubernetes CLI
+
+### Basic Commands
+
+```bash
+# Get cluster info
+kubectl cluster-info
+kubectl get nodes
+
+# Get resources
+kubectl get pods
+kubectl get deployments
+kubectl get services
+kubectl get all
+
+# Describe resource (detail info)
+kubectl describe pod myapp-pod
+
+# Logs
+kubectl logs myapp-pod
+kubectl logs -f myapp-pod  # Follow logs
+kubectl logs myapp-pod -c container-name  # Multi-container pod
+
+# Execute command in pod
+kubectl exec -it myapp-pod -- /bin/sh
+kubectl exec myapp-pod -- env
+
+# Port forward (local testing)
+kubectl port-forward pod/myapp-pod 8080:3000
+kubectl port-forward service/myapp-service 8080:80
+```
+
+### Apply & Delete
+
+```bash
+# Create/update resources
+kubectl apply -f deployment.yaml
+kubectl apply -f ./k8s-manifests/
+
+# Delete resources
+kubectl delete -f deployment.yaml
+kubectl delete pod myapp-pod
+kubectl delete deployment myapp-deployment
+
+# Delete all in namespace
+kubectl delete all --all -n staging
+```
+
+### Scaling
+
+```bash
+# Manual scaling
+kubectl scale deployment myapp-deployment --replicas=5
+
+# Auto-scaling
+kubectl autoscale deployment myapp-deployment \
+  --cpu-percent=70 \
+  --min=2 \
+  --max=10
+```
+
+### Updates & Rollback
+
+```bash
+# Update image
+kubectl set image deployment/myapp-deployment \
+  myapp=myapp:v2
+
+# Rollout status
+kubectl rollout status deployment/myapp-deployment
+
+# Rollout history
+kubectl rollout history deployment/myapp-deployment
+
+# Rollback
+kubectl rollout undo deployment/myapp-deployment
+kubectl rollout undo deployment/myapp-deployment --to-revision=2
+```
+
+## Deployment Strategies
+
+### 1. Rolling Update (Default)
+
+Update pods secara bertahap.
+
+```yaml
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+```
+
+### 2. Recreate
+
+Terminate semua pods lama, baru start yang baru. Brief downtime.
+
+```yaml
+spec:
+  strategy:
+    type: Recreate
+```
+
+### 3. Blue-Green (Manual)
+
+Run dua versions simultaneously, switch traffic.
+
+```bash
+# Deploy green version
+kubectl apply -f green-deployment.yaml
+
+# Test green
+kubectl port-forward service/myapp-green 8080:80
+
+# Switch traffic (update service selector)
+kubectl patch service myapp -p '{"spec":{"selector":{"version":"green"}}}'
+```
+
+### 4. Canary
+
+Gradual rollout ke subset users.
+
+```yaml
+# Stable deployment: 90% traffic
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-stable
+spec:
+  replicas: 9
+  # ...
+
+---
+# Canary deployment: 10% traffic
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-canary
+spec:
+  replicas: 1
+  # ...
+```
+
+## Resource Management
+
+### Resource Requests & Limits
+
+```yaml
+resources:
+  requests:
+    memory: "128Mi"  # Minimum guaranteed
+    cpu: "250m"      # 0.25 CPU core
+  limits:
+    memory: "256Mi"  # Maximum allowed
+    cpu: "500m"      # 0.5 CPU core
+```
+
+### Quality of Service (QoS)
+
+1. **Guaranteed** - requests = limits
+2. **Burstable** - requests < limits
+3. **BestEffort** - no requests/limits
+
+## Health Checks
+
+### Liveness Probe
+
+Check if container is alive. Restart if fails.
+
+```yaml
+livenessProbe:
+  httpGet:
+    path: /health
+    port: 3000
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 3
+  failureThreshold: 3
+```
+
+### Readiness Probe
+
+Check if container ready to accept traffic.
+
+```yaml
+readinessProbe:
+  httpGet:
+    path: /ready
+    port: 3000
+  initialDelaySeconds: 5
+  periodSeconds: 5
+  failureThreshold: 3
+```
+
+### Startup Probe
+
+For slow-starting containers.
+
+```yaml
+startupProbe:
+  httpGet:
+    path: /startup
+    port: 3000
+  initialDelaySeconds: 0
+  periodSeconds: 10
+  failureThreshold: 30  # 300s total
+```
+
+## Persistent Storage
+
+### PersistentVolume (PV)
+
+Cluster-level storage resource.
+
+```yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-data
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: standard
+  hostPath:
+    path: /data
+```
+
+### PersistentVolumeClaim (PVC)
+
+Request for storage by pod.
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-data
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: standard
+```
+
+### Use in Pod
+
+```yaml
+spec:
+  containers:
+  - name: myapp
+    volumeMounts:
+    - mountPath: /app/data
+      name: data
+  volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: pvc-data
+```
+
+## Helm: Kubernetes Package Manager
+
+Package K8s applications sebagai "charts".
+
+```bash
+# Install Helm
+curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+# Add repository
+helm repo add bitnami https://charts.bitnami.com/bitnami
+
+# Search charts
+helm search repo postgres
+
+# Install chart
+helm install my-postgres bitnami/postgresql
+
+# List releases
+helm list
+
+# Uninstall
+helm uninstall my-postgres
+```
+
+### Create Custom Chart
+
+```bash
+# Create chart structure
+helm create myapp
+
+myapp/
+├── Chart.yaml
+├── values.yaml
+├── templates/
+│   ├── deployment.yaml
+│   ├── service.yaml
+│   └── ingress.yaml
+```
+
+## Managed Kubernetes Services
+
+### Google Kubernetes Engine (GKE)
+
+```bash
+gcloud container clusters create mycluster \
+  --num-nodes=3 \
+  --zone=asia-southeast1-a
+```
+
+### Amazon EKS
+
+```bash
+eksctl create cluster \
+  --name mycluster \
+  --region ap-southeast-1 \
+  --nodes 3
+```
+
+### Azure AKS
+
+```bash
+az aks create \
+  --resource-group mygroup \
+  --name mycluster \
+  --node-count 3
+```
+
+### DigitalOcean Kubernetes
+
+```bash
+doctl kubernetes cluster create mycluster \
+  --region sgp1 \
+  --node-pool "name=worker;size=s-2vcpu-4gb;count=3"
+```
+
+## Best Practices
+
+### 1. Resource Limits
+
+Always set requests dan limits untuk predictable behavior.
+
+### 2. Health Checks
+
+Implement liveness dan readiness probes.
+
+### 3. Use Namespaces
+
+Isolate environments (dev, staging, prod).
+
+### 4. ConfigMaps & Secrets
+
+Never hardcode configuration.
+
+### 5. Labels & Annotations
+
+Organize dan document resources.
+
+```yaml
+metadata:
+  labels:
+    app: myapp
+    version: v1
+    environment: production
+    team: backend
+  annotations:
+    description: "Main application deployment"
+    contact: "team@example.com"
+```
+
+### 6. Pod Security
+
+```yaml
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  fsGroup: 1000
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
+```
+
+### 7. Network Policies
+
+Restrict traffic between pods.
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: api-policy
+spec:
+  podSelector:
+    matchLabels:
+      app: api
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: frontend
+    ports:
+    - protocol: TCP
+      port: 8080
+```
+
+## Kubernetes untuk Developer Indonesia
+
+### Kapan Perlu K8s?
+
+**Kubernetes biasanya masuk akal jika:**
+- Aplikasi sudah berbentuk microservices
+- High availability memang dibutuhkan
+- Auto-scaling mulai penting
+- Anda mengelola beberapa environment sekaligus
+- Tim dan jumlah service sudah cukup besar
+
+**Kubernetes sering belum perlu jika:**
+- Aplikasinya masih monolith sederhana
+- Traffic masih rendah
+- Anda bekerja sendiri atau di tim kecil
+- Budget dan waktu operasional terbatas
+
+### Alternatif Lebih Sederhana
+
+Untuk banyak startup atau SMB di Indonesia, platform yang lebih sederhana sering lebih realistis untuk tahap awal:
+- **smbCloud** - PaaS dengan setup yang lebih ringan
+- **Heroku** - PaaS yang mudah dipakai
+- **Railway** - Cukup ramah untuk developer
+- **Fly.io** - Cocok untuk deployment yang dekat ke edge
+- **Render** - Opsi cloud yang relatif sederhana
+
+## Troubleshooting Common Issues
+
+### Pod Stuck in Pending
+
+```bash
+kubectl describe pod myapp-pod
+# Check: Insufficient resources, PVC not bound, node selector issues
+```
+
+### CrashLoopBackOff
+
+```bash
+kubectl logs myapp-pod --previous
+# Check: Application errors, missing dependencies, misconfiguration
+```
+
+### ImagePullBackOff
+
+```bash
+kubectl describe pod myapp-pod
+# Check: Wrong image name, authentication issues, network problems
+```
+
+### Service Not Accessible
+
+```bash
+kubectl get endpoints myapp-service
+# Check: Label selector, port configuration, pod readiness
+```
+
+## Learning Path
+
+### Beginner (1-2 bulan)
+- Understand containers (Docker)
+- K8s architecture basics
+- Deploy simple app with Deployment + Service
+- kubectl basic commands
+
+### Intermediate (3-6 bulan)
+- ConfigMaps & Secrets
+- Health checks
+- Ingress & networking
+- Persistent storage
+- Helm charts
+
+### Advanced (6+ bulan)
+- StatefulSets
+- Custom Resource Definitions (CRDs)
+- Operators
+- Service mesh (Istio/Linkerd)
+- Multi-cluster management
+
+## Kesimpulan
+
+Kubernetes sangat berguna saat aplikasi containerized sudah cukup besar dan operasionalnya mulai sulit ditangani manual. Dengan Kubernetes, tim bisa mengatur deployment, scaling, networking, dan pemulihan service dengan cara yang lebih konsisten.
+
+Tetap ada konsekuensinya: Kubernetes menambah lapisan kompleksitas. Karena itu, pilih Kubernetes saat kebutuhan sistem memang mengarah ke sana, bukan hanya karena sedang populer.
+
+Kalau Anda baru belajar, mulai saja dari dasar-dasarnya dulu: pahami container, pod, deployment, service, dan `kubectl`. Setelah itu, baru lanjut ke topik seperti ingress, Helm, autoscaling, dan observability.

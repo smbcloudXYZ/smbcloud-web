@@ -1,0 +1,353 @@
+---
+title: "DevOps"
+term: "apa-itu-devops"
+category: "Software Development"
+tags: ["devops", "ci-cd", "automation", "deployment", "infrastructure", "agile"]
+description: "Kombinasi praktik, tools, dan filosofi budaya yang mengintegrasikan development dan operations untuk meningkatkan kecepatan delivery software."
+englishTerm: "Development and Operations"
+relatedTerms: ["apa-itu-ci-cd", "apa-itu-docker", "apa-itu-kubernetes", "apa-itu-automation", "apa-itu-infrastructure-as-code"]
+difficulty: "menengah"
+lastmod: 2024-01-15
+published: true
+---
+
+## Apa itu DevOps?
+
+**DevOps** adalah gabungan dari **Development** dan **Operations**. Istilah ini mengacu pada cara kerja yang menyatukan proses pengembangan software dan operasional sistem supaya rilis aplikasi bisa lebih cepat, lebih stabil, dan tidak terlalu bergantung pada banyak langkah manual.
+
+Sebelum pendekatan DevOps populer, tim development dan operations sering bekerja terpisah. Akibatnya, proses rilis terasa lambat, handoff antartim sering membingungkan, dan saat ada masalah, semua orang sibuk mencari siapa yang salah.
+
+Beberapa masalah yang umum muncul tanpa praktik DevOps yang baik:
+- **Deploy lambat** - Rilis bisa makan waktu berminggu-minggu atau berbulan-bulan
+- **Komunikasi buruk** - Tim dev dan ops bekerja di jalur masing-masing
+- **Proses manual berulang** - Banyak tugas rutin rawan lupa atau salah
+- **Kualitas tidak konsisten** - Testing dan deployment berjalan berbeda-beda di tiap lingkungan
+
+## Prinsip-prinsip Utama DevOps
+
+### 1. Kolaborasi
+Tim development dan operations bekerja lebih dekat, berbagi tanggung jawab atas lifecycle aplikasi.
+
+### 2. Otomasi
+Tugas yang berulang seperti build, test, deployment, dan provisioning sebaiknya diotomasi.
+
+### 3. Perbaikan Berkelanjutan
+Proses selalu dievaluasi. Kalau ada bottleneck, prosesnya yang diperbaiki, bukan cuma ditambal.
+
+### 4. Fokus pada Pengguna
+Tujuannya bukan sekadar rilis cepat, tetapi mengirim nilai ke pengguna dengan cara yang tetap aman dan terukur.
+
+### 5. Belajar dari Insiden
+Error dan incident tetap bisa terjadi. Yang penting, tim belajar dari penyebabnya dan memperbaiki proses agar tidak terulang dengan cara yang sama.
+
+## DevOps Lifecycle
+
+### 1. Plan
+Merencanakan fitur dan perubahan berdasarkan kebutuhan produk dan feedback pengguna.
+
+**Tools**: Jira, Trello, Azure Boards, Linear
+
+### 2. Code
+Developer menulis kode dan menyimpannya di version control.
+
+**Tools**: Git, GitHub, GitLab, Bitbucket
+
+### 3. Build
+Kode di-compile atau dipaketkan menjadi artefak yang siap diuji atau dijalankan.
+
+**Tools**: Maven, Gradle, npm, webpack
+
+### 4. Test
+Automated testing membantu mengecek apakah perubahan baru merusak perilaku yang sudah ada.
+
+**Tools**: Jest, Pytest, JUnit, Selenium, Cypress
+
+```javascript
+// Contoh automated test
+describe('User API', () => {
+  test('should create new user', async () => {
+    const response = await api.post('/users', {
+      name: 'Budi',
+      email: 'budi@example.com'
+    });
+    expect(response.status).toBe(201);
+  });
+});
+```
+
+### 5. Release
+Aplikasi disiapkan untuk dikirim ke environment tujuan, lengkap dengan artefak build dan konfigurasi yang dibutuhkan.
+
+**Tools**: Docker, Helm, Artifactory
+
+### 6. Deploy
+Versi baru aplikasi dirilis ke staging atau production.
+
+**Tools**: Kubernetes, AWS, smbCloud, Ansible
+
+```bash
+# Contoh deployment ke smbCloud
+$ git push smb main
+# Otomatis trigger build dan deploy
+```
+
+### 7. Operate
+Aplikasi yang sudah berjalan perlu dikelola: resource, ketersediaan, incident, dan operasional harian.
+
+**Tools**: Prometheus, Grafana, Datadog, New Relic
+
+### 8. Monitor
+Tim memantau performa, error, log, dan perilaku sistem setelah aplikasi dirilis.
+
+**Tools**: ELK Stack, Sentry, LogRocket
+
+## CI/CD: Bagian Penting dalam DevOps
+
+### Continuous Integration (CI)
+Developer menggabungkan perubahan kode ke branch utama secara rutin. Setiap perubahan biasanya memicu proses build dan test otomatis.
+
+```yaml
+# Contoh GitHub Actions CI
+name: CI
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npm test
+      - name: Run linter
+        run: npm run lint
+```
+
+### Continuous Delivery (CD)
+Setelah lolos test, kode disiapkan untuk dirilis ke environment berikutnya, biasanya staging atau production.
+
+```yaml
+# Contoh CD pipeline
+deploy:
+  runs-on: ubuntu-latest
+  needs: test
+  if: github.ref == 'refs/heads/main'
+  steps:
+    - name: Deploy to production
+      run: |
+        curl -X POST https://api.smbcloud.com/deploy \
+          -H "Authorization: Bearer ${{ secrets.SMB_TOKEN }}" \
+          -d '{"app": "myapp", "branch": "main"}'
+```
+
+## Infrastructure as Code (IaC)
+
+Infrastructure as Code berarti infrastruktur dikelola lewat file konfigurasi, bukan lewat klik manual di dashboard.
+
+### Terraform Example
+```hcl
+# Define infrastructure as code
+resource "aws_instance" "web_server" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t2.micro"
+  
+  tags = {
+    Name = "WebServer"
+    Environment = "Production"
+  }
+}
+```
+
+### Docker Example
+```dockerfile
+# Dockerfile untuk Node.js app
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --production
+COPY . .
+EXPOSE 3000
+CMD ["node", "server.js"]
+```
+
+## DevOps Tools Ecosystem
+
+### Version Control
+- **Git** - Sistem version control terdistribusi
+- **GitHub/GitLab** - Platform hosting kode dan kolaborasi
+
+### CI/CD Platforms
+- **GitHub Actions** - CI/CD yang terintegrasi dengan GitHub
+- **GitLab CI** - CI/CD bawaan GitLab
+- **Jenkins** - Automation server open-source
+- **CircleCI** - Platform CI/CD berbasis cloud
+
+### Containerization
+- **Docker** - Platform container untuk memaketkan aplikasi
+- **Podman** - Alternatif ke Docker
+
+### Orchestration
+- **Kubernetes** - Platform orkestrasi container
+- **Docker Swarm** - Opsi orkestrasi bawaan Docker
+
+### Cloud Platforms
+- **AWS** - Amazon Web Services
+- **Google Cloud** - Google Cloud Platform
+- **Azure** - Platform cloud dari Microsoft
+- **smbCloud** - Platform cloud untuk developer Indonesia
+
+### Monitoring & Logging
+- **Prometheus** - Pengumpulan metrik dan alerting
+- **Grafana** - Dashboard dan visualisasi
+- **ELK Stack** - Elasticsearch, Logstash, Kibana
+- **Datadog** - Monitoring terintegrasi
+
+### Configuration Management
+- **Ansible** - Otomasi operasional IT
+- **Puppet** - Configuration management
+- **Chef** - Infrastructure automation
+
+## DevOps Best Practices
+
+### 1. Mulai dari yang Kecil
+Tidak perlu mengadopsi semuanya sekaligus. Banyak tim memulai dari:
+- Version control yang rapi
+- CI sederhana
+- Deployment otomatis untuk satu environment
+
+### 2. Otomasi yang Memang Perlu
+Proses manual yang sering diulang biasanya layak diotomasi, misalnya:
+- Testing
+- Deployment
+- Provisioning infrastruktur
+- Alerting dasar
+
+### 3. Ukur Proses, Bukan Cuma Menebak
+Beberapa metrik yang sering dipakai:
+- **Deployment frequency** - Seberapa sering aplikasi dirilis
+- **Lead time** - Waktu dari perubahan kode sampai live
+- **MTTR** - Waktu pemulihan saat terjadi incident
+- **Change failure rate** - Persentase deploy yang berujung masalah
+
+### 4. Gunakan Feature Flags Saat Perlu
+Feature flag membantu tim merilis kode tanpa harus langsung mengaktifkan semua fitur ke semua pengguna.
+
+```javascript
+if (featureFlags.isEnabled('new-checkout')) {
+  // New checkout flow
+} else {
+  // Old checkout flow
+}
+```
+
+### 5. Masukkan Security Sejak Awal
+Pendekatan ini sering disebut **DevSecOps**. Intinya sederhana: keamanan tidak ditaruh di akhir, tetapi diperiksa sepanjang proses build sampai deploy.
+
+## DevOps Culture: Bagian yang Sering Sulit
+
+### Blameless Post-Mortems
+Saat incident terjadi, fokus utama seharusnya memahami apa yang terjadi dan bagaimana mencegah kejadian serupa, bukan mencari kambing hitam.
+
+1. **Apa yang terjadi?** - Urutan kejadian
+2. **Kenapa bisa terjadi?** - Analisis akar masalah
+3. **Apa yang perlu diubah?** - Action items yang bisa benar-benar dikerjakan
+
+### Shared Responsibility
+Prinsip seperti *"you build it, you run it"* muncul dari kebutuhan agar tim yang membuat aplikasi juga memahami dampak operasionalnya di production.
+
+### Continuous Learning
+Praktik DevOps biasanya matang lewat eksperimen, evaluasi, dan kebiasaan memperbaiki proses sedikit demi sedikit.
+
+## DevOps untuk Startup & SMB Indonesia
+
+### Tantangan
+- **Resource terbatas** - Tim kecil sering harus merangkap banyak peran
+- **Gap keahlian** - Tidak semua tim punya engineer yang fokus ke DevOps
+- **Tooling terasa rumit** - Banyak pilihan, tapi tidak semuanya relevan untuk tahap awal
+
+### Solusi dengan smbCloud
+smbCloud membantu tim yang ingin punya alur deploy dan operasional yang lebih rapi tanpa harus menyiapkan banyak komponen sendiri.
+
+```bash
+# No complex setup needed
+$ npx smb init
+$ git add .
+$ git commit -m "Initial commit"
+$ git push smb main
+
+Auto CI/CD configured
+SSL certificate provisioned
+Monitoring enabled
+Live at https://myapp.smbcloud.app
+```
+
+**Keuntungan**:
+- Setup operasional lebih ringan
+- Auto-scaling tersedia sebagai fitur platform
+- Monitoring dasar sudah disediakan
+- Biaya lebih mudah diperkirakan untuk tim kecil
+
+## Metrics DevOps yang Penting
+
+### DORA Metrics
+(DevOps Research and Assessment)
+
+1. **Deployment Frequency**
+   - Elite: Multiple deploys per day
+   - High: Once per day to once per week
+   - Medium: Once per week to once per month
+   - Low: Less than once per month
+
+2. **Lead Time for Changes**
+   - Elite: Less than 1 hour
+   - High: 1 day to 1 week
+   - Medium: 1 week to 1 month
+   - Low: More than 1 month
+
+3. **Mean Time to Recover (MTTR)**
+   - Elite: Less than 1 hour
+   - High: Less than 1 day
+   - Medium: 1 day to 1 week
+   - Low: More than 1 week
+
+4. **Change Failure Rate**
+   - Elite: 0-15%
+   - High: 16-30%
+   - Medium: 31-45%
+   - Low: 46-60%
+
+## Roadmap Menjadi DevOps Engineer
+
+### Level 1: Fundamentals (3-6 bulan)
+- Linux basics dan command line
+- Git dan version control
+- Basic networking (DNS, HTTP, TCP/IP)
+- Programming atau scripting (Python, Bash, JavaScript)
+
+### Level 2: Core DevOps (6-12 bulan)
+- CI/CD dengan GitHub Actions atau GitLab CI
+- Docker dan containerization
+- Basic Kubernetes
+- Infrastructure as Code (Terraform)
+- Monitoring dan logging
+
+### Level 3: Advanced (12+ bulan)
+- Advanced Kubernetes (Helm, Operators)
+- Service mesh (Istio, Linkerd)
+- Advanced networking dan security
+- Multi-cloud strategies
+- Chaos engineering
+
+## Kesalahan Umum dalam DevOps
+
+1. **Terlalu fokus ke tools** - Tools penting, tapi cara kerja tim tetap penentu utama
+2. **Membuat silo baru bernama "tim DevOps"** - Kalau semua dilempar ke satu tim, masalah kolaborasi belum selesai
+3. **Mengotomasi proses yang masih kacau** - Rapikan proses dulu, baru otomasi
+4. **Mengabaikan security** - Menambah belakangan biasanya lebih mahal dan lebih merepotkan
+5. **Deploy tanpa monitoring** - Sulit memperbaiki sistem kalau Anda tidak tahu apa yang sedang terjadi
+
+## Kesimpulan
+
+DevOps bukan sekadar kumpulan tools. Intinya adalah membangun alur kerja yang lebih rapi antara penulisan kode, pengujian, deployment, dan operasional aplikasi.
+
+Kalau Anda baru mulai, cukup fokus pada dasar-dasarnya dulu: version control yang disiplin, test otomatis, deployment yang bisa diulang, dan monitoring yang masuk akal. Setelah itu, baru tambah tool dan proses lain sesuai kebutuhan tim.

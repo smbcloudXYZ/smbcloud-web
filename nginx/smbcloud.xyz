@@ -1,0 +1,59 @@
+# ─────────────────────────────────────────────────────────────
+# smbcloud.xyz — minimal Nginx reverse-proxy for Next.js SSR
+#
+# This follows the simpler smbcloud-web-console pattern:
+# proxy everything to the standalone Next.js server and let the app
+# serve both SSR responses and /_next/static assets.
+#
+# Next.js runs via PM2:  node server.js  (PORT=3030, HOSTNAME=127.0.0.1)
+# Deploy path:           /home/git/apps/web/smbcloudweb/
+# PM2 app:               smbcloud-web
+#
+# Keep the port aligned in three places:
+#   1. .smb/config.toml
+#   2. PM2 env / ecosystem.config.js
+#   3. this nginx proxy target
+# ─────────────────────────────────────────────────────────────
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name smbcloud.xyz www.smbcloud.xyz;
+
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name smbcloud.xyz www.smbcloud.xyz;
+
+    ssl_certificate /etc/letsencrypt/live/smbcloud.xyz/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/smbcloud.xyz/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    access_log /var/log/nginx/smbcloud.xyz.access.log;
+    error_log /var/log/nginx/smbcloud.xyz.error.log;
+
+    location / {
+        proxy_pass http://127.0.0.1:3030;
+        proxy_http_version 1.1;
+
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Port 443;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+
+        proxy_connect_timeout 60s;
+        proxy_send_timeout 60s;
+        proxy_read_timeout 60s;
+        proxy_buffering off;
+        proxy_cache_bypass $http_upgrade;
+    }
+}

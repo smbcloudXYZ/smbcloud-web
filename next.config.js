@@ -3,6 +3,7 @@ const { withContentlayer } = require("next-contentlayer2");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  output: "standalone",
   // Empty Turbopack config to silence webpack compatibility warning
   turbopack: {},
 };
