@@ -34,7 +34,7 @@ export default function Header() {
               </span>
             </div>
             <span className="font-semibold text-slate-900 dark:text-white tracking-tight text-sm">
-              smbCloud Platform
+              smbCloud
             </span>
           </Link>
 

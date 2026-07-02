@@ -1,6 +1,6 @@
 # smbCloud
 
-> smbCloud is an SSH-first cloud deploy platform for small teams. It helps developers deploy Node.js, Ruby on Rails, and Swift/Vapor apps with one command, live logs, fast rollbacks, and a clean web console.
+> smbCloud is a developer platform that brings four services together so small teams get enterprise power at startup velocity: Deploy ships Node.js, Ruby on Rails, and Swift/Vapor apps with one command (live logs, fast rollbacks); Auth handles sign-in, accounts, and collaborators; Mail routes your domain email; and GresIQ runs your database. One platform instead of four vendors.
 
 Website: https://smbcloud.xyz/
 Organization: smbCloud
@@ -9,34 +9,42 @@ Location: Stockholm, Sweden
 Contact: support@smbcloud.xyz
 GitHub: https://github.com/smbcloudXYZ
 
+## Products
+- smbCloud Deploy: SSH-first application deployment for Node.js, Ruby on Rails, and Swift/Vapor — one command, live logs, fast rollbacks.
+- smbCloud Auth: hosted authentication — sign-in, signup, sessions, collaborators, and account management. https://smbcloud.xyz/auth
+- smbCloud Mail: domain mail routing, forwarding, and stored inbound mail. https://smbcloud.xyz/mail
+- GresIQ: the data and memory layer for AI apps — Postgres-backed documents, realtime, row-level security, and vector search. https://gresiq.com/
+
 ## Primary pages
 - Home: https://smbcloud.xyz/
 - Services: https://smbcloud.xyz/services
+- Auth: https://smbcloud.xyz/auth
+- Mail: https://smbcloud.xyz/mail
 - Blog: https://smbcloud.xyz/posts
 - CLI install guide: https://smbcloud.xyz/posts/cli
-- Contact: https://smbcloud.xyz/contact
 - About: https://smbcloud.xyz/about
+- Contact: https://smbcloud.xyz/contact
+- KTI glossary (Indonesian technology terms): https://smbcloud.xyz/kti
+
+## Comparison pages
 - Heroku alternative: https://smbcloud.xyz/heroku-alternative
 - Railway alternative: https://smbcloud.xyz/railway-alternative
 - Resend alternative: https://smbcloud.xyz/resend-alternative
 - useSend alternative: https://smbcloud.xyz/usesend-alternative
 - SendGrid alternative: https://smbcloud.xyz/sendgrid-alternative
-- KTI glossary: https://smbcloud.xyz/kti
+- Auth0 alternative: https://smbcloud.xyz/auth0-alternative
+- Clerk alternative: https://smbcloud.xyz/clerk-alternative
+- Supabase alternative: https://smbcloud.xyz/supabase-alternative
+- Neon alternative: https://smbcloud.xyz/neon-alternative
+- PlanetScale alternative: https://smbcloud.xyz/planetscale-alternative
 
 ## Core topics
 - SSH-first application deployment
-- Node.js deployment
-- Ruby on Rails deployment
-- Swift Vapor deployment
+- Node.js, Ruby on Rails, and Swift/Vapor deployment
+- Hosted authentication for developers
+- Domain mail routing and inbox workflows
+- Postgres data layer and vector search for AI apps
 - Developer infrastructure for small teams
-- Hosted deploy workflows, logs, and rollbacks
-
-## Products and services
-- smbCloud Deploy: application deployment over SSH
-- smbCloud Auth: hosted authentication flows
-- smbCloud Mail: domain mail routing and inbox workflows
-- GresIQ: data layer service within the smbCloud platform
-- siGit Code & Deploy: mobile and desktop companion app for code review and deployment workflows
 
 ## Editorial resources
 - Product updates and deployment guides live on the blog: https://smbcloud.xyz/posts
