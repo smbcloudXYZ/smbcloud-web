@@ -1,92 +1,58 @@
+import { execSync } from "child_process";
 import { MetadataRoute } from "next";
 import { allKtis, allPages, allPosts } from "contentlayer/generated";
 import { absoluteUrl } from "./seo";
 
 export const dynamic = "force-static";
 
+// Static routes have no frontmatter date, so pull the real last-edited date
+// from git history instead of stamping every one with the build time —
+// accurate lastmod values are a genuine freshness signal for crawlers.
+function lastCommitDate(sourceFile: string): Date | undefined {
+  try {
+    const iso = execSync(`git log -1 --format=%cI -- "${sourceFile}"`, {
+      cwd: process.cwd(),
+      encoding: "utf8",
+    }).trim();
+    return iso ? new Date(iso) : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+interface StaticRoute {
+  path: string;
+  sourceFile: string;
+  changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
+  priority: number;
+}
+
+const STATIC_ROUTES: StaticRoute[] = [
+  { path: "/", sourceFile: "app/page.tsx", changeFrequency: "weekly", priority: 1 },
+  { path: "/services", sourceFile: "app/services/page.tsx", changeFrequency: "weekly", priority: 0.9 },
+  { path: "/mail", sourceFile: "app/mail/page.tsx", changeFrequency: "weekly", priority: 0.9 },
+  { path: "/auth", sourceFile: "app/auth/page.tsx", changeFrequency: "weekly", priority: 0.9 },
+  { path: "/posts", sourceFile: "app/posts/page.tsx", changeFrequency: "weekly", priority: 0.8 },
+  { path: "/kti", sourceFile: "app/kti/page.tsx", changeFrequency: "weekly", priority: 0.8 },
+  { path: "/heroku-alternative", sourceFile: "app/heroku-alternative/page.tsx", changeFrequency: "weekly", priority: 0.8 },
+  { path: "/railway-alternative", sourceFile: "app/railway-alternative/page.tsx", changeFrequency: "weekly", priority: 0.8 },
+  { path: "/resend-alternative", sourceFile: "app/resend-alternative/page.tsx", changeFrequency: "weekly", priority: 0.8 },
+  { path: "/usesend-alternative", sourceFile: "app/usesend-alternative/page.tsx", changeFrequency: "weekly", priority: 0.8 },
+  { path: "/sendgrid-alternative", sourceFile: "app/sendgrid-alternative/page.tsx", changeFrequency: "weekly", priority: 0.8 },
+  { path: "/auth0-alternative", sourceFile: "app/auth0-alternative/page.tsx", changeFrequency: "weekly", priority: 0.8 },
+  { path: "/clerk-alternative", sourceFile: "app/clerk-alternative/page.tsx", changeFrequency: "weekly", priority: 0.8 },
+  { path: "/supabase-alternative", sourceFile: "app/supabase-alternative/page.tsx", changeFrequency: "weekly", priority: 0.8 },
+  { path: "/neon-alternative", sourceFile: "app/neon-alternative/page.tsx", changeFrequency: "weekly", priority: 0.8 },
+  { path: "/planetscale-alternative", sourceFile: "app/planetscale-alternative/page.tsx", changeFrequency: "weekly", priority: 0.8 },
+];
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes: MetadataRoute.Sitemap = [
-    {
-      url: absoluteUrl("/"),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: absoluteUrl("/services"),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: absoluteUrl("/mail"),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: absoluteUrl("/auth"),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: absoluteUrl("/posts"),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: absoluteUrl("/kti"),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: absoluteUrl("/heroku-alternative"),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: absoluteUrl("/railway-alternative"),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: absoluteUrl("/resend-alternative"),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: absoluteUrl("/usesend-alternative"),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: absoluteUrl("/sendgrid-alternative"),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: absoluteUrl("/auth0-alternative"),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: absoluteUrl("/clerk-alternative"),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: absoluteUrl("/supabase-alternative"),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: absoluteUrl("/neon-alternative"),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: absoluteUrl("/planetscale-alternative"),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-  ];
+  const staticRoutes: MetadataRoute.Sitemap = STATIC_ROUTES.map((route) => ({
+    url: absoluteUrl(route.path),
+    lastModified: lastCommitDate(route.sourceFile),
+    changeFrequency: route.changeFrequency,
+    priority: route.priority,
+  }));
 
   const postRoutes: MetadataRoute.Sitemap = allPosts
     .filter((post) => post.published)
